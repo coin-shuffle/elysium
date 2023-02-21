@@ -1,0 +1,582 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CEE8800229A5098D009CC313 /* TrueElysiumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8800129A5098D009CC313 /* TrueElysiumApp.swift */; };
+		CEE8800429A5098D009CC313 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8800329A5098D009CC313 /* ContentView.swift */; };
+		CEE8800629A5098E009CC313 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE8800529A5098E009CC313 /* Assets.xcassets */; };
+		CEE8800929A5098E009CC313 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE8800829A5098E009CC313 /* Preview Assets.xcassets */; };
+		CEE8801329A5098F009CC313 /* TrueElysiumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8801229A5098F009CC313 /* TrueElysiumTests.swift */; };
+		CEE8801D29A5098F009CC313 /* TrueElysiumUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8801C29A5098F009CC313 /* TrueElysiumUITests.swift */; };
+		CEE8801F29A5098F009CC313 /* TrueElysiumUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8801E29A5098F009CC313 /* TrueElysiumUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CEE8800F29A5098F009CC313 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE87FF629A5098D009CC313 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEE87FFD29A5098D009CC313;
+			remoteInfo = TrueElysium;
+		};
+		CEE8801929A5098F009CC313 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE87FF629A5098D009CC313 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEE87FFD29A5098D009CC313;
+			remoteInfo = TrueElysium;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CEE87FFE29A5098D009CC313 /* TrueElysium.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrueElysium.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEE8800129A5098D009CC313 /* TrueElysiumApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueElysiumApp.swift; sourceTree = "<group>"; };
+		CEE8800329A5098D009CC313 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CEE8800529A5098E009CC313 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CEE8800829A5098E009CC313 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CEE8800E29A5098F009CC313 /* TrueElysiumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrueElysiumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEE8801229A5098F009CC313 /* TrueElysiumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueElysiumTests.swift; sourceTree = "<group>"; };
+		CEE8801829A5098F009CC313 /* TrueElysiumUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrueElysiumUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEE8801C29A5098F009CC313 /* TrueElysiumUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueElysiumUITests.swift; sourceTree = "<group>"; };
+		CEE8801E29A5098F009CC313 /* TrueElysiumUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueElysiumUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CEE87FFB29A5098D009CC313 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEE8800B29A5098F009CC313 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEE8801529A5098F009CC313 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CEE87FF529A5098D009CC313 = {
+			isa = PBXGroup;
+			children = (
+				CEE8800029A5098D009CC313 /* TrueElysium */,
+				CEE8801129A5098F009CC313 /* TrueElysiumTests */,
+				CEE8801B29A5098F009CC313 /* TrueElysiumUITests */,
+				CEE87FFF29A5098D009CC313 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CEE87FFF29A5098D009CC313 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEE87FFE29A5098D009CC313 /* TrueElysium.app */,
+				CEE8800E29A5098F009CC313 /* TrueElysiumTests.xctest */,
+				CEE8801829A5098F009CC313 /* TrueElysiumUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEE8800029A5098D009CC313 /* TrueElysium */ = {
+			isa = PBXGroup;
+			children = (
+				CEE8800129A5098D009CC313 /* TrueElysiumApp.swift */,
+				CEE8800329A5098D009CC313 /* ContentView.swift */,
+				CEE8800529A5098E009CC313 /* Assets.xcassets */,
+				CEE8800729A5098E009CC313 /* Preview Content */,
+			);
+			path = TrueElysium;
+			sourceTree = "<group>";
+		};
+		CEE8800729A5098E009CC313 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				CEE8800829A5098E009CC313 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CEE8801129A5098F009CC313 /* TrueElysiumTests */ = {
+			isa = PBXGroup;
+			children = (
+				CEE8801229A5098F009CC313 /* TrueElysiumTests.swift */,
+			);
+			path = TrueElysiumTests;
+			sourceTree = "<group>";
+		};
+		CEE8801B29A5098F009CC313 /* TrueElysiumUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CEE8801C29A5098F009CC313 /* TrueElysiumUITests.swift */,
+				CEE8801E29A5098F009CC313 /* TrueElysiumUITestsLaunchTests.swift */,
+			);
+			path = TrueElysiumUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CEE87FFD29A5098D009CC313 /* TrueElysium */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEE8802229A5098F009CC313 /* Build configuration list for PBXNativeTarget "TrueElysium" */;
+			buildPhases = (
+				CEE87FFA29A5098D009CC313 /* Sources */,
+				CEE87FFB29A5098D009CC313 /* Frameworks */,
+				CEE87FFC29A5098D009CC313 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TrueElysium;
+			productName = TrueElysium;
+			productReference = CEE87FFE29A5098D009CC313 /* TrueElysium.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CEE8800D29A5098F009CC313 /* TrueElysiumTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEE8802529A5098F009CC313 /* Build configuration list for PBXNativeTarget "TrueElysiumTests" */;
+			buildPhases = (
+				CEE8800A29A5098F009CC313 /* Sources */,
+				CEE8800B29A5098F009CC313 /* Frameworks */,
+				CEE8800C29A5098F009CC313 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CEE8801029A5098F009CC313 /* PBXTargetDependency */,
+			);
+			name = TrueElysiumTests;
+			productName = TrueElysiumTests;
+			productReference = CEE8800E29A5098F009CC313 /* TrueElysiumTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CEE8801729A5098F009CC313 /* TrueElysiumUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEE8802829A5098F009CC313 /* Build configuration list for PBXNativeTarget "TrueElysiumUITests" */;
+			buildPhases = (
+				CEE8801429A5098F009CC313 /* Sources */,
+				CEE8801529A5098F009CC313 /* Frameworks */,
+				CEE8801629A5098F009CC313 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CEE8801A29A5098F009CC313 /* PBXTargetDependency */,
+			);
+			name = TrueElysiumUITests;
+			productName = TrueElysiumUITests;
+			productReference = CEE8801829A5098F009CC313 /* TrueElysiumUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CEE87FF629A5098D009CC313 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					CEE87FFD29A5098D009CC313 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					CEE8800D29A5098F009CC313 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = CEE87FFD29A5098D009CC313;
+					};
+					CEE8801729A5098F009CC313 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = CEE87FFD29A5098D009CC313;
+					};
+				};
+			};
+			buildConfigurationList = CEE87FF929A5098D009CC313 /* Build configuration list for PBXProject "TrueElysium" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CEE87FF529A5098D009CC313;
+			productRefGroup = CEE87FFF29A5098D009CC313 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CEE87FFD29A5098D009CC313 /* TrueElysium */,
+				CEE8800D29A5098F009CC313 /* TrueElysiumTests */,
+				CEE8801729A5098F009CC313 /* TrueElysiumUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CEE87FFC29A5098D009CC313 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEE8800929A5098E009CC313 /* Preview Assets.xcassets in Resources */,
+				CEE8800629A5098E009CC313 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEE8800C29A5098F009CC313 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEE8801629A5098F009CC313 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CEE87FFA29A5098D009CC313 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEE8800429A5098D009CC313 /* ContentView.swift in Sources */,
+				CEE8800229A5098D009CC313 /* TrueElysiumApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEE8800A29A5098F009CC313 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEE8801329A5098F009CC313 /* TrueElysiumTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEE8801429A5098F009CC313 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEE8801D29A5098F009CC313 /* TrueElysiumUITests.swift in Sources */,
+				CEE8801F29A5098F009CC313 /* TrueElysiumUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CEE8801029A5098F009CC313 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEE87FFD29A5098D009CC313 /* TrueElysium */;
+			targetProxy = CEE8800F29A5098F009CC313 /* PBXContainerItemProxy */;
+		};
+		CEE8801A29A5098F009CC313 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEE87FFD29A5098D009CC313 /* TrueElysium */;
+			targetProxy = CEE8801929A5098F009CC313 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		CEE8802029A5098F009CC313 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CEE8802129A5098F009CC313 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CEE8802329A5098F009CC313 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TrueElysium/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = DistributedLab.TrueElysium;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CEE8802429A5098F009CC313 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TrueElysium/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = DistributedLab.TrueElysium;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CEE8802629A5098F009CC313 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = DistributedLab.TrueElysiumTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TrueElysium.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TrueElysium";
+			};
+			name = Debug;
+		};
+		CEE8802729A5098F009CC313 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = DistributedLab.TrueElysiumTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TrueElysium.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TrueElysium";
+			};
+			name = Release;
+		};
+		CEE8802929A5098F009CC313 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = DistributedLab.TrueElysiumUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TrueElysium;
+			};
+			name = Debug;
+		};
+		CEE8802A29A5098F009CC313 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = DistributedLab.TrueElysiumUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TrueElysium;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CEE87FF929A5098D009CC313 /* Build configuration list for PBXProject "TrueElysium" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEE8802029A5098F009CC313 /* Debug */,
+				CEE8802129A5098F009CC313 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEE8802229A5098F009CC313 /* Build configuration list for PBXNativeTarget "TrueElysium" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEE8802329A5098F009CC313 /* Debug */,
+				CEE8802429A5098F009CC313 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEE8802529A5098F009CC313 /* Build configuration list for PBXNativeTarget "TrueElysiumTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEE8802629A5098F009CC313 /* Debug */,
+				CEE8802729A5098F009CC313 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEE8802829A5098F009CC313 /* Build configuration list for PBXNativeTarget "TrueElysiumUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEE8802929A5098F009CC313 /* Debug */,
+				CEE8802A29A5098F009CC313 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CEE87FF629A5098D009CC313 /* Project object */;
+}
