@@ -7,13 +7,61 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE7BB88929AB6C0C0089CB57 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB88829AB6C0C0089CB57 /* String.swift */; };
+		CE7BB88A29AB6C0C0089CB57 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB88829AB6C0C0089CB57 /* String.swift */; };
+		CE7BB88C29AB93870089CB57 /* SolidityInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB88B29AB93870089CB57 /* SolidityInvocation.swift */; };
+		CE7BB88D29AB93870089CB57 /* SolidityInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB88B29AB93870089CB57 /* SolidityInvocation.swift */; };
+		CE7BB89B29ABB8E70089CB57 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89129ABB8E60089CB57 /* LoaderView.swift */; };
+		CE7BB89C29ABB8E70089CB57 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89129ABB8E60089CB57 /* LoaderView.swift */; };
+		CE7BB89D29ABB8E70089CB57 /* MainLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89229ABB8E60089CB57 /* MainLoaderView.swift */; };
+		CE7BB89E29ABB8E70089CB57 /* MainLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89229ABB8E60089CB57 /* MainLoaderView.swift */; };
+		CE7BB8A329ABB8E70089CB57 /* NewUTXOView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89529ABB8E60089CB57 /* NewUTXOView.swift */; };
+		CE7BB8A429ABB8E70089CB57 /* NewUTXOView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89529ABB8E60089CB57 /* NewUTXOView.swift */; };
+		CE7BB8A529ABB8E70089CB57 /* UTXODetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89629ABB8E70089CB57 /* UTXODetailView.swift */; };
+		CE7BB8A629ABB8E70089CB57 /* UTXODetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89629ABB8E70089CB57 /* UTXODetailView.swift */; };
+		CE7BB8A729ABB8E70089CB57 /* UTXOsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89729ABB8E70089CB57 /* UTXOsView.swift */; };
+		CE7BB8A829ABB8E70089CB57 /* UTXOsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89729ABB8E70089CB57 /* UTXOsView.swift */; };
+		CE7BB8A929ABB8E70089CB57 /* Geek-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE7BB89929ABB8E70089CB57 /* Geek-Regular.ttf */; };
+		CE7BB8AA29ABB8E70089CB57 /* Geek-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE7BB89929ABB8E70089CB57 /* Geek-Regular.ttf */; };
+		CE7BB8AB29ABB8E70089CB57 /* CardUTXOView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89A29ABB8E70089CB57 /* CardUTXOView.swift */; };
+		CE7BB8AC29ABB8E70089CB57 /* CardUTXOView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89A29ABB8E70089CB57 /* CardUTXOView.swift */; };
+		CE7BB8B229ABB92D0089CB57 /* shuffle_service.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB8AE29ABB92C0089CB57 /* shuffle_service.pb.swift */; };
+		CE7BB8B329ABB92D0089CB57 /* shuffle_service.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB8AE29ABB92C0089CB57 /* shuffle_service.pb.swift */; };
+		CE7BB8B829ABB92D0089CB57 /* LaunchScreenStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB8B129ABB92D0089CB57 /* LaunchScreenStateManager.swift */; };
+		CE7BB8B929ABB92D0089CB57 /* LaunchScreenStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB8B129ABB92D0089CB57 /* LaunchScreenStateManager.swift */; };
+		CE7BB8BC29ABBA7A0089CB57 /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = CE7BB8BB29ABBA7A0089CB57 /* SwiftProtobuf */; };
+		CE7BB8BE29ABBA7A0089CB57 /* SwiftProtobufPluginLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = CE7BB8BD29ABBA7A0089CB57 /* SwiftProtobufPluginLibrary */; };
+		CE7BB8C129ABBAAF0089CB57 /* CGRPCZlib in Frameworks */ = {isa = PBXBuildFile; productRef = CE7BB8C029ABBAAF0089CB57 /* CGRPCZlib */; };
+		CE7BB8C329ABBAAF0089CB57 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = CE7BB8C229ABBAAF0089CB57 /* GRPC */; };
+		CE7BB8C529ABDB330089CB57 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB8C429ABDB330089CB57 /* Error.swift */; };
+		CE7BB8C629ABDB330089CB57 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB8C429ABDB330089CB57 /* Error.swift */; };
+		CE94EEF229ACB98A00B06CFA /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EEF129ACB98A00B06CFA /* View.swift */; };
+		CE94EEF329ACB98A00B06CFA /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EEF129ACB98A00B06CFA /* View.swift */; };
+		CE94EEF529ACFA0300B06CFA /* ChangePrivateKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EEF429ACFA0300B06CFA /* ChangePrivateKeyView.swift */; };
+		CE94EEF629ACFA0300B06CFA /* ChangePrivateKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EEF429ACFA0300B06CFA /* ChangePrivateKeyView.swift */; };
+		CE94EEFA29AD0BB400B06CFA /* UTXOStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EEF929AD0BB400B06CFA /* UTXOStore.swift */; };
+		CE94EEFB29AD0BB400B06CFA /* UTXOStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EEF929AD0BB400B06CFA /* UTXOStore.swift */; };
+		CE94EF0129AD599600B06CFA /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EF0029AD599600B06CFA /* Client.swift */; };
+		CE94EF0229AD599600B06CFA /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EF0029AD599600B06CFA /* Client.swift */; };
+		CEA1FB2F29A620C30008C9C5 /* UTXOStorageContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA1FB2E29A620C30008C9C5 /* UTXOStorageContract.swift */; };
+		CEA1FB3329A62D940008C9C5 /* UTXO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA1FB3229A62D940008C9C5 /* UTXO.swift */; };
+		CEA1FB3429A63B960008C9C5 /* UTXOStorageContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA1FB2E29A620C30008C9C5 /* UTXOStorageContract.swift */; };
+		CEA1FB3529A63B9A0008C9C5 /* UTXO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA1FB3229A62D940008C9C5 /* UTXO.swift */; };
+		CECEA98C29A514C3009C70CE /* EthereumClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8802D29A509DF009CC313 /* EthereumClient.swift */; };
+		CECEA98F29A515ED009C70CE /* Web3 in Frameworks */ = {isa = PBXBuildFile; productRef = CECEA98E29A515ED009C70CE /* Web3 */; };
+		CECEA99129A515ED009C70CE /* Web3ContractABI in Frameworks */ = {isa = PBXBuildFile; productRef = CECEA99029A515ED009C70CE /* Web3ContractABI */; };
+		CECEA99329A515ED009C70CE /* Web3PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = CECEA99229A515ED009C70CE /* Web3PromiseKit */; };
 		CEE8800229A5098D009CC313 /* TrueElysiumApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8800129A5098D009CC313 /* TrueElysiumApp.swift */; };
-		CEE8800429A5098D009CC313 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8800329A5098D009CC313 /* ContentView.swift */; };
 		CEE8800629A5098E009CC313 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE8800529A5098E009CC313 /* Assets.xcassets */; };
 		CEE8800929A5098E009CC313 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE8800829A5098E009CC313 /* Preview Assets.xcassets */; };
 		CEE8801329A5098F009CC313 /* TrueElysiumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8801229A5098F009CC313 /* TrueElysiumTests.swift */; };
 		CEE8801D29A5098F009CC313 /* TrueElysiumUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8801C29A5098F009CC313 /* TrueElysiumUITests.swift */; };
 		CEE8801F29A5098F009CC313 /* TrueElysiumUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8801E29A5098F009CC313 /* TrueElysiumUITestsLaunchTests.swift */; };
+		CEE8802E29A509DF009CC313 /* EthereumClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8802D29A509DF009CC313 /* EthereumClient.swift */; };
+		CEE8803329A50A8C009CC313 /* Web3 in Frameworks */ = {isa = PBXBuildFile; productRef = CEE8803229A50A8C009CC313 /* Web3 */; };
+		CEE8803529A50A8C009CC313 /* Web3ContractABI in Frameworks */ = {isa = PBXBuildFile; productRef = CEE8803429A50A8C009CC313 /* Web3ContractABI */; };
+		CEE8803729A50A8C009CC313 /* Web3PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = CEE8803629A50A8C009CC313 /* Web3PromiseKit */; };
+		CEE8803A29A50D79009CC313 /* EthereumClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE8802F29A50A00009CC313 /* EthereumClientTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +82,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE7BB88829AB6C0C0089CB57 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		CE7BB88B29AB93870089CB57 /* SolidityInvocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidityInvocation.swift; sourceTree = "<group>"; };
+		CE7BB89129ABB8E60089CB57 /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
+		CE7BB89229ABB8E60089CB57 /* MainLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainLoaderView.swift; sourceTree = "<group>"; };
+		CE7BB89529ABB8E60089CB57 /* NewUTXOView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUTXOView.swift; sourceTree = "<group>"; };
+		CE7BB89629ABB8E70089CB57 /* UTXODetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UTXODetailView.swift; sourceTree = "<group>"; };
+		CE7BB89729ABB8E70089CB57 /* UTXOsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UTXOsView.swift; sourceTree = "<group>"; };
+		CE7BB89929ABB8E70089CB57 /* Geek-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Geek-Regular.ttf"; sourceTree = "<group>"; };
+		CE7BB89A29ABB8E70089CB57 /* CardUTXOView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardUTXOView.swift; sourceTree = "<group>"; };
+		CE7BB8AE29ABB92C0089CB57 /* shuffle_service.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shuffle_service.pb.swift; sourceTree = "<group>"; };
+		CE7BB8B129ABB92D0089CB57 /* LaunchScreenStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenStateManager.swift; sourceTree = "<group>"; };
+		CE7BB8C429ABDB330089CB57 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		CE7BB8C729ABDD2B0089CB57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CE94EEF129ACB98A00B06CFA /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		CE94EEF429ACFA0300B06CFA /* ChangePrivateKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePrivateKeyView.swift; sourceTree = "<group>"; };
+		CE94EEF929AD0BB400B06CFA /* UTXOStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTXOStore.swift; sourceTree = "<group>"; };
+		CE94EF0029AD599600B06CFA /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		CEA1FB2E29A620C30008C9C5 /* UTXOStorageContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTXOStorageContract.swift; sourceTree = "<group>"; };
+		CEA1FB3229A62D940008C9C5 /* UTXO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTXO.swift; sourceTree = "<group>"; };
 		CEE87FFE29A5098D009CC313 /* TrueElysium.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrueElysium.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE8800129A5098D009CC313 /* TrueElysiumApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueElysiumApp.swift; sourceTree = "<group>"; };
-		CEE8800329A5098D009CC313 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CEE8800529A5098E009CC313 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEE8800829A5098E009CC313 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CEE8800E29A5098F009CC313 /* TrueElysiumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrueElysiumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +110,8 @@
 		CEE8801829A5098F009CC313 /* TrueElysiumUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrueElysiumUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE8801C29A5098F009CC313 /* TrueElysiumUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueElysiumUITests.swift; sourceTree = "<group>"; };
 		CEE8801E29A5098F009CC313 /* TrueElysiumUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueElysiumUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		CEE8802D29A509DF009CC313 /* EthereumClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumClient.swift; sourceTree = "<group>"; };
+		CEE8802F29A50A00009CC313 /* EthereumClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumClientTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +119,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE8803529A50A8C009CC313 /* Web3ContractABI in Frameworks */,
+				CEE8803729A50A8C009CC313 /* Web3PromiseKit in Frameworks */,
+				CE7BB8BE29ABBA7A0089CB57 /* SwiftProtobufPluginLibrary in Frameworks */,
+				CEE8803329A50A8C009CC313 /* Web3 in Frameworks */,
+				CE7BB8BC29ABBA7A0089CB57 /* SwiftProtobuf in Frameworks */,
+				CE7BB8C129ABBAAF0089CB57 /* CGRPCZlib in Frameworks */,
+				CE7BB8C329ABBAAF0089CB57 /* GRPC in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +133,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CECEA99129A515ED009C70CE /* Web3ContractABI in Frameworks */,
+				CECEA99329A515ED009C70CE /* Web3PromiseKit in Frameworks */,
+				CECEA98F29A515ED009C70CE /* Web3 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +149,72 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE7BB88729AB6BF40089CB57 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CE7BB88829AB6C0C0089CB57 /* String.swift */,
+				CE7BB88B29AB93870089CB57 /* SolidityInvocation.swift */,
+				CE94EEF129ACB98A00B06CFA /* View.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		CE7BB89829ABB8E70089CB57 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CE7BB89929ABB8E70089CB57 /* Geek-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		CE7BB8AD29ABB92C0089CB57 /* Proto */ = {
+			isa = PBXGroup;
+			children = (
+				CE7BB8AE29ABB92C0089CB57 /* shuffle_service.pb.swift */,
+			);
+			path = Proto;
+			sourceTree = "<group>";
+		};
+		CE94EEF829AD0B9600B06CFA /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				CE94EEF929AD0BB400B06CFA /* UTXOStore.swift */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
+		CE94EEFF29AD596500B06CFA /* CoinShuffle */ = {
+			isa = PBXGroup;
+			children = (
+				CE94EF0029AD599600B06CFA /* Client.swift */,
+			);
+			path = CoinShuffle;
+			sourceTree = "<group>";
+		};
+		CEA1FB3129A62D830008C9C5 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				CEA1FB3229A62D940008C9C5 /* UTXO.swift */,
+				CE7BB8C429ABDB330089CB57 /* Error.swift */,
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
+		CECEA98D29A515ED009C70CE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CECEA99429A51ABC009C70CE /* Contracts */ = {
+			isa = PBXGroup;
+			children = (
+				CEA1FB2E29A620C30008C9C5 /* UTXOStorageContract.swift */,
+			);
+			path = Contracts;
+			sourceTree = "<group>";
+		};
 		CEE87FF529A5098D009CC313 = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +222,7 @@
 				CEE8801129A5098F009CC313 /* TrueElysiumTests */,
 				CEE8801B29A5098F009CC313 /* TrueElysiumUITests */,
 				CEE87FFF29A5098D009CC313 /* Products */,
+				CECEA98D29A515ED009C70CE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,10 +239,19 @@
 		CEE8800029A5098D009CC313 /* TrueElysium */ = {
 			isa = PBXGroup;
 			children = (
+				CE7BB8C729ABDD2B0089CB57 /* Info.plist */,
+				CE7BB89A29ABB8E70089CB57 /* CardUTXOView.swift */,
+				CE7BB89829ABB8E70089CB57 /* Fonts */,
+				CE7BB89129ABB8E60089CB57 /* LoaderView.swift */,
+				CE7BB89229ABB8E60089CB57 /* MainLoaderView.swift */,
+				CE7BB89529ABB8E60089CB57 /* NewUTXOView.swift */,
+				CE7BB89629ABB8E70089CB57 /* UTXODetailView.swift */,
+				CE7BB89729ABB8E70089CB57 /* UTXOsView.swift */,
+				CEE8802B29A50994009CC313 /* Modules */,
 				CEE8800129A5098D009CC313 /* TrueElysiumApp.swift */,
-				CEE8800329A5098D009CC313 /* ContentView.swift */,
 				CEE8800529A5098E009CC313 /* Assets.xcassets */,
 				CEE8800729A5098E009CC313 /* Preview Content */,
+				CE94EEF429ACFA0300B06CFA /* ChangePrivateKeyView.swift */,
 			);
 			path = TrueElysium;
 			sourceTree = "<group>";
@@ -113,6 +267,7 @@
 		CEE8801129A5098F009CC313 /* TrueElysiumTests */ = {
 			isa = PBXGroup;
 			children = (
+				CEE8802F29A50A00009CC313 /* EthereumClientTest.swift */,
 				CEE8801229A5098F009CC313 /* TrueElysiumTests.swift */,
 			);
 			path = TrueElysiumTests;
@@ -125,6 +280,29 @@
 				CEE8801E29A5098F009CC313 /* TrueElysiumUITestsLaunchTests.swift */,
 			);
 			path = TrueElysiumUITests;
+			sourceTree = "<group>";
+		};
+		CEE8802B29A50994009CC313 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				CE94EEFF29AD596500B06CFA /* CoinShuffle */,
+				CE94EEF829AD0B9600B06CFA /* Stores */,
+				CE7BB8B129ABB92D0089CB57 /* LaunchScreenStateManager.swift */,
+				CE7BB8AD29ABB92C0089CB57 /* Proto */,
+				CE7BB88729AB6BF40089CB57 /* Helpers */,
+				CEA1FB3129A62D830008C9C5 /* Types */,
+				CEE8802C29A509CE009CC313 /* EthereumClient */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		CEE8802C29A509CE009CC313 /* EthereumClient */ = {
+			isa = PBXGroup;
+			children = (
+				CECEA99429A51ABC009C70CE /* Contracts */,
+				CEE8802D29A509DF009CC313 /* EthereumClient.swift */,
+			);
+			path = EthereumClient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +321,15 @@
 			dependencies = (
 			);
 			name = TrueElysium;
+			packageProductDependencies = (
+				CEE8803229A50A8C009CC313 /* Web3 */,
+				CEE8803429A50A8C009CC313 /* Web3ContractABI */,
+				CEE8803629A50A8C009CC313 /* Web3PromiseKit */,
+				CE7BB8BB29ABBA7A0089CB57 /* SwiftProtobuf */,
+				CE7BB8BD29ABBA7A0089CB57 /* SwiftProtobufPluginLibrary */,
+				CE7BB8C029ABBAAF0089CB57 /* CGRPCZlib */,
+				CE7BB8C229ABBAAF0089CB57 /* GRPC */,
+			);
 			productName = TrueElysium;
 			productReference = CEE87FFE29A5098D009CC313 /* TrueElysium.app */;
 			productType = "com.apple.product-type.application";
@@ -161,6 +348,11 @@
 				CEE8801029A5098F009CC313 /* PBXTargetDependency */,
 			);
 			name = TrueElysiumTests;
+			packageProductDependencies = (
+				CECEA98E29A515ED009C70CE /* Web3 */,
+				CECEA99029A515ED009C70CE /* Web3ContractABI */,
+				CECEA99229A515ED009C70CE /* Web3PromiseKit */,
+			);
 			productName = TrueElysiumTests;
 			productReference = CEE8800E29A5098F009CC313 /* TrueElysiumTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -215,6 +407,11 @@
 				Base,
 			);
 			mainGroup = CEE87FF529A5098D009CC313;
+			packageReferences = (
+				CEE8803129A50A8C009CC313 /* XCRemoteSwiftPackageReference "Web3" */,
+				CE7BB8BA29ABBA790089CB57 /* XCRemoteSwiftPackageReference "swift-protobuf" */,
+				CE7BB8BF29ABBAAF0089CB57 /* XCRemoteSwiftPackageReference "grpc-swift" */,
+			);
 			productRefGroup = CEE87FFF29A5098D009CC313 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,6 +430,7 @@
 			files = (
 				CEE8800929A5098E009CC313 /* Preview Assets.xcassets in Resources */,
 				CEE8800629A5098E009CC313 /* Assets.xcassets in Resources */,
+				CE7BB8A929ABB8E70089CB57 /* Geek-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +438,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE7BB8AA29ABB8E70089CB57 /* Geek-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,8 +456,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEE8800429A5098D009CC313 /* ContentView.swift in Sources */,
+				CE94EEF229ACB98A00B06CFA /* View.swift in Sources */,
+				CE7BB88929AB6C0C0089CB57 /* String.swift in Sources */,
+				CE7BB8A529ABB8E70089CB57 /* UTXODetailView.swift in Sources */,
+				CE7BB8B229ABB92D0089CB57 /* shuffle_service.pb.swift in Sources */,
+				CEA1FB3329A62D940008C9C5 /* UTXO.swift in Sources */,
+				CEA1FB2F29A620C30008C9C5 /* UTXOStorageContract.swift in Sources */,
 				CEE8800229A5098D009CC313 /* TrueElysiumApp.swift in Sources */,
+				CE94EEFA29AD0BB400B06CFA /* UTXOStore.swift in Sources */,
+				CE94EEF529ACFA0300B06CFA /* ChangePrivateKeyView.swift in Sources */,
+				CE7BB89B29ABB8E70089CB57 /* LoaderView.swift in Sources */,
+				CE7BB8A729ABB8E70089CB57 /* UTXOsView.swift in Sources */,
+				CE7BB88C29AB93870089CB57 /* SolidityInvocation.swift in Sources */,
+				CE7BB89D29ABB8E70089CB57 /* MainLoaderView.swift in Sources */,
+				CEE8802E29A509DF009CC313 /* EthereumClient.swift in Sources */,
+				CE7BB8B829ABB92D0089CB57 /* LaunchScreenStateManager.swift in Sources */,
+				CE7BB8AB29ABB8E70089CB57 /* CardUTXOView.swift in Sources */,
+				CE94EF0129AD599600B06CFA /* Client.swift in Sources */,
+				CE7BB8C529ABDB330089CB57 /* Error.swift in Sources */,
+				CE7BB8A329ABB8E70089CB57 /* NewUTXOView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,7 +482,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE7BB8C629ABDB330089CB57 /* Error.swift in Sources */,
+				CE7BB88A29AB6C0C0089CB57 /* String.swift in Sources */,
+				CE7BB8A629ABB8E70089CB57 /* UTXODetailView.swift in Sources */,
 				CEE8801329A5098F009CC313 /* TrueElysiumTests.swift in Sources */,
+				CE94EEF329ACB98A00B06CFA /* View.swift in Sources */,
+				CE7BB8B329ABB92D0089CB57 /* shuffle_service.pb.swift in Sources */,
+				CEA1FB3529A63B9A0008C9C5 /* UTXO.swift in Sources */,
+				CEE8803A29A50D79009CC313 /* EthereumClientTest.swift in Sources */,
+				CE94EEFB29AD0BB400B06CFA /* UTXOStore.swift in Sources */,
+				CECEA98C29A514C3009C70CE /* EthereumClient.swift in Sources */,
+				CE7BB89C29ABB8E70089CB57 /* LoaderView.swift in Sources */,
+				CE7BB8A829ABB8E70089CB57 /* UTXOsView.swift in Sources */,
+				CE7BB88D29AB93870089CB57 /* SolidityInvocation.swift in Sources */,
+				CE7BB89E29ABB8E70089CB57 /* MainLoaderView.swift in Sources */,
+				CEA1FB3429A63B960008C9C5 /* UTXOStorageContract.swift in Sources */,
+				CE94EEF629ACFA0300B06CFA /* ChangePrivateKeyView.swift in Sources */,
+				CE7BB8B929ABB92D0089CB57 /* LaunchScreenStateManager.swift in Sources */,
+				CE7BB8AC29ABB8E70089CB57 /* CardUTXOView.swift in Sources */,
+				CE94EF0229AD599600B06CFA /* Client.swift in Sources */,
+				CE7BB8A429ABB8E70089CB57 /* NewUTXOView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +654,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TrueElysium/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TrueElysium/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -447,6 +683,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TrueElysium/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TrueElysium/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -577,6 +814,86 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CE7BB8BA29ABBA790089CB57 /* XCRemoteSwiftPackageReference "swift-protobuf" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-protobuf.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		CE7BB8BF29ABBAAF0089CB57 /* XCRemoteSwiftPackageReference "grpc-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/grpc/grpc-swift.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		CEE8803129A50A8C009CC313 /* XCRemoteSwiftPackageReference "Web3" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Boilertalk/Web3.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CE7BB8BB29ABBA7A0089CB57 /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE7BB8BA29ABBA790089CB57 /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
+		};
+		CE7BB8BD29ABBA7A0089CB57 /* SwiftProtobufPluginLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE7BB8BA29ABBA790089CB57 /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobufPluginLibrary;
+		};
+		CE7BB8C029ABBAAF0089CB57 /* CGRPCZlib */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE7BB8BF29ABBAAF0089CB57 /* XCRemoteSwiftPackageReference "grpc-swift" */;
+			productName = CGRPCZlib;
+		};
+		CE7BB8C229ABBAAF0089CB57 /* GRPC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE7BB8BF29ABBAAF0089CB57 /* XCRemoteSwiftPackageReference "grpc-swift" */;
+			productName = GRPC;
+		};
+		CECEA98E29A515ED009C70CE /* Web3 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEE8803129A50A8C009CC313 /* XCRemoteSwiftPackageReference "Web3" */;
+			productName = Web3;
+		};
+		CECEA99029A515ED009C70CE /* Web3ContractABI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEE8803129A50A8C009CC313 /* XCRemoteSwiftPackageReference "Web3" */;
+			productName = Web3ContractABI;
+		};
+		CECEA99229A515ED009C70CE /* Web3PromiseKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEE8803129A50A8C009CC313 /* XCRemoteSwiftPackageReference "Web3" */;
+			productName = Web3PromiseKit;
+		};
+		CEE8803229A50A8C009CC313 /* Web3 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEE8803129A50A8C009CC313 /* XCRemoteSwiftPackageReference "Web3" */;
+			productName = Web3;
+		};
+		CEE8803429A50A8C009CC313 /* Web3ContractABI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEE8803129A50A8C009CC313 /* XCRemoteSwiftPackageReference "Web3" */;
+			productName = Web3ContractABI;
+		};
+		CEE8803629A50A8C009CC313 /* Web3PromiseKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEE8803129A50A8C009CC313 /* XCRemoteSwiftPackageReference "Web3" */;
+			productName = Web3PromiseKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CEE87FF629A5098D009CC313 /* Project object */;
 }
