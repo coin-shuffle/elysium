@@ -9,7 +9,8 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct UTXODetailView: View {
-    @Binding var utxo: UTXO    
+    @Binding var utxo: UTXO
+    let hasUser: Bool
     var body: some View {
         VStack {
             List {
@@ -55,6 +56,7 @@ struct UTXODetailView: View {
             Button("Shuffle") {
                 utxo.status = .shuffling
             }
+            .disabled(!hasUser && utxo.status != .created)
         }
         .navigationTitle("\(utxo.name)(\(utxo.symbol))")
     }
@@ -63,7 +65,7 @@ struct UTXODetailView: View {
 struct UTXODetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            UTXODetailView(utxo: .constant(UTXO.sampleData[0]))
+            UTXODetailView(utxo: .constant(UTXO.sampleData[0]), hasUser: true)
         }
     }
 }

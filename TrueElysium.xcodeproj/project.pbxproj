@@ -25,14 +25,10 @@
 		CE7BB8AA29ABB8E70089CB57 /* Geek-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE7BB89929ABB8E70089CB57 /* Geek-Regular.ttf */; };
 		CE7BB8AB29ABB8E70089CB57 /* CardUTXOView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89A29ABB8E70089CB57 /* CardUTXOView.swift */; };
 		CE7BB8AC29ABB8E70089CB57 /* CardUTXOView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89A29ABB8E70089CB57 /* CardUTXOView.swift */; };
-		CE7BB8B229ABB92D0089CB57 /* shuffle_service.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB8AE29ABB92C0089CB57 /* shuffle_service.pb.swift */; };
-		CE7BB8B329ABB92D0089CB57 /* shuffle_service.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB8AE29ABB92C0089CB57 /* shuffle_service.pb.swift */; };
 		CE7BB8B829ABB92D0089CB57 /* LaunchScreenStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB8B129ABB92D0089CB57 /* LaunchScreenStateManager.swift */; };
 		CE7BB8B929ABB92D0089CB57 /* LaunchScreenStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB8B129ABB92D0089CB57 /* LaunchScreenStateManager.swift */; };
 		CE7BB8BC29ABBA7A0089CB57 /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = CE7BB8BB29ABBA7A0089CB57 /* SwiftProtobuf */; };
 		CE7BB8BE29ABBA7A0089CB57 /* SwiftProtobufPluginLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = CE7BB8BD29ABBA7A0089CB57 /* SwiftProtobufPluginLibrary */; };
-		CE7BB8C129ABBAAF0089CB57 /* CGRPCZlib in Frameworks */ = {isa = PBXBuildFile; productRef = CE7BB8C029ABBAAF0089CB57 /* CGRPCZlib */; };
-		CE7BB8C329ABBAAF0089CB57 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = CE7BB8C229ABBAAF0089CB57 /* GRPC */; };
 		CE7BB8C529ABDB330089CB57 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB8C429ABDB330089CB57 /* Error.swift */; };
 		CE7BB8C629ABDB330089CB57 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB8C429ABDB330089CB57 /* Error.swift */; };
 		CE94EEF229ACB98A00B06CFA /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EEF129ACB98A00B06CFA /* View.swift */; };
@@ -43,6 +39,14 @@
 		CE94EEFB29AD0BB400B06CFA /* UTXOStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EEF929AD0BB400B06CFA /* UTXOStore.swift */; };
 		CE94EF0129AD599600B06CFA /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EF0029AD599600B06CFA /* Client.swift */; };
 		CE94EF0229AD599600B06CFA /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EF0029AD599600B06CFA /* Client.swift */; };
+		CE94EF0829ADFB6B00B06CFA /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EF0729ADFB6B00B06CFA /* Room.swift */; };
+		CE94EF0929ADFB6B00B06CFA /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EF0729ADFB6B00B06CFA /* Room.swift */; };
+		CE94EF0D29AE118000B06CFA /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EF0C29AE118000B06CFA /* Messages.swift */; };
+		CE94EF0E29AE118000B06CFA /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EF0C29AE118000B06CFA /* Messages.swift */; };
+		CE94EF1029AE3D5C00B06CFA /* CryptographyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EF0F29AE3D5C00B06CFA /* CryptographyTest.swift */; };
+		CE94EF1229AE450B00B06CFA /* shuffle_service.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EF0329ADF56F00B06CFA /* shuffle_service.pb.swift */; };
+		CE94EF1329AE450C00B06CFA /* shuffle_service.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94EF0329ADF56F00B06CFA /* shuffle_service.pb.swift */; };
+		CE94EF1529AE4C5300B06CFA /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = CE94EF1429AE4C5300B06CFA /* GRPC */; };
 		CEA1FB2F29A620C30008C9C5 /* UTXOStorageContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA1FB2E29A620C30008C9C5 /* UTXOStorageContract.swift */; };
 		CEA1FB3329A62D940008C9C5 /* UTXO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA1FB3229A62D940008C9C5 /* UTXO.swift */; };
 		CEA1FB3429A63B960008C9C5 /* UTXOStorageContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA1FB2E29A620C30008C9C5 /* UTXOStorageContract.swift */; };
@@ -91,7 +95,6 @@
 		CE7BB89729ABB8E70089CB57 /* UTXOsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UTXOsView.swift; sourceTree = "<group>"; };
 		CE7BB89929ABB8E70089CB57 /* Geek-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Geek-Regular.ttf"; sourceTree = "<group>"; };
 		CE7BB89A29ABB8E70089CB57 /* CardUTXOView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardUTXOView.swift; sourceTree = "<group>"; };
-		CE7BB8AE29ABB92C0089CB57 /* shuffle_service.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shuffle_service.pb.swift; sourceTree = "<group>"; };
 		CE7BB8B129ABB92D0089CB57 /* LaunchScreenStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenStateManager.swift; sourceTree = "<group>"; };
 		CE7BB8C429ABDB330089CB57 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		CE7BB8C729ABDD2B0089CB57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -99,6 +102,10 @@
 		CE94EEF429ACFA0300B06CFA /* ChangePrivateKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePrivateKeyView.swift; sourceTree = "<group>"; };
 		CE94EEF929AD0BB400B06CFA /* UTXOStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTXOStore.swift; sourceTree = "<group>"; };
 		CE94EF0029AD599600B06CFA /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		CE94EF0329ADF56F00B06CFA /* shuffle_service.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shuffle_service.pb.swift; sourceTree = "<group>"; };
+		CE94EF0729ADFB6B00B06CFA /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		CE94EF0C29AE118000B06CFA /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		CE94EF0F29AE3D5C00B06CFA /* CryptographyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptographyTest.swift; sourceTree = "<group>"; };
 		CEA1FB2E29A620C30008C9C5 /* UTXOStorageContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTXOStorageContract.swift; sourceTree = "<group>"; };
 		CEA1FB3229A62D940008C9C5 /* UTXO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTXO.swift; sourceTree = "<group>"; };
 		CEE87FFE29A5098D009CC313 /* TrueElysium.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrueElysium.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,11 +128,10 @@
 			files = (
 				CEE8803529A50A8C009CC313 /* Web3ContractABI in Frameworks */,
 				CEE8803729A50A8C009CC313 /* Web3PromiseKit in Frameworks */,
+				CE94EF1529AE4C5300B06CFA /* GRPC in Frameworks */,
 				CE7BB8BE29ABBA7A0089CB57 /* SwiftProtobufPluginLibrary in Frameworks */,
 				CEE8803329A50A8C009CC313 /* Web3 in Frameworks */,
 				CE7BB8BC29ABBA7A0089CB57 /* SwiftProtobuf in Frameworks */,
-				CE7BB8C129ABBAAF0089CB57 /* CGRPCZlib in Frameworks */,
-				CE7BB8C329ABBAAF0089CB57 /* GRPC in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,14 +155,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CE7BB88729AB6BF40089CB57 /* Helpers */ = {
+		CE7BB88729AB6BF40089CB57 /* Exstensions */ = {
 			isa = PBXGroup;
 			children = (
 				CE7BB88829AB6C0C0089CB57 /* String.swift */,
 				CE7BB88B29AB93870089CB57 /* SolidityInvocation.swift */,
 				CE94EEF129ACB98A00B06CFA /* View.swift */,
 			);
-			path = Helpers;
+			path = Exstensions;
 			sourceTree = "<group>";
 		};
 		CE7BB89829ABB8E70089CB57 /* Fonts */ = {
@@ -170,7 +176,7 @@
 		CE7BB8AD29ABB92C0089CB57 /* Proto */ = {
 			isa = PBXGroup;
 			children = (
-				CE7BB8AE29ABB92C0089CB57 /* shuffle_service.pb.swift */,
+				CE94EF0329ADF56F00B06CFA /* shuffle_service.pb.swift */,
 			);
 			path = Proto;
 			sourceTree = "<group>";
@@ -186,14 +192,46 @@
 		CE94EEFF29AD596500B06CFA /* CoinShuffle */ = {
 			isa = PBXGroup;
 			children = (
+				CE94EF0629ADFB4800B06CFA /* Types */,
 				CE94EF0029AD599600B06CFA /* Client.swift */,
 			);
 			path = CoinShuffle;
 			sourceTree = "<group>";
 		};
+		CE94EF0629ADFB4800B06CFA /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				CE94EF0729ADFB6B00B06CFA /* Room.swift */,
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
+		CE94EF0A29AE00F300B06CFA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE94EEF429ACFA0300B06CFA /* ChangePrivateKeyView.swift */,
+				CE7BB89729ABB8E70089CB57 /* UTXOsView.swift */,
+				CE7BB89629ABB8E70089CB57 /* UTXODetailView.swift */,
+				CE7BB89529ABB8E60089CB57 /* NewUTXOView.swift */,
+				CE7BB89229ABB8E60089CB57 /* MainLoaderView.swift */,
+				CE7BB89A29ABB8E70089CB57 /* CardUTXOView.swift */,
+				CE7BB89129ABB8E60089CB57 /* LoaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CE94EF0B29AE115200B06CFA /* RSA */ = {
+			isa = PBXGroup;
+			children = (
+				CE94EF0C29AE118000B06CFA /* Messages.swift */,
+			);
+			path = RSA;
+			sourceTree = "<group>";
+		};
 		CEA1FB3129A62D830008C9C5 /* Types */ = {
 			isa = PBXGroup;
 			children = (
+				CE7BB8B129ABB92D0089CB57 /* LaunchScreenStateManager.swift */,
 				CEA1FB3229A62D940008C9C5 /* UTXO.swift */,
 				CE7BB8C429ABDB330089CB57 /* Error.swift */,
 			);
@@ -239,19 +277,13 @@
 		CEE8800029A5098D009CC313 /* TrueElysium */ = {
 			isa = PBXGroup;
 			children = (
+				CE94EF0A29AE00F300B06CFA /* Views */,
 				CE7BB8C729ABDD2B0089CB57 /* Info.plist */,
-				CE7BB89A29ABB8E70089CB57 /* CardUTXOView.swift */,
 				CE7BB89829ABB8E70089CB57 /* Fonts */,
-				CE7BB89129ABB8E60089CB57 /* LoaderView.swift */,
-				CE7BB89229ABB8E60089CB57 /* MainLoaderView.swift */,
-				CE7BB89529ABB8E60089CB57 /* NewUTXOView.swift */,
-				CE7BB89629ABB8E70089CB57 /* UTXODetailView.swift */,
-				CE7BB89729ABB8E70089CB57 /* UTXOsView.swift */,
 				CEE8802B29A50994009CC313 /* Modules */,
 				CEE8800129A5098D009CC313 /* TrueElysiumApp.swift */,
 				CEE8800529A5098E009CC313 /* Assets.xcassets */,
 				CEE8800729A5098E009CC313 /* Preview Content */,
-				CE94EEF429ACFA0300B06CFA /* ChangePrivateKeyView.swift */,
 			);
 			path = TrueElysium;
 			sourceTree = "<group>";
@@ -269,6 +301,7 @@
 			children = (
 				CEE8802F29A50A00009CC313 /* EthereumClientTest.swift */,
 				CEE8801229A5098F009CC313 /* TrueElysiumTests.swift */,
+				CE94EF0F29AE3D5C00B06CFA /* CryptographyTest.swift */,
 			);
 			path = TrueElysiumTests;
 			sourceTree = "<group>";
@@ -285,11 +318,11 @@
 		CEE8802B29A50994009CC313 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CE94EF0B29AE115200B06CFA /* RSA */,
 				CE94EEFF29AD596500B06CFA /* CoinShuffle */,
 				CE94EEF829AD0B9600B06CFA /* Stores */,
-				CE7BB8B129ABB92D0089CB57 /* LaunchScreenStateManager.swift */,
 				CE7BB8AD29ABB92C0089CB57 /* Proto */,
-				CE7BB88729AB6BF40089CB57 /* Helpers */,
+				CE7BB88729AB6BF40089CB57 /* Exstensions */,
 				CEA1FB3129A62D830008C9C5 /* Types */,
 				CEE8802C29A509CE009CC313 /* EthereumClient */,
 			);
@@ -327,8 +360,7 @@
 				CEE8803629A50A8C009CC313 /* Web3PromiseKit */,
 				CE7BB8BB29ABBA7A0089CB57 /* SwiftProtobuf */,
 				CE7BB8BD29ABBA7A0089CB57 /* SwiftProtobufPluginLibrary */,
-				CE7BB8C029ABBAAF0089CB57 /* CGRPCZlib */,
-				CE7BB8C229ABBAAF0089CB57 /* GRPC */,
+				CE94EF1429AE4C5300B06CFA /* GRPC */,
 			);
 			productName = TrueElysium;
 			productReference = CEE87FFE29A5098D009CC313 /* TrueElysium.app */;
@@ -459,17 +491,19 @@
 				CE94EEF229ACB98A00B06CFA /* View.swift in Sources */,
 				CE7BB88929AB6C0C0089CB57 /* String.swift in Sources */,
 				CE7BB8A529ABB8E70089CB57 /* UTXODetailView.swift in Sources */,
-				CE7BB8B229ABB92D0089CB57 /* shuffle_service.pb.swift in Sources */,
 				CEA1FB3329A62D940008C9C5 /* UTXO.swift in Sources */,
 				CEA1FB2F29A620C30008C9C5 /* UTXOStorageContract.swift in Sources */,
 				CEE8800229A5098D009CC313 /* TrueElysiumApp.swift in Sources */,
 				CE94EEFA29AD0BB400B06CFA /* UTXOStore.swift in Sources */,
 				CE94EEF529ACFA0300B06CFA /* ChangePrivateKeyView.swift in Sources */,
 				CE7BB89B29ABB8E70089CB57 /* LoaderView.swift in Sources */,
+				CE94EF1229AE450B00B06CFA /* shuffle_service.pb.swift in Sources */,
 				CE7BB8A729ABB8E70089CB57 /* UTXOsView.swift in Sources */,
+				CE94EF0D29AE118000B06CFA /* Messages.swift in Sources */,
 				CE7BB88C29AB93870089CB57 /* SolidityInvocation.swift in Sources */,
 				CE7BB89D29ABB8E70089CB57 /* MainLoaderView.swift in Sources */,
 				CEE8802E29A509DF009CC313 /* EthereumClient.swift in Sources */,
+				CE94EF0829ADFB6B00B06CFA /* Room.swift in Sources */,
 				CE7BB8B829ABB92D0089CB57 /* LaunchScreenStateManager.swift in Sources */,
 				CE7BB8AB29ABB8E70089CB57 /* CardUTXOView.swift in Sources */,
 				CE94EF0129AD599600B06CFA /* Client.swift in Sources */,
@@ -484,10 +518,12 @@
 			files = (
 				CE7BB8C629ABDB330089CB57 /* Error.swift in Sources */,
 				CE7BB88A29AB6C0C0089CB57 /* String.swift in Sources */,
+				CE94EF0929ADFB6B00B06CFA /* Room.swift in Sources */,
+				CE94EF1329AE450C00B06CFA /* shuffle_service.pb.swift in Sources */,
+				CE94EF1029AE3D5C00B06CFA /* CryptographyTest.swift in Sources */,
 				CE7BB8A629ABB8E70089CB57 /* UTXODetailView.swift in Sources */,
 				CEE8801329A5098F009CC313 /* TrueElysiumTests.swift in Sources */,
 				CE94EEF329ACB98A00B06CFA /* View.swift in Sources */,
-				CE7BB8B329ABB92D0089CB57 /* shuffle_service.pb.swift in Sources */,
 				CEA1FB3529A63B9A0008C9C5 /* UTXO.swift in Sources */,
 				CEE8803A29A50D79009CC313 /* EthereumClientTest.swift in Sources */,
 				CE94EEFB29AD0BB400B06CFA /* UTXOStore.swift in Sources */,
@@ -498,6 +534,7 @@
 				CE7BB89E29ABB8E70089CB57 /* MainLoaderView.swift in Sources */,
 				CEA1FB3429A63B960008C9C5 /* UTXOStorageContract.swift in Sources */,
 				CE94EEF629ACFA0300B06CFA /* ChangePrivateKeyView.swift in Sources */,
+				CE94EF0E29AE118000B06CFA /* Messages.swift in Sources */,
 				CE7BB8B929ABB92D0089CB57 /* LaunchScreenStateManager.swift in Sources */,
 				CE7BB8AC29ABB8E70089CB57 /* CardUTXOView.swift in Sources */,
 				CE94EF0229AD599600B06CFA /* Client.swift in Sources */,
@@ -652,9 +689,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TrueElysium/Preview Content\"";
+				DEVELOPMENT_TEAM = 2KZ5J7SB82;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TrueElysium/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TrueElysium;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -664,7 +703,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = DistributedLab.TrueElysium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -681,9 +720,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TrueElysium/Preview Content\"";
+				DEVELOPMENT_TEAM = 2KZ5J7SB82;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TrueElysium/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TrueElysium;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -693,7 +734,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = DistributedLab.TrueElysium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -853,12 +894,7 @@
 			package = CE7BB8BA29ABBA790089CB57 /* XCRemoteSwiftPackageReference "swift-protobuf" */;
 			productName = SwiftProtobufPluginLibrary;
 		};
-		CE7BB8C029ABBAAF0089CB57 /* CGRPCZlib */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CE7BB8BF29ABBAAF0089CB57 /* XCRemoteSwiftPackageReference "grpc-swift" */;
-			productName = CGRPCZlib;
-		};
-		CE7BB8C229ABBAAF0089CB57 /* GRPC */ = {
+		CE94EF1429AE4C5300B06CFA /* GRPC */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CE7BB8BF29ABBAAF0089CB57 /* XCRemoteSwiftPackageReference "grpc-swift" */;
 			productName = GRPC;

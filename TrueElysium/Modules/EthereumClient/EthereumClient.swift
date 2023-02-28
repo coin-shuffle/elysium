@@ -235,7 +235,7 @@ public extension EthereumClient {
                 utxoStorage.listUTXOsByAddress(
                     owner: self.user!.address,
                     offset: BigUInt(userUTXOs.count),
-                    limit: 5
+                    limit: 10000000000000000000
                 ).call()
             }.done(on: queue) { values in
                 let utxos = UTXOStorageContract.UTXO.getUTXOsFromAny(values: values["UTXOs"]!)

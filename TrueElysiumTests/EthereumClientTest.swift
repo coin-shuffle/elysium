@@ -17,12 +17,11 @@ final class EthereumClientTest: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         self.ethereumClient = try EthereumClient(
-            privateKey: "c70f720a396a8dafa16da1a3bddefe70f22b089a7c821e3595765d14de0f377f",
             utxoStorageContractAddress: try! EthereumAddress(hex: "0x4C0d116d9d028E60904DCA468b9Fa7537Ef8Cd5f", eip55: true)
         )
         
         print("Gas price: \(ethereumClient.gasPrice!)")
-        print("Funds: \(try! ethereumClient.client.eth.getBalance(address: ethereumClient.user.address, block: .latest).wait())")
+        print("Funds: \(try! ethereumClient.client.eth.getBalance(address: ethereumClient.user!.address, block: .latest).wait())")
     }
 
     override func tearDownWithError() throws {}
@@ -47,7 +46,7 @@ final class EthereumClientTest: XCTestCase {
         assert(utxo.id == ethereumClient.userUTXOs.count-1, "UTXO ERROR: Invalid ID")
         assert(utxo.token == contractAddress, "UTXO ERROR: Invalid token")
         assert(utxo.amount == amount, "UTXO ERROR: Invalid amount")
-        assert(utxo.owner == ethereumClient.user.address, "UTXO ERROR: Invalid owner")
+        assert(utxo.owner == ethereumClient.user!.address, "UTXO ERROR: Invalid owner")
         assert(utxo.name == "Ibrahim", "UTXO ERROR: Invalid name")
         assert(utxo.symbol == "KEK", "UTXO ERROR: Invalid symbol")
         assert(utxo.status == .created, "UTXO ERROR: Invalid status")
@@ -93,7 +92,7 @@ final class EthereumClientTest: XCTestCase {
         
         let invocation = ethereumClient.utxoStorage.deposit(
             token: contractAddress,
-            outputs: [UTXOStorageContract.Output(amount: 5, owner: ethereumClient.user.address)]
+            outputs: [UTXOStorageContract.Output(amount: 5, owner: ethereumClient.user!.address)]
         )
         
         guard let hexString = try? ABI.encodeFunctionCall(invocation) else {
@@ -119,7 +118,7 @@ final class EthereumClientTest: XCTestCase {
             maxFeePerGas: nil,
             maxPriorityFeePerGas: nil,
             gasLimit: 300000,
-            from: ethereumClient.user.address,
+            from: ethereumClient.user!.address,
             value: 0,
             accessList: [:],
             transactionType: .legacy
@@ -138,7 +137,7 @@ final class EthereumClientTest: XCTestCase {
         while flag {
             firstly {
                 ethereumClient.utxoStorage.listUTXOsByAddress(
-                    owner: ethereumClient.user.address,
+                    owner: ethereumClient.user!.address,
                     offset: BigUInt(ethereumClient.userUTXOs.count),
                     limit: 5
                 ).call()

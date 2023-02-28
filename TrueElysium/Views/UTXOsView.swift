@@ -41,7 +41,7 @@ struct UTXOsView: View {
                 if !utxoStore.utxos.isEmpty {
                     List {
                         ForEach($utxoStore.utxos) {$utxo in
-                            NavigationLink(destination: UTXODetailView(utxo: $utxo)) {
+                            NavigationLink(destination: UTXODetailView(utxo: $utxo, hasUser: ethereumClient.user != nil && privateKey.isEmpty)) {
                                 CardUTXOView(utxo: utxo)
                             }
                         }
