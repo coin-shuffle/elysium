@@ -83,7 +83,8 @@ public extension UTXO {
                 amount: 13123,
                 owner: try! EthereumAddress(hex: "0xC37EE126208Aba4d9F5fe361279Ca3d882427C39", eip55: true),
                 name: "Tether",
-                symbol: "USDT"
+                symbol: "USDT",
+                status: .created
             ),
             UTXO(
                 id: 1,
@@ -109,11 +110,13 @@ public extension UTXO {
         case creating
         case failed
         case created
+        case searching
         case shuffling
         case shuffled
         
         public var description: String {
             switch self {
+            case .searching: return "Searching"
             case .creating: return "Creating"
             case .created: return "Created"
             case .failed: return "Failed"
@@ -124,8 +127,9 @@ public extension UTXO {
         
         public var color: Color {
             switch self {
+            case .searching: return .yellow
             case .created: return .blue
-            case .shuffling: return .yellow
+            case .shuffling: return .orange
             case .shuffled: return .green
             case .creating: return .gray
             case .failed: return .red
@@ -154,6 +158,8 @@ public extension UTXO {
                 self = .shuffling
             case 4:
                 self = .shuffled
+            case 5:
+                self = .searching
             default:
                 throw CodingError.unknownValue
             }
@@ -172,6 +178,8 @@ public extension UTXO {
                 try container.encode(3, forKey: .rawValue)
             case .shuffled:
                 try container.encode(4, forKey: .rawValue)
+            case .searching:
+                try container.encode(5, forKey: .rawValue)
             }
         }
     }

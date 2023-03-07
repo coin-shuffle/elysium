@@ -43,7 +43,7 @@ final class EthereumClientTest: XCTestCase {
         let amount = BigUInt(5)
         let utxo = try ethereumClient.createUTXO(from: contractAddress, amount: amount)
         
-        assert(utxo.id == ethereumClient.userUTXOs.count-1, "UTXO ERROR: Invalid ID")
+        assert(utxo.id == ethereumClient.userUTXOs.last!.id, "UTXO ERROR: Invalid ID")
         assert(utxo.token == contractAddress, "UTXO ERROR: Invalid token")
         assert(utxo.amount == amount, "UTXO ERROR: Invalid amount")
         assert(utxo.owner == ethereumClient.user!.address, "UTXO ERROR: Invalid owner")

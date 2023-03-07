@@ -5,28 +5,34 @@
 //  Created by Ivan Lele on 28.02.2023.
 //
 
+import Foundation
 import Web3
+import SwiftyRSA
 import CryptoSwift
 
 public typealias Output = Bytes
 public typealias Outputs = [Output]
 
 public struct Room {
-    public let utxo: UTXO
-    public let output: Output
-    public var publicRSAKeys: [RSA] = []
+    public let utxoID: BigUInt
+    public let amount: BigUInt
+    public let output: Data
+    public var publicRSAKeys: [PublicKey] = []
     public var status: ShuffleStatus = .searchParticipants
-    public let privateRSAKey: RSA
+    public let privateRSAKey: PrivateKey
     public let privateEthereumKey: EthereumPrivateKey
     public var participantCount: UInt64 = 0
+    public var jwt: String?
     
     public init(
-        utxo: UTXO,
-        privateRSAKey: RSA,
+        utxoID: BigUInt,
+        amount: BigUInt,
+        privateRSAKey: PrivateKey,
         privateEthereumKey: EthereumPrivateKey,
-        output: Output
+        output: Data
     ) {
-        self.utxo = utxo
+        self.utxoID = utxoID
+        self.amount = amount
         self.privateRSAKey = privateRSAKey
         self.privateEthereumKey = privateEthereumKey
         self.output = output
