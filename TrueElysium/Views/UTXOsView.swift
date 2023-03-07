@@ -136,6 +136,11 @@ struct UTXOsView: View {
         }
         
         Task {
+            if !(try await ethereumClient.isContract(tokenAddress)) {
+                _error = UTXOsViewError.invalidTokenAddress
+                return
+            }
+            
             guard let (name, symbol) = try? await ethereumClient.getETC20NameAndSymbol(tokenAddress) else {
                 _error = UTXOsViewError.failedToGetTokenNameAndSymbol
                 return

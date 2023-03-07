@@ -28,7 +28,7 @@ final class EthereumClientTest: XCTestCase {
         let userAddress = try EthereumAddress(hex: "0xE86C4A45C1Da21f8838a1ea26Fc852BD66489ce9", eip55: true)
         
         var result = try await ethereumClient.client.eth.getCode(address: contractAddress, block: .latest).async()
-        print("Address code: \(result.hex())")
+        _ = try await ethereumClient.isContract(userAddress)
         
         result = try await ethereumClient.client.eth.getCode(address: userAddress, block: .latest).async()
         print("Address code: \(result.hex())")

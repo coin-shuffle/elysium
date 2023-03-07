@@ -32,20 +32,8 @@ public class EthereumClient {
         self.client = client
         self.erc20 = erc20
         self.utxoStorage = utxoStorage
-        
-//        try _checkConnection(client: client)
     }
-
     
-    private func _checkConnection(client: Web3) throws {
-        let semaphore = DispatchSemaphore(value: 0)
-        Task {
-            let version = try await client.clientVersion().async()
-            self.logger.info("Ethereum client version: \(version)")
-            semaphore.signal()
-        }
-        semaphore.wait()
-    }
 }
 
 public extension EthereumClient {
@@ -74,6 +62,19 @@ public extension EthereumClient {
                 throw EthereumClientError.txFailed
             }
         }
+    }
+    
+    func isContract(_ contractAddress: EthereumAddress) async throws -> Bool {
+        let code = try await client.eth.getCode(
+            address: contractAddress,
+            block: .latest
+        ).async()
+                
+        if code.bytes.count == 0 {
+            return false
+        }
+        
+        return true
     }
 }
 

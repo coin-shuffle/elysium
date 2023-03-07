@@ -43,7 +43,7 @@
                   Identifier = "CryptographyTest">
                </Test>
                <Test
-                  Identifier = "EthereumClientTest/testCheckAddressType()">
+                  Identifier = "EthereumClientTest/testCreateUTXO()">
                </Test>
                <Test
                   Identifier = "EthereumClientTest/testFunctionEncoding()">
