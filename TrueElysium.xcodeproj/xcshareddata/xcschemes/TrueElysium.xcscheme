@@ -43,7 +43,22 @@
                   Identifier = "CryptographyTest">
                </Test>
                <Test
-                  Identifier = "EthereumClientTest">
+                  Identifier = "EthereumClientTest/testCheckAddressType()">
+               </Test>
+               <Test
+                  Identifier = "EthereumClientTest/testFunctionEncoding()">
+               </Test>
+               <Test
+                  Identifier = "EthereumClientTest/testGetNameAndSymbol()">
+               </Test>
+               <Test
+                  Identifier = "EthereumClientTest/testOutputConverible()">
+               </Test>
+               <Test
+                  Identifier = "EthereumClientTest/testUTXOsFetch()">
+               </Test>
+               <Test
+                  Identifier = "ShuffleClientTest">
                </Test>
                <Test
                   Identifier = "TrueElysiumTests">

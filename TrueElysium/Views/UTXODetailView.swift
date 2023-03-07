@@ -25,7 +25,7 @@ struct UTXODetailView: View {
                     HStack {
                         Text("ID")
                         Spacer()
-                        Text(utxo.id.description)
+                        Text(utxo.ID.description)
                     }
                     HStack {
                         Text("Token address")
@@ -72,7 +72,9 @@ struct UTXODetailView: View {
                         do {
                             try await shuffle(outputAddress: outputAddress)
                         } catch let error {
-                            print("Error \(error)")
+                            try! shuffleClient.node.updateUTXOStatus(utxoID: utxo.ID, status: .created)
+                            
+                            shuffleClient.logger.error("UTXO ID: \(utxo.ID), received an error: \(error)")
                         }
                     }
                 
@@ -89,13 +91,13 @@ struct UTXODetailView: View {
     
     func shuffle(outputAddress: EthereumAddress) async throws  {
         try await shuffleClient.initRoom(
-            utxoID: utxo.id,
+            utxoID: utxo.ID,
             outputAddress: outputAddress,
             privateEthKey: ethreumClient.user!
         )
-        try await shuffleClient.joinRoom(utxoID: utxo.id)
-        try await shuffleClient.waitShuffle(utxoID: utxo.id)
-        try await shuffleClient.connectRoom(utxoID: utxo.id)
+        try await shuffleClient.joinRoom(utxoID: utxo.ID)
+        try await shuffleClient.waitShuffle(utxoID: utxo.ID)
+        try await shuffleClient.connectRoom(utxoID: utxo.ID)
     }
 }
 

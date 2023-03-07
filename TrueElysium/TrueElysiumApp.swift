@@ -24,7 +24,7 @@ struct ElysiumApp: App {
                         utxoStore: store,
                         ethereumClient: ethereumClient,
                         shuffleClient:  try! ShuffleClient(
-                            grpcHost: "3.23.147.9",
+                            grpcHost: "qui0scit.dev",
                             port: 8080,
                             node: Node(
                                 utxoStore: store

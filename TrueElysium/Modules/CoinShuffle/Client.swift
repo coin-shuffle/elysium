@@ -81,6 +81,7 @@ class ShuffleClient {
             )
             
             isReady = resp.ready
+            try await node.setJwt(utxoID: utxoID, jwt: resp.roomAccessToken)
             logger.info("UTXO ID: \(utxoID). Checking a queue status..., isReady: \(isReady)")
         }
     }

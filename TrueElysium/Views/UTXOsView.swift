@@ -23,47 +23,42 @@ struct UTXOsView: View {
     let saveAction: ()->Void
     
     var body: some View {
-        ZStack {
-            VStack {
-                HeaderView(
-                    isPresentChangePrivateKey: $isPresentChangePrivateKey)
-                if !utxoStore.utxos.isEmpty {
-                    List {
-                        ForEach($utxoStore.utxos) {$utxo in
-                            NavigationLink(
-                                destination: UTXODetailView(
-                                    utxo: $utxo,
-                                    hasUser: ethereumClient.user != nil && privateKey.isEmpty,
-                                    shuffleClient: shuffleClient,
-                                    ethreumClient: ethereumClient
-                                )
-                            ) {
-                                CardUTXOView(utxo: utxo)
-                            }
+        VStack {
+            HeaderView(
+                isPresentChangePrivateKey: $isPresentChangePrivateKey)
+            if !utxoStore.utxos.isEmpty {
+                List {
+                    ForEach($utxoStore.utxos) {$utxo in
+                        NavigationLink(
+                            destination: UTXODetailView(
+                                utxo: $utxo,
+                                hasUser: ethereumClient.user != nil && privateKey.isEmpty,
+                                shuffleClient: shuffleClient,
+                                ethreumClient: ethereumClient
+                            )
+                        ) {
+                            CardUTXOView(utxo: utxo)
                         }
                     }
-                    .onChange(of: scenePhase) { phase in
-                        if phase == .inactive {
-                            saveAction()
-                        }
+                }
+                .onChange(of: scenePhase) { phase in
+                    if phase == .inactive {
+                        saveAction()
                     }
-                } else {
-                    Spacer()
-                    Label("You do not have UTXO yet", systemImage: "nosign")
-                    Spacer()
                 }
-                Button(action: {
-                    isPresentCreateUTXO = true
-                }) {
-                    Text("New")
-                        .font(.bold(.headline)())
-                }
-                .disabled(ethereumClient.user == nil && privateKey.isEmpty)
-                
+            } else {
+                Spacer()
+                Label("You do not have UTXO yet", systemImage: "nosign")
+                Spacer()
             }
-            LoaderView()
-                .hidden(!isLoading)
-                
+            Button(action: {
+                isPresentCreateUTXO = true
+            }) {
+                Text("New")
+                    .font(.bold(.headline)())
+            }
+            .disabled(ethereumClient.user == nil && privateKey.isEmpty || isLoading)
+            
         }
         .sheet(isPresented: $isPresentCreateUTXO) {
             NavigationView {
@@ -131,36 +126,41 @@ struct UTXOsView: View {
         }
         
         guard let tokenAddress = try? EthereumAddress(hex: data.token, eip55: true) else {
-                _error = UTXOsViewError.invalidTokenAddress
-                return
+            _error = UTXOsViewError.invalidTokenAddress
+            return
         }
         
         guard let amount = BigUInt(data.amount) else {
-                _error = UTXOsViewError.invalidAmount
-                return
-        }
-        
-        guard let (name, symbol) = try? ethereumClient.getETC20NameAndSymbol(tokenAddress) else {
-            _error = UTXOsViewError.failedToGetTokenNameAndSymbol
+            _error = UTXOsViewError.invalidAmount
             return
         }
-                                        
-        let utxo = UTXO(token: tokenAddress, amount: amount, name: name, symbol: symbol)
         
-        utxoStore.utxos.append(utxo)
-        let utxoIndex = utxoStore.utxos.endIndex-1
-        
-        isPresentCreateUTXO = false
-        isLoading = true
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            guard let finishedUTXO = try? ethereumClient.createUTXO(from: tokenAddress, amount: amount)
+        Task {
+            guard let (name, symbol) = try? await ethereumClient.getETC20NameAndSymbol(tokenAddress) else {
+                _error = UTXOsViewError.failedToGetTokenNameAndSymbol
+                return
+            }
+            
+            utxoStore.utxos.append(UTXO(
+                token: tokenAddress,
+                amount: amount,
+                name: name,
+                symbol: symbol
+            ))
+            
+            let utxoIndex = utxoStore.utxos.endIndex-1
+            
+            isLoading = true
+            isPresentCreateUTXO = false
+            
+            guard let finishedUTXO = try? await ethereumClient.createUTXO(from: tokenAddress, amount: amount)
             else {
                 var _utxo = utxoStore.utxos[utxoIndex]
                 
                 _utxo.status = .failed
                 
                 utxoStore.utxos[utxoIndex] = _utxo
+                isLoading = false
                 _error = UTXOsViewError.failedToCreateUTXO
                 return
             }
@@ -170,7 +170,6 @@ struct UTXOsView: View {
             _utxo.update(utxo: finishedUTXO)
             
             utxoStore.utxos[utxoIndex] = _utxo
-            
             isLoading = false
         }
     }

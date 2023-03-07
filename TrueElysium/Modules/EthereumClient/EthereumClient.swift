@@ -6,24 +6,24 @@
 //
 
 import os
-
 import Foundation
 import Web3
 import Web3ContractABI
 import Web3PromiseKit
 import Collections
 
+let LIMIT = BigUInt(stringLiteral: "115792089237316195423570985008687907853269984665640564039457584007913129639936")
+
 public class EthereumClient {
     public let client: Web3
     public var user: EthereumPrivateKey?
-    public var userUTXOs: [UTXOStorageContract.UTXO]
     public let erc20: GenericERC20Contract
     public let utxoStorage: UTXOStorageContract
     public let logger = Logger()
     public var queue = DispatchQueue.global(qos: .default)
     
     public init(utxoStorageContractAddress: EthereumAddress) throws {
-        let rpcURL = "https://goerli.infura.io/v3/d009354476b140008dd04c741c00341b"
+        let rpcURL = "https://goerli.infura.io/v3/cb621ec4047444bd91487c018d21f733"
         let client = Web3(rpcURL: rpcURL)
         
         let erc20 = GenericERC20Contract(address: nil, eth: client.eth)
@@ -32,150 +32,86 @@ public class EthereumClient {
         self.client = client
         self.erc20 = erc20
         self.utxoStorage = utxoStorage
-        self.userUTXOs = []
         
-        guard _checkConnection(client: client) else {
-            throw EthereumClientError.failedToConnect
+//        try _checkConnection(client: client)
+    }
+
+    
+    private func _checkConnection(client: Web3) throws {
+        let semaphore = DispatchSemaphore(value: 0)
+        Task {
+            let version = try await client.clientVersion().async()
+            self.logger.info("Ethereum client version: \(version)")
+            semaphore.signal()
         }
-    }
-
-    
-    private func _checkConnection(client: Web3) -> Bool {
-        let semaphore = DispatchSemaphore(value: 0)
-        var success = false
-        
-        client.clientVersion()
-            .done(on: queue) { version in
-                self.logger.info("Ethereum client version: \(version)")
-                success = true
-            }
-            .catch(on: queue) { error in
-                self.logger.error("An error has occured: \(error)")
-            }
-            .finally(on: queue) {
-                semaphore.signal()
-            }; semaphore.wait()
-        return success
+        semaphore.wait()
     }
 }
 
 public extension EthereumClient {
-    var gasPrice: EthereumQuantity? {
-        var _gasPrice: EthereumQuantity?
-        
-        let semaphore = DispatchSemaphore(value: 0)
-        client.eth.gasPrice()
-            .done(on: queue) { __gasPrice in
-                _gasPrice = __gasPrice
-            }.catch(on: queue) { _ in
-                _gasPrice = nil
-            }.finally(on: queue) {
-                semaphore.signal()
-            }; semaphore.wait()
-        
-        return _gasPrice
+    func getGasPrice() async throws -> EthereumQuantity {
+        return try await client.eth.gasPrice().async()
     }
     
-    var nonce: EthereumQuantity? {
-        var _nonce: EthereumQuantity?
-        
-        let semaphore = DispatchSemaphore(value: 0)
-        client.eth.getTransactionCount(address: user!.address, block: .latest)
-            .done(on: queue) { __nonce in
-                _nonce = try! EthereumQuantity(__nonce.quantity)
-            }.catch(on: queue) { _ in
-                _nonce = nil
-            }.finally(on: queue) {
-                semaphore.signal()
-            }; semaphore.wait()
-        
-        return _nonce
+    func getNonce() async throws -> EthereumQuantity {
+        return try await client.eth.getTransactionCount(
+            address: user!.address,
+            block: .latest
+        ).async()
     }
 }
 
 public extension EthereumClient {
-    func isTxSuccesful(txHash: EthereumData, interval: DispatchTimeInterval = .seconds(3)) -> Promise<Void> {
-        return Promise { seal in
-            var isTxPending = true
-            let timer = DispatchSource.makeTimerSource(queue: queue)
-            timer.schedule(deadline: .now(), repeating: interval)
-            timer.setEventHandler {
-                firstly {
-                    self.client.eth.getTransactionReceipt(transactionHash: txHash)
-                }.done(on: self.queue) { receipt in
-                    if let status = receipt?.status {
-                        isTxPending = false
-                        if status == 1 {
-                            seal.fulfill(())
-                        } else {
-                            seal.reject(EthereumClientError.txFailed)
-                        }
-                    }
-                }.catch { error in
-                    seal.reject(error)
+    func waitTxSuccess(txHash: EthereumData, each intervalInSeconds: UInt64 = 3) async throws {
+        while true {
+            try await Task.sleep(nanoseconds: intervalInSeconds * NSEC_PER_SEC)
+            let receipt = try? await self.client.eth.getTransactionReceipt(transactionHash: txHash).async()
+            if let status = receipt?.status {
+                if status == 1 {
+                    return
                 }
                 
-                if !isTxPending {
-                    timer.cancel()
-                }
+                throw EthereumClientError.txFailed
             }
-            timer.resume()
         }
     }
 }
 
 public extension EthereumClient {
-    func getETC20NameAndSymbol(_ tokenContractAddress: EthereumAddress) throws -> (String, String) {
-        let semaphore = DispatchSemaphore(value: 0)
+    func getETC20NameAndSymbol(_ tokenContractAddress: EthereumAddress) async throws -> (String, String) {
         erc20.address = tokenContractAddress
         defer {
             erc20.address = nil
         }
         
-        
-        var err: Error?
-        var name: String?, symbol: String?
-        firstly {
-            erc20.name().call()
-        }.done(on: queue) { outputs in
-            name = outputs["_name"] as? String
-        }.catch(on: queue) { error in
-            err = error
-        }.finally(on: queue) {
-            semaphore.signal()
-        }; semaphore.wait()
-        if err != nil {
-            throw err!
-        }
-        
-        firstly {
-            erc20.symbol().call()
-        }.done(on: queue) { outputs in
-            symbol = outputs["_symbol"] as? String
-        }.catch(on: queue) { error in
-            err = error
-        }.finally(on: queue) {
-            semaphore.signal()
-        }; semaphore.wait()
-        if err != nil {
-            throw err!
-        }
+        let name = try await erc20.name().call().async()["_name"] as? String
+        let symbol = try await erc20.symbol().call().async()["_symbol"] as? String
         
         return (name ?? "Token", symbol ?? "SYM")
     }
     
-    func createUTXO(from tokenContractAddress: EthereumAddress, amount: BigUInt) throws -> UTXO {
-        let semaphore = DispatchSemaphore(value: 0)
+    func getUTXOsLength() async throws -> BigUInt {
+        return (try await utxoStorage.getUTXOsLength().call().async()["length"] as? BigUInt)!
+    }
+    
+    func listUTXOsByAddress(owner: EthereumAddress, offset: BigUInt, limit: BigUInt) async throws -> [UTXOStorageContract.UTXO] {
+        let values = try await utxoStorage.listUTXOsByAddress(owner: owner, offset: offset, limit: limit).call().async()
+        return UTXOStorageContract.UTXO.getUTXOsFromAny(values: values["UTXOs"]!)
+    }
+    
+    func createUTXO(from tokenContractAddress: EthereumAddress, amount: BigUInt) async throws -> UTXO {
         erc20.address = tokenContractAddress
         defer {
             erc20.address = nil
         }
         
-        var err: Error?
+        let _nonce = EthereumQuantity(quantity: try await getNonce().quantity)
+        let _gasPrice = try await getGasPrice()
+        
         guard let approveTx = erc20.approve(spender: utxoStorage.address!, value: amount).createTransaction(
-            nonce: nonce,
-            gasPrice: EthereumQuantity(quantity: gasPrice!.quantity + 50.gwei),
-            maxFeePerGas: EthereumQuantity(quantity: gasPrice!.quantity + 100.gwei),
+            nonce: _nonce,
+            gasPrice: EthereumQuantity(quantity: _gasPrice.quantity + 50.gwei),
+            maxFeePerGas: EthereumQuantity(quantity: _gasPrice.quantity + 100.gwei),
             maxPriorityFeePerGas: EthereumQuantity(quantity: 3.gwei),
             gasLimit: 3000000,
             from: user!.address,
@@ -190,9 +126,9 @@ public extension EthereumClient {
             token: tokenContractAddress,
             outputs: [UTXOStorageContract.Output(amount: amount, owner: self.user!.address)]
         ).createTx(
-            nonce: try? EthereumQuantity(nonce!.quantity + 1),
-            gasPrice: EthereumQuantity(quantity: gasPrice!.quantity + 50.gwei),
-            maxFeePerGas: EthereumQuantity(quantity: gasPrice!.quantity + 100.gwei),
+            nonce: EthereumQuantity(quantity: _nonce.quantity + 1),
+            gasPrice: EthereumQuantity(quantity: _gasPrice.quantity + 50.gwei),
+            maxFeePerGas: EthereumQuantity(quantity: _gasPrice.quantity + 100.gwei),
             maxPriorityFeePerGas: EthereumQuantity(quantity: 3.gwei),
             gasLimit: 3000000,
             from: self.user!.address,
@@ -203,61 +139,35 @@ public extension EthereumClient {
             throw EthereumClientError.failedToCreateTx
         }
         
+        let signedApproveTx = try approveTx.sign(with: user!, chainId: 5)
+        let approveTxHash = try await client.eth.sendRawTransaction(transaction: signedApproveTx).async()
         
-        firstly {
-            try approveTx.sign(with: user!, chainId: 5).guarantee
-        }.then(on: queue) { signedTx in
-            return self.client.eth.sendRawTransaction(transaction: signedTx)
-        }.then(on: queue) { txHash in
-            self.logger.info("Approve Tx: \(txHash.hex())")
-            return self.isTxSuccesful(txHash: txHash)
-        }.then(on: queue) { _ in
-            try depositTx.sign(with: self.user!, chainId: 5).guarantee
-        }.then(on: queue) { signedTx in
-            self.client.eth.sendRawTransaction(transaction: signedTx)
-        }.then(on: queue) { txHash in
-            self.logger.info("Deposit Tx: \(txHash.hex())")
-            return self.isTxSuccesful(txHash: txHash)
-        }.done(on: queue) { _ in
-        }.catch(on: queue) { error in
-            err = error
-        }.finally(on: queue) {
-            semaphore.signal()
-        }; semaphore.wait()
-        if err != nil {
-            throw err!
-        }
-
-        var flag = true
-        while flag {
-            firstly {
-                utxoStorage.listUTXOsByAddress(
-                    owner: self.user!.address,
-                    offset: BigUInt(userUTXOs.count),
-                    limit: 10000000000000000000
-                ).call()
-            }.done(on: queue) { values in
-                let utxos = UTXOStorageContract.UTXO.getUTXOsFromAny(values: values["UTXOs"]!)
-                if utxos.isEmpty {
-                    flag = false
-                }
-                
-                self.userUTXOs.append(contentsOf: utxos)
-            }.catch(on: queue) { error in
-                err = error
-            }.finally(on: queue) {
-                semaphore.signal()
-            }; semaphore.wait()
-            if err != nil {
-                throw err!
-            }
+        print("Approve Tx Hash: \(approveTxHash)")
+        try await waitTxSuccess(txHash: approveTxHash)
+        
+        let utxosLength = try await getUTXOsLength()
+        
+        let signedDepositTx = try depositTx.sign(with: self.user!, chainId: 5)
+        let depositTxHash = try await client.eth.sendRawTransaction(transaction: signedDepositTx).async()
+        
+        print("Deposit Tx Hash: \(depositTxHash)")
+        try await waitTxSuccess(txHash: depositTxHash)
+        
+        let utxos = try await listUTXOsByAddress(
+            owner: user!.address,
+            offset: utxosLength-1,
+            limit: LIMIT
+        )
+        
+        if utxos.isEmpty {
+            throw EthereumClientError.txFailed
         }
         
         var name: String, symbol: String
-        (name, symbol) = try getETC20NameAndSymbol(tokenContractAddress)
+        (name, symbol) = try await getETC20NameAndSymbol(tokenContractAddress)
         
         return UTXO(
-            id: userUTXOs.last!.id,
+            ID: utxos.last!.id,
             token: tokenContractAddress,
             amount: amount,
             owner: user!.address,
