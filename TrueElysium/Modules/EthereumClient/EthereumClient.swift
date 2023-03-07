@@ -164,8 +164,7 @@ public extension EthereumClient {
         return (name ?? "Token", symbol ?? "SYM")
     }
     
-    func
-    createUTXO(from tokenContractAddress: EthereumAddress, amount: BigUInt) throws -> UTXO {
+    func createUTXO(from tokenContractAddress: EthereumAddress, amount: BigUInt) throws -> UTXO {
         let semaphore = DispatchSemaphore(value: 0)
         erc20.address = tokenContractAddress
         defer {
@@ -235,7 +234,7 @@ public extension EthereumClient {
                 utxoStorage.listUTXOsByAddress(
                     owner: self.user!.address,
                     offset: BigUInt(userUTXOs.count),
-                    limit: 5
+                    limit: 10000000000000000000
                 ).call()
             }.done(on: queue) { values in
                 let utxos = UTXOStorageContract.UTXO.getUTXOsFromAny(values: values["UTXOs"]!)
@@ -258,7 +257,7 @@ public extension EthereumClient {
         (name, symbol) = try getETC20NameAndSymbol(tokenContractAddress)
         
         return UTXO(
-            id: BigUInt(userUTXOs.count-1),
+            id: userUTXOs.last!.id,
             token: tokenContractAddress,
             amount: amount,
             owner: user!.address,

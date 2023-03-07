@@ -6,10 +6,18 @@
 //
 
 import SwiftUI
+import Web3
 import UniformTypeIdentifiers
 
 struct UTXODetailView: View {
-    @Binding var utxo: UTXO    
+    @Binding var utxo: UTXO
+    let hasUser: Bool
+    let shuffleClient: ShuffleClient
+    let ethreumClient: EthereumClient
+    @State var isRunning = false
+    
+    @State private var output: String = ""
+    
     var body: some View {
         VStack {
             List {
@@ -52,18 +60,62 @@ struct UTXODetailView: View {
                     }
                 }
             }
-            Button("Shuffle") {
-                utxo.status = .shuffling
+            HStack {
+                TextField("0x00...00", text: $output)
+                Button("Shuffle") {
+                    guard let outputAddress = try? EthereumAddress(hex: output, eip55: true) else {
+                        output = ""
+                        return
+                    }
+                    
+                    Task {
+                        do {
+                            try await shuffle(outputAddress: outputAddress)
+                        } catch let error {
+                            print("Error \(error)")
+                        }
+                    }
+                
+                    output = ""
+
+                }
+                .disabled(output.isEmpty)
             }
+            .disabled(!hasUser || utxo.status != .created)
+            .padding()
         }
         .navigationTitle("\(utxo.name)(\(utxo.symbol))")
+    }
+    
+    func shuffle(outputAddress: EthereumAddress) async throws  {
+        try await shuffleClient.initRoom(
+            utxoID: utxo.id,
+            outputAddress: outputAddress,
+            privateEthKey: ethreumClient.user!
+        )
+        try await shuffleClient.joinRoom(utxoID: utxo.id)
+        try await shuffleClient.waitShuffle(utxoID: utxo.id)
+        try await shuffleClient.connectRoom(utxoID: utxo.id)
     }
 }
 
 struct UTXODetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            UTXODetailView(utxo: .constant(UTXO.sampleData[0]))
+            UTXODetailView(
+                utxo: .constant(UTXO.sampleData[0]),
+                hasUser: true,
+                shuffleClient: try! ShuffleClient(
+                    grpcHost: "3.23.147.9",
+                    port: 8080,
+                    node: Node(
+                        utxoStore: UTXOStore()
+                    )
+                ),
+                ethreumClient: try! EthereumClient(
+                    utxoStorageContractAddress: try! EthereumAddress(hex: "0x4C0d116d9d028E60904DCA468b9Fa7537Ef8Cd5f", eip55: true)
+                    )
+            )
         }
     }
 }

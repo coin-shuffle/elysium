@@ -25,8 +25,9 @@ public extension String {
             return self
         }
         
-        let endIndex = self.index(self.startIndex, offsetBy: String.IndexDistance(maxLength - 3))
-        let startIndex = self.index(self.startIndex, offsetBy: String.IndexDistance(self.count - 2))
+        
+        let endIndex = self.index(self.startIndex, offsetBy: Int(maxLength - 3))
+        let startIndex = self.index(self.startIndex, offsetBy: Int(self.count - 2))
         
         return "\(self[...endIndex])...\(self[startIndex...])"
     }

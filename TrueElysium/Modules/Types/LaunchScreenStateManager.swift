@@ -9,11 +9,11 @@ import Foundation
 
 final class LaunchScreenStateManager: ObservableObject {
     @MainActor @Published var state = true
-        @MainActor func dismiss() {
-            Task {
-                try? await Task.sleep(for: Duration.seconds(1))
+    @MainActor func dismiss() {
+        Task {
+            try? await Task.sleep(for: Duration.seconds(1))
 
-                self.state = false
-            }
+            self.state = false
         }
+    }
 }

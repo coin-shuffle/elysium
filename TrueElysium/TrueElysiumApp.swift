@@ -20,7 +20,17 @@ struct ElysiumApp: App {
         WindowGroup {
             ZStack {
                 NavigationStack {
-                    UTXOsView(utxoStore: store, ethereumClient: ethereumClient) {
+                    UTXOsView(
+                        utxoStore: store,
+                        ethereumClient: ethereumClient,
+                        shuffleClient:  try! ShuffleClient(
+                            grpcHost: "3.23.147.9",
+                            port: 8080,
+                            node: Node(
+                                utxoStore: store
+                            )
+                        )
+                    ) {
                         UTXOStore.save(utxos: store.utxos) { result in
                             if case .failure(let error) = result {
                                 fatalError(error.localizedDescription)
