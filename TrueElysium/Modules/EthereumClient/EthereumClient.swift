@@ -19,8 +19,8 @@ public class EthereumClient {
     public var user: EthereumPrivateKey?
     public let erc20: GenericERC20Contract
     public let utxoStorage: UTXOStorageContract
+    public var lastNonce: EthereumQuantity? = nil
     public let logger = Logger()
-    public var queue = DispatchQueue.global(qos: .default)
     
     public init(utxoStorageContractAddress: EthereumAddress) throws {
         let rpcURL = "https://goerli.infura.io/v3/cb621ec4047444bd91487c018d21f733"
@@ -42,10 +42,25 @@ public extension EthereumClient {
     }
     
     func getNonce() async throws -> EthereumQuantity {
-        return try await client.eth.getTransactionCount(
+        var txCount = try await client.eth.getTransactionCount(
             address: user!.address,
             block: .latest
         ).async()
+        
+        if lastNonce == nil {
+            lastNonce = EthereumQuantity(quantity: txCount.quantity+1)
+            return txCount
+        }
+        
+        if lastNonce!.quantity > txCount.quantity {
+            txCount = EthereumQuantity(quantity: txCount.quantity + (lastNonce!.quantity - txCount.quantity))
+        }
+        
+        lastNonce = EthereumQuantity(quantity: txCount.quantity+1)
+        
+        print("Nonce: \(txCount.quantity)")
+        
+        return txCount
     }
 }
 
@@ -106,11 +121,10 @@ public extension EthereumClient {
             erc20.address = nil
         }
         
-        let _nonce = EthereumQuantity(quantity: try await getNonce().quantity)
         let _gasPrice = try await getGasPrice()
         
         guard let approveTx = erc20.approve(spender: utxoStorage.address!, value: amount).createTransaction(
-            nonce: _nonce,
+            nonce: try await getNonce(),
             gasPrice: EthereumQuantity(quantity: _gasPrice.quantity + 50.gwei),
             maxFeePerGas: EthereumQuantity(quantity: _gasPrice.quantity + 100.gwei),
             maxPriorityFeePerGas: EthereumQuantity(quantity: 3.gwei),
@@ -127,7 +141,7 @@ public extension EthereumClient {
             token: tokenContractAddress,
             outputs: [UTXOStorageContract.Output(amount: amount, owner: self.user!.address)]
         ).createTx(
-            nonce: EthereumQuantity(quantity: _nonce.quantity + 1),
+            nonce: try await getNonce(),
             gasPrice: EthereumQuantity(quantity: _gasPrice.quantity + 50.gwei),
             maxFeePerGas: EthereumQuantity(quantity: _gasPrice.quantity + 100.gwei),
             maxPriorityFeePerGas: EthereumQuantity(quantity: 3.gwei),
@@ -143,7 +157,7 @@ public extension EthereumClient {
         let signedApproveTx = try approveTx.sign(with: user!, chainId: 5)
         let approveTxHash = try await client.eth.sendRawTransaction(transaction: signedApproveTx).async()
         
-        print("Approve Tx Hash: \(approveTxHash)")
+        print("Approve Tx Hash: \(approveTxHash.hex())")
         try await waitTxSuccess(txHash: approveTxHash)
         
         let utxosLength = try await getUTXOsLength()
@@ -151,7 +165,7 @@ public extension EthereumClient {
         let signedDepositTx = try depositTx.sign(with: self.user!, chainId: 5)
         let depositTxHash = try await client.eth.sendRawTransaction(transaction: signedDepositTx).async()
         
-        print("Deposit Tx Hash: \(depositTxHash)")
+        print("Deposit Tx Hash: \(depositTxHash.hex())")
         try await waitTxSuccess(txHash: depositTxHash)
         
         let utxos = try await listUTXOsByAddress(

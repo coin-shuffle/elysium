@@ -14,7 +14,6 @@ struct UTXOsView: View {
     @EnvironmentObject private var launchScreenState: LaunchScreenStateManager
     @State private var isPresentCreateUTXO = false
     @State private var isPresentChangePrivateKey = false
-    @State private var isLoading = false
     @State private var data = UTXO.Data()
     @State private var privateKey: String = ""
     @State private var _error: LocalizedError?
@@ -57,7 +56,7 @@ struct UTXOsView: View {
                 Text("New")
                     .font(.bold(.headline)())
             }
-            .disabled(ethereumClient.user == nil && privateKey.isEmpty || isLoading)
+            .disabled(ethereumClient.user == nil && privateKey.isEmpty)
             
         }
         .sheet(isPresented: $isPresentCreateUTXO) {
@@ -155,7 +154,6 @@ struct UTXOsView: View {
             
             let utxoIndex = utxoStore.utxos.endIndex-1
             
-            isLoading = true
             isPresentCreateUTXO = false
             
             guard let finishedUTXO = try? await ethereumClient.createUTXO(from: tokenAddress, amount: amount)
@@ -165,7 +163,6 @@ struct UTXOsView: View {
                 _utxo.status = .failed
                 
                 utxoStore.utxos[utxoIndex] = _utxo
-                isLoading = false
                 _error = UTXOsViewError.failedToCreateUTXO
                 return
             }
@@ -175,7 +172,6 @@ struct UTXOsView: View {
             _utxo.update(utxo: finishedUTXO)
             
             utxoStore.utxos[utxoIndex] = _utxo
-            isLoading = false
         }
     }
 }
