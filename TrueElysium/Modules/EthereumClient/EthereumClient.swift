@@ -113,12 +113,20 @@ public extension EthereumClient {
         return (try await utxoStorage.getUTXOsLength().call().async()["length"] as? BigUInt)!
     }
     
-    func listUTXOsByAddress(owner: EthereumAddress, offset: BigUInt, limit: BigUInt) async throws -> [UTXOStorageContract.UTXO] {
+    func listUTXOsByAddress(
+        owner: EthereumAddress,
+        offset: BigUInt,
+        limit: BigUInt
+    ) async throws -> [UTXOStorageContract.UTXO] {
         let values = try await utxoStorage.listUTXOsByAddress(owner: owner, offset: offset, limit: limit).call().async()
         return UTXOStorageContract.UTXO.getUTXOsFromAny(values: values["UTXOs"]!)
     }
     
-    func createUTXO(from tokenContractAddress: EthereumAddress, amount: BigUInt) async throws -> UTXO {
+    func createUTXO(
+        tokenStore: TokenStore,
+        from tokenContractAddress: EthereumAddress,
+        amount: BigUInt
+    ) async throws -> UTXO {
         erc20.address = tokenContractAddress
         defer {
             erc20.address = nil
@@ -181,15 +189,15 @@ public extension EthereumClient {
             throw EthereumClientError.txFailed
         }
         
-        let (name, symbol) = try await getETC20NameAndSymbol(tokenContractAddress)
+        let token = try await tokenStore.getToken(tokenContractAddress)
         
         return UTXO(
             ID: utxos.last!.id,
             token: tokenContractAddress,
             amount: amount,
             owner: user!.address,
-            name: name,
-            symbol: symbol,
+            name: token.name,
+            symbol: token.symbol,
             status: .created
         )
     }

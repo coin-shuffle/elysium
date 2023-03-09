@@ -11,11 +11,13 @@ import SwiftUI
 
 class UTXOLoader {
     @ObservedObject var utxoStore: UTXOStore
+    @ObservedObject var tokenStore: TokenStore
     let ethereumClient: EthereumClient
     var offset: BigUInt = 0
     
-    init(utxoStore: UTXOStore, ethereumClient: EthereumClient) {
+    init(utxoStore: UTXOStore, tokenStore: TokenStore, ethereumClient: EthereumClient) {
         self.utxoStore = utxoStore
+        self.tokenStore = tokenStore
         self.ethereumClient = ethereumClient
     }
     
@@ -41,15 +43,15 @@ class UTXOLoader {
             offset += 100
             
             for utxo in utxos {
-                let (name, symbol) = try await ethereumClient.getETC20NameAndSymbol(utxo.token)
+                let token = try await tokenStore.getToken(utxo.token)
                 
                 let _utxo = UTXO(
                     ID: utxo.id,
                     token: utxo.token,
                     amount: utxo.amount,
                     owner: utxo.owner,
-                    name: name,
-                    symbol: symbol,
+                    name: token.name,
+                    symbol: token.symbol,
                     status: (utxo.isSpent) ? .shuffled : .created
                 )
                 

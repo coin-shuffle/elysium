@@ -10,6 +10,7 @@ import Web3
 
 struct UTXOsView: View {
     @ObservedObject var utxoStore: UTXOStore
+    @ObservedObject var tokenStore: TokenStore
     @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject private var launchScreenState: LaunchScreenStateManager
     @State private var isPresentCreateUTXO = false
@@ -152,16 +153,15 @@ struct UTXOsView: View {
                 throw UTXOsViewError.invalidTokenAddress
             }
             
-            guard let (name, symbol) = try? await ethereumClient.getETC20NameAndSymbol(tokenAddress) else {
-                _error = UTXOsViewError.failedToGetTokenNameAndSymbol
-                return
+            guard let token = try? await tokenStore.getToken(tokenAddress) else {
+                throw UTXOsViewError.failedToGetTokenNameAndSymbol
             }
             
             utxoStore.utxos.append(UTXO(
                 token: tokenAddress,
                 amount: amount,
-                name: name,
-                symbol: symbol
+                name: token.name,
+                symbol: token.symbol
             ))
             
             let utxoIndex = utxoStore.utxos.endIndex-1
@@ -169,6 +169,7 @@ struct UTXOsView: View {
             isPresentCreateUTXO = false
             
             guard let finishedUTXO = try? await ethereumClient.createUTXO(
+                tokenStore: tokenStore,
                 from: tokenAddress,
                 amount: amount
             ) else {
@@ -196,6 +197,11 @@ struct UTXOsView_Previews: PreviewProvider {
         NavigationStack {
             UTXOsView(
                 utxoStore: UTXOStore(),
+                tokenStore: TokenStore(
+                    ethereumClient: try! EthereumClient(
+                        netCfg: parseConfig().NetConfig
+                    )
+                ),
                 ethereumClient: try! EthereumClient(
                     netCfg: parseConfig().NetConfig
                 ),
