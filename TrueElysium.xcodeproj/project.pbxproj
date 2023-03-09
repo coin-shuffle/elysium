@@ -19,8 +19,6 @@
 		CE7BB88A29AB6C0C0089CB57 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB88829AB6C0C0089CB57 /* String.swift */; };
 		CE7BB88C29AB93870089CB57 /* SolidityInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB88B29AB93870089CB57 /* SolidityInvocation.swift */; };
 		CE7BB88D29AB93870089CB57 /* SolidityInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB88B29AB93870089CB57 /* SolidityInvocation.swift */; };
-		CE7BB89B29ABB8E70089CB57 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89129ABB8E60089CB57 /* LoaderView.swift */; };
-		CE7BB89C29ABB8E70089CB57 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89129ABB8E60089CB57 /* LoaderView.swift */; };
 		CE7BB89D29ABB8E70089CB57 /* MainLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89229ABB8E60089CB57 /* MainLoaderView.swift */; };
 		CE7BB89E29ABB8E70089CB57 /* MainLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89229ABB8E60089CB57 /* MainLoaderView.swift */; };
 		CE7BB8A329ABB8E70089CB57 /* NewUTXOView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB89529ABB8E60089CB57 /* NewUTXOView.swift */; };
@@ -64,6 +62,10 @@
 		CEA691E429B8E9C600110E44 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA691E229B8E9C600110E44 /* Parser.swift */; };
 		CEA691E729B8E9F100110E44 /* Cfg.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA691E629B8E9F100110E44 /* Cfg.swift */; };
 		CEA691E829B8E9F100110E44 /* Cfg.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA691E629B8E9F100110E44 /* Cfg.swift */; };
+		CEB68BCE29B9F4BC00455785 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BCD29B9F4BC00455785 /* FilterView.swift */; };
+		CEB68BCF29B9F4BC00455785 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BCD29B9F4BC00455785 /* FilterView.swift */; };
+		CEB68BD129B9FC7A00455785 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BD029B9FC7A00455785 /* Filters.swift */; };
+		CEB68BD229B9FC7A00455785 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BD029B9FC7A00455785 /* Filters.swift */; };
 		CEC45CA429AF72C500848C23 /* SwiftyRSA in Frameworks */ = {isa = PBXBuildFile; productRef = CEC45CA329AF72C500848C23 /* SwiftyRSA */; };
 		CEC45CA629AF72C500848C23 /* SwiftyRSA in Embed Frameworks */ = {isa = PBXBuildFile; productRef = CEC45CA329AF72C500848C23 /* SwiftyRSA */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CEC45CA829AFF3DD00848C23 /* librsa_crypto.a in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEC45CA729AFF3DD00848C23 /* librsa_crypto.a */; };
@@ -156,7 +158,6 @@
 		CE3C7F8F29B64DA900734DF9 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
 		CE7BB88829AB6C0C0089CB57 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		CE7BB88B29AB93870089CB57 /* SolidityInvocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidityInvocation.swift; sourceTree = "<group>"; };
-		CE7BB89129ABB8E60089CB57 /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		CE7BB89229ABB8E60089CB57 /* MainLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainLoaderView.swift; sourceTree = "<group>"; };
 		CE7BB89529ABB8E60089CB57 /* NewUTXOView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUTXOView.swift; sourceTree = "<group>"; };
 		CE7BB89629ABB8E70089CB57 /* UTXODetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UTXODetailView.swift; sourceTree = "<group>"; };
@@ -178,6 +179,8 @@
 		CEA691D929B8E66200110E44 /* Config.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = Config.yaml; sourceTree = "<group>"; };
 		CEA691E229B8E9C600110E44 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		CEA691E629B8E9F100110E44 /* Cfg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cfg.swift; sourceTree = "<group>"; };
+		CEB68BCD29B9F4BC00455785 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		CEB68BD029B9FC7A00455785 /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
 		CEC45CA729AFF3DD00848C23 /* librsa_crypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librsa_crypto.a; sourceTree = "<group>"; };
 		CEC45CA929AFF45900848C23 /* rsa_crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rsa_crypto.h; sourceTree = "<group>"; };
 		CEC45CAA29AFF4DD00848C23 /* RSACryptoBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSACryptoBridgingHeader.h; sourceTree = "<group>"; };
@@ -329,8 +332,8 @@
 				CE7BB89529ABB8E60089CB57 /* NewUTXOView.swift */,
 				CE7BB89229ABB8E60089CB57 /* MainLoaderView.swift */,
 				CE7BB89A29ABB8E70089CB57 /* CardUTXOView.swift */,
-				CE7BB89129ABB8E60089CB57 /* LoaderView.swift */,
 				CEED37B129B0EBB600C5FB41 /* HeaderView.swift */,
+				CEB68BCD29B9F4BC00455785 /* FilterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				CE7BB8B129ABB92D0089CB57 /* LaunchScreenStateManager.swift */,
 				CEA1FB3229A62D940008C9C5 /* UTXO.swift */,
 				CE7BB8C429ABDB330089CB57 /* Error.swift */,
+				CEB68BD029B9FC7A00455785 /* Filters.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -694,7 +698,6 @@
 				CEC9D10F29B245A20056D3C4 /* ECDSACrypto.swift in Sources */,
 				CE94EEFA29AD0BB400B06CFA /* UTXOStore.swift in Sources */,
 				CE94EEF529ACFA0300B06CFA /* ChangePrivateKeyView.swift in Sources */,
-				CE7BB89B29ABB8E70089CB57 /* LoaderView.swift in Sources */,
 				CEC45CAC29AFF83B00848C23 /* RSACrypto.swift in Sources */,
 				CE94EF1229AE450B00B06CFA /* shuffle_service.pb.swift in Sources */,
 				CE7BB8A729ABB8E70089CB57 /* UTXOsView.swift in Sources */,
@@ -703,10 +706,12 @@
 				CEA691E329B8E9C600110E44 /* Parser.swift in Sources */,
 				CEE8802E29A509DF009CC313 /* EthereumClient.swift in Sources */,
 				CE3C7F9029B64DA900734DF9 /* Future.swift in Sources */,
+				CEB68BCE29B9F4BC00455785 /* FilterView.swift in Sources */,
 				CE94EF0829ADFB6B00B06CFA /* Room.swift in Sources */,
 				CE7BB8B829ABB92D0089CB57 /* LaunchScreenStateManager.swift in Sources */,
 				CE7BB8AB29ABB8E70089CB57 /* CardUTXOView.swift in Sources */,
 				CE94EF0129AD599600B06CFA /* Client.swift in Sources */,
+				CEB68BD129B9FC7A00455785 /* Filters.swift in Sources */,
 				CEC9D0F629B211120056D3C4 /* shuffle_service.grpc.swift in Sources */,
 				CEA691E729B8E9F100110E44 /* Cfg.swift in Sources */,
 				CE7BB8C529ABDB330089CB57 /* Error.swift in Sources */,
@@ -724,6 +729,7 @@
 				CE3C7F7D29B4D77100734DF9 /* ShuffleClientTest.swift in Sources */,
 				CEED37B029B0D7B400C5FB41 /* Nonce.swift in Sources */,
 				CEC45CAD29AFF83B00848C23 /* RSACrypto.swift in Sources */,
+				CEB68BCF29B9F4BC00455785 /* FilterView.swift in Sources */,
 				CE7BB88A29AB6C0C0089CB57 /* String.swift in Sources */,
 				CE94EF0929ADFB6B00B06CFA /* Room.swift in Sources */,
 				CEDEEE0F29B10A85009647C1 /* Node.swift in Sources */,
@@ -739,12 +745,12 @@
 				CEA691E829B8E9F100110E44 /* Cfg.swift in Sources */,
 				CECEA98C29A514C3009C70CE /* EthereumClient.swift in Sources */,
 				CE3C7F7E29B4E30A00734DF9 /* ShuffleError.swift in Sources */,
-				CE7BB89C29ABB8E70089CB57 /* LoaderView.swift in Sources */,
 				CEDEEE0929B0F0EB009647C1 /* UTXOsView.swift in Sources */,
 				CEC9D11029B245A20056D3C4 /* ECDSACrypto.swift in Sources */,
 				CEED37B329B0EBB600C5FB41 /* HeaderView.swift in Sources */,
 				CE7BB88D29AB93870089CB57 /* SolidityInvocation.swift in Sources */,
 				CE7BB89E29ABB8E70089CB57 /* MainLoaderView.swift in Sources */,
+				CEB68BD229B9FC7A00455785 /* Filters.swift in Sources */,
 				CEA1FB3429A63B960008C9C5 /* UTXOStorageContract.swift in Sources */,
 				CEC9D10829B243B20056D3C4 /* PublicKey.swift in Sources */,
 				CE94EEF629ACFA0300B06CFA /* ChangePrivateKeyView.swift in Sources */,

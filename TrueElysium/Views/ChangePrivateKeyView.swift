@@ -24,7 +24,9 @@ struct ChangePrivateKeyView: View {
 
 struct ChangePrivateKeyView_Previews: PreviewProvider {
     static var previews: some View {
-        ChangePrivateKeyView(privateKey: .constant(""))
+        ChangePrivateKeyView(
+            privateKey: .constant("")
+        )
     }
 }
 

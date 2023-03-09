@@ -14,9 +14,11 @@ struct UTXOsView: View {
     @EnvironmentObject private var launchScreenState: LaunchScreenStateManager
     @State private var isPresentCreateUTXO = false
     @State private var isPresentChangePrivateKey = false
+    @State private var isPresentFilterSelection = false
     @State private var data = UTXO.Data()
     @State private var privateKey: String = ""
     @State private var _error: LocalizedError?
+    @StateObject private var filterer = Filterer()
     var ethereumClient: EthereumClient
     var shuffleClient: ShuffleClient
     let saveAction: ()->Void
@@ -24,19 +26,25 @@ struct UTXOsView: View {
     var body: some View {
         VStack {
             HeaderView(
-                isPresentChangePrivateKey: $isPresentChangePrivateKey)
+                isPresentChangePrivateKey: $isPresentChangePrivateKey,
+                isPresentFilterSelection: $isPresentFilterSelection
+            )
             if !utxoStore.utxos.isEmpty {
                 List {
                     ForEach($utxoStore.utxos) { $utxo in
-                        NavigationLink(
-                            destination: UTXODetailView(
-                                utxo: $utxo,
-                                hasUser: ethereumClient.user != nil && privateKey.isEmpty,
-                                shuffleClient: shuffleClient,
-                                ethreumClient: ethereumClient
-                            )
-                        ) {
-                            CardUTXOView(utxo: utxo)
+                        if filterer.isSelected(status: utxo.status) {
+                            if filterer.isFitName(name: utxo.name) {
+                                NavigationLink(
+                                    destination: UTXODetailView(
+                                        utxo: $utxo,
+                                        hasUser: ethereumClient.user != nil && privateKey.isEmpty,
+                                        shuffleClient: shuffleClient,
+                                        ethreumClient: ethereumClient
+                                    )
+                                ) {
+                                    CardUTXOView(utxo: utxo)
+                                }
+                            }
                         }
                     }
                 }
@@ -76,6 +84,12 @@ struct UTXOsView: View {
                         }
                     }
                     .errorAlert(error: $_error, actor: $isPresentCreateUTXO)
+            }
+        }
+        .sheet(isPresented: $isPresentFilterSelection) {
+            NavigationView {
+                FilterView(filterer: filterer)
+                    .navigationTitle("Filtering")
             }
         }
         .sheet(isPresented: $isPresentChangePrivateKey) {
