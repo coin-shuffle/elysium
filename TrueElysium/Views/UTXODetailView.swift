@@ -14,7 +14,6 @@ struct UTXODetailView: View {
     let hasUser: Bool
     let shuffleClient: ShuffleClient
     let ethreumClient: EthereumClient
-    @State var isRunning = false
     
     @State private var output: String = ""
     
@@ -108,15 +107,14 @@ struct UTXODetail_Previews: PreviewProvider {
                 utxo: .constant(UTXO.sampleData[0]),
                 hasUser: true,
                 shuffleClient: try! ShuffleClient(
-                    grpcHost: "3.23.147.9",
-                    port: 8080,
+                    cfg: parseConfig().CoinShuffleSvcConfig,
                     node: Node(
                         utxoStore: UTXOStore()
                     )
                 ),
                 ethreumClient: try! EthereumClient(
-                    utxoStorageContractAddress: try! EthereumAddress(hex: "0x4C0d116d9d028E60904DCA468b9Fa7537Ef8Cd5f", eip55: true)
-                    )
+                    netCfg: parseConfig().NetConfig
+                )
             )
         }
     }

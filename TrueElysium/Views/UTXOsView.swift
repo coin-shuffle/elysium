@@ -27,7 +27,7 @@ struct UTXOsView: View {
                 isPresentChangePrivateKey: $isPresentChangePrivateKey)
             if !utxoStore.utxos.isEmpty {
                 List {
-                    ForEach($utxoStore.utxos) {$utxo in
+                    ForEach($utxoStore.utxos) { $utxo in
                         NavigationLink(
                             destination: UTXODetailView(
                                 utxo: $utxo,
@@ -170,7 +170,6 @@ struct UTXOsView: View {
             var _utxo = utxoStore.utxos[utxoIndex]
             
             _utxo.update(utxo: finishedUTXO)
-            
             utxoStore.utxos[utxoIndex] = _utxo
         }
     }
@@ -184,11 +183,10 @@ struct UTXOsView_Previews: PreviewProvider {
             UTXOsView(
                 utxoStore: UTXOStore(),
                 ethereumClient: try! EthereumClient(
-                utxoStorageContractAddress: try! EthereumAddress(hex: "0x4C0d116d9d028E60904DCA468b9Fa7537Ef8Cd5f", eip55: true)
+                    netCfg: parseConfig().NetConfig
                 ),
                 shuffleClient: try! ShuffleClient(
-                    grpcHost: "3.23.147.9",
-                    port: 8080,
+                    cfg: parseConfig().CoinShuffleSvcConfig,
                     node: Node(
                         utxoStore: UTXOStore()
                     )

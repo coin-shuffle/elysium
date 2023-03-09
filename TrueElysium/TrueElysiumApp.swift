@@ -8,12 +8,14 @@
 import SwiftUI
 import Web3
 
+let cfg = parseConfig()
+
 @main
 struct ElysiumApp: App {
     @StateObject private var store = UTXOStore()
     @StateObject var launchScreenState = LaunchScreenStateManager()
     let ethereumClient = try! EthereumClient(
-        utxoStorageContractAddress: try! EthereumAddress(hex: "0x4C0d116d9d028E60904DCA468b9Fa7537Ef8Cd5f", eip55: true)
+        netCfg: cfg.NetConfig
     )
     
     var body: some Scene {
@@ -24,8 +26,7 @@ struct ElysiumApp: App {
                         utxoStore: store,
                         ethereumClient: ethereumClient,
                         shuffleClient:  try! ShuffleClient(
-                            grpcHost: "qui0scit.dev",
-                            port: 8080,
+                            cfg: cfg.CoinShuffleSvcConfig,
                             node: Node(
                                 utxoStore: store
                             )

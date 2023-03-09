@@ -43,6 +43,9 @@
                   Identifier = "CryptographyTest">
                </Test>
                <Test
+                  Identifier = "EthereumClientTest">
+               </Test>
+               <Test
                   Identifier = "EthereumClientTest/testCreateUTXO()">
                </Test>
                <Test
@@ -59,9 +62,6 @@
                </Test>
                <Test
                   Identifier = "ShuffleClientTest">
-               </Test>
-               <Test
-                  Identifier = "TrueElysiumTests">
                </Test>
             </SkippedTests>
          </TestableReference>

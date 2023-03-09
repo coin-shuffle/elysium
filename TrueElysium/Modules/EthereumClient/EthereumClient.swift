@@ -21,19 +21,25 @@ public class EthereumClient {
     public let utxoStorage: UTXOStorageContract
     public var lastNonce: EthereumQuantity? = nil
     public let logger = Logger()
+    public let networkID: EthereumQuantity
     
-    public init(utxoStorageContractAddress: EthereumAddress) throws {
-        let rpcURL = "https://goerli.infura.io/v3/cb621ec4047444bd91487c018d21f733"
-        let client = Web3(rpcURL: rpcURL)
+    public init(netCfg: NetConfig) throws {
+        let client = Web3(rpcURL: netCfg.httpProviderURL)
         
-        let erc20 = GenericERC20Contract(address: nil, eth: client.eth)
-        let utxoStorage = UTXOStorageContract(address: utxoStorageContractAddress, eth: client.eth)
+        let erc20 = GenericERC20Contract(
+            address: nil,
+            eth: client.eth
+        )
+        let utxoStorage = UTXOStorageContract(
+            address: try EthereumAddress(hex: netCfg.utxoStorageAddress, eip55: true),
+            eth: client.eth
+        )
         
         self.client = client
         self.erc20 = erc20
         self.utxoStorage = utxoStorage
+        self.networkID = EthereumQuantity(quantity: try BigUInt(netCfg.networkID))
     }
-    
 }
 
 public extension EthereumClient {
@@ -57,9 +63,6 @@ public extension EthereumClient {
         }
         
         lastNonce = EthereumQuantity(quantity: txCount.quantity+1)
-        
-        print("Nonce: \(txCount.quantity)")
-        
         return txCount
     }
 }
@@ -154,7 +157,7 @@ public extension EthereumClient {
             throw EthereumClientError.failedToCreateTx
         }
         
-        let signedApproveTx = try approveTx.sign(with: user!, chainId: 5)
+        let signedApproveTx = try approveTx.sign(with: user!, chainId: networkID)
         let approveTxHash = try await client.eth.sendRawTransaction(transaction: signedApproveTx).async()
         
         print("Approve Tx Hash: \(approveTxHash.hex())")
@@ -162,7 +165,7 @@ public extension EthereumClient {
         
         let utxosLength = try await getUTXOsLength()
         
-        let signedDepositTx = try depositTx.sign(with: self.user!, chainId: 5)
+        let signedDepositTx = try depositTx.sign(with: self.user!, chainId: networkID)
         let depositTxHash = try await client.eth.sendRawTransaction(transaction: signedDepositTx).async()
         
         print("Deposit Tx Hash: \(depositTxHash.hex())")
