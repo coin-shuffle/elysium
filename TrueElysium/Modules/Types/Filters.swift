@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Web3
 
 struct StatusFilter: Identifiable {
     let id: Int
@@ -23,7 +24,9 @@ class Filterer: ObservableObject {
         StatusFilter(id: 5, value: .shuffled, selected: true)
     ]
     
-    @Published var tokenName: String = ""
+    @Published var tokenName = ""
+    
+    @Published var onlyMine = false
     
     func toggle(statusFilter: StatusFilter) {
         self.statuses[statusFilter.id].selected.toggle()
@@ -45,5 +48,25 @@ class Filterer: ObservableObject {
         }
         
         return tokenName == name
+    }
+    
+    func isMine(owner: EthereumAddress, user: EthereumAddress?) -> Bool {
+        if user == nil {
+            return false
+        }
+        
+        return owner == user
+    }
+    
+    func filter(utxo: UTXO, user: EthereumAddress?) -> Bool {
+        guard isSelected(status: utxo.status) else {
+            return false
+        }
+        
+        if onlyMine {
+            return isMine(owner: utxo.owner, user: user) && isFitName(name: utxo.name)
+        }
+        
+        return isFitName(name: utxo.name)
     }
 }

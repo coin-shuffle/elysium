@@ -31,20 +31,19 @@ struct UTXOsView: View {
             )
             if !utxoStore.utxos.isEmpty {
                 List {
-                    ForEach($utxoStore.utxos) { $utxo in
-                        if filterer.isSelected(status: utxo.status) {
-                            if filterer.isFitName(name: utxo.name) {
-                                NavigationLink(
-                                    destination: UTXODetailView(
-                                        utxo: $utxo,
-                                        hasUser: ethereumClient.user != nil && privateKey.isEmpty,
-                                        shuffleClient: shuffleClient,
-                                        ethreumClient: ethereumClient
-                                    )
-                                ) {
-                                    CardUTXOView(utxo: utxo)
-                                }
-                            }
+                    ForEach($utxoStore.utxos.filter {filterer.filter(
+                        utxo: $0.wrappedValue,
+                        user: ethereumClient.user?.publicKey.address
+                    )}) { $utxo in
+                        NavigationLink(
+                            destination: UTXODetailView(
+                                utxo: $utxo,
+                                hasUser: ethereumClient.user != nil && privateKey.isEmpty && ethereumClient.user!.publicKey.address == utxo.owner,
+                                shuffleClient: shuffleClient,
+                                ethreumClient: ethereumClient
+                            )
+                        ) {
+                            CardUTXOView(utxo: utxo)
                         }
                     }
                 }
@@ -149,9 +148,8 @@ struct UTXOsView: View {
         }
         
         Task {
-            if !(try await ethereumClient.isContract(tokenAddress)) {
-                _error = UTXOsViewError.invalidTokenAddress
-                return
+            guard try await ethereumClient.isContract(tokenAddress) else {
+                throw UTXOsViewError.invalidTokenAddress
             }
             
             guard let (name, symbol) = try? await ethereumClient.getETC20NameAndSymbol(tokenAddress) else {
@@ -170,8 +168,10 @@ struct UTXOsView: View {
             
             isPresentCreateUTXO = false
             
-            guard let finishedUTXO = try? await ethereumClient.createUTXO(from: tokenAddress, amount: amount)
-            else {
+            guard let finishedUTXO = try? await ethereumClient.createUTXO(
+                from: tokenAddress,
+                amount: amount
+            ) else {
                 var _utxo = utxoStore.utxos[utxoIndex]
                 
                 _utxo.status = .failed

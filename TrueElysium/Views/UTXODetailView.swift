@@ -59,31 +59,33 @@ struct UTXODetailView: View {
                     }
                 }
             }
-            HStack {
-                TextField("0x00...00", text: $output)
-                Button("Shuffle") {
-                    guard let outputAddress = try? EthereumAddress(hex: output, eip55: true) else {
-                        output = ""
-                        return
-                    }
-                    
-                    Task {
-                        do {
-                            try await shuffle(outputAddress: outputAddress)
-                        } catch let error {
-                            try! shuffleClient.node.updateUTXOStatus(utxoID: utxo.ID, status: .created)
-                            
-                            shuffleClient.logger.error("UTXO ID: \(utxo.ID), received an error: \(error)")
+            if hasUser && utxo.status == .created {
+                HStack {
+                    TextField("0x00...00", text: $output)
+                    Button("Shuffle") {
+                        guard let outputAddress = try? EthereumAddress(hex: output, eip55: true) else {
+                            output = ""
+                            return
                         }
+                        
+                        Task {
+                            do {
+                                try await shuffle(outputAddress: outputAddress)
+                            } catch let error {
+                                try! shuffleClient.node.updateUTXOStatus(utxoID: utxo.ID, status: .created)
+                                
+                                shuffleClient.logger.error("UTXO ID: \(utxo.ID), received an error: \(error)")
+                            }
+                        }
+                        
+                        output = ""
+                        
                     }
-                
-                    output = ""
-
+                    .disabled(output.isEmpty)
                 }
-                .disabled(output.isEmpty)
+                .disabled(!hasUser || utxo.status != .created)
+                .padding()
             }
-            .disabled(!hasUser || utxo.status != .created)
-            .padding()
         }
         .navigationTitle("\(utxo.name)(\(utxo.symbol))")
     }

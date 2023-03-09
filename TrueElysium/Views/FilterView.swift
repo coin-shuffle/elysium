@@ -30,6 +30,11 @@ struct FilterView: View {
                 Section(header: Text("Token name")) {
                     TextField("Tether, e.g.", text: $filterer.tokenName)
                 }
+                Section(header: Text("Ownership")) {
+                    Toggle(isOn: $filterer.onlyMine) {
+                        Text("Mine")
+                    }
+                }
             }
         }
     }
