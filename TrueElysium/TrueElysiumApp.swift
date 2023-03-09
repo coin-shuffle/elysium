@@ -48,6 +48,12 @@ struct ElysiumApp: App {
                             store.utxos = utxos
                         }
                     }
+                    Task {
+                        await UTXOLoader(
+                            utxoStore: store,
+                            ethereumClient: ethereumClient
+                        ).run()
+                    }
                 }
                 
                 if launchScreenState.state {

@@ -181,8 +181,7 @@ public extension EthereumClient {
             throw EthereumClientError.txFailed
         }
         
-        var name: String, symbol: String
-        (name, symbol) = try await getETC20NameAndSymbol(tokenContractAddress)
+        let (name, symbol) = try await getETC20NameAndSymbol(tokenContractAddress)
         
         return UTXO(
             ID: utxos.last!.id,

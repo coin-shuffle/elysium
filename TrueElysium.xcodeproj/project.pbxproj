@@ -66,6 +66,8 @@
 		CEB68BCF29B9F4BC00455785 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BCD29B9F4BC00455785 /* FilterView.swift */; };
 		CEB68BD129B9FC7A00455785 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BD029B9FC7A00455785 /* Filters.swift */; };
 		CEB68BD229B9FC7A00455785 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BD029B9FC7A00455785 /* Filters.swift */; };
+		CEB68BD629BA285B00455785 /* UTXOSLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BD529BA285B00455785 /* UTXOSLoader.swift */; };
+		CEB68BD729BA285B00455785 /* UTXOSLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BD529BA285B00455785 /* UTXOSLoader.swift */; };
 		CEC45CA429AF72C500848C23 /* SwiftyRSA in Frameworks */ = {isa = PBXBuildFile; productRef = CEC45CA329AF72C500848C23 /* SwiftyRSA */; };
 		CEC45CA629AF72C500848C23 /* SwiftyRSA in Embed Frameworks */ = {isa = PBXBuildFile; productRef = CEC45CA329AF72C500848C23 /* SwiftyRSA */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CEC45CA829AFF3DD00848C23 /* librsa_crypto.a in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEC45CA729AFF3DD00848C23 /* librsa_crypto.a */; };
@@ -181,6 +183,7 @@
 		CEA691E629B8E9F100110E44 /* Cfg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cfg.swift; sourceTree = "<group>"; };
 		CEB68BCD29B9F4BC00455785 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		CEB68BD029B9FC7A00455785 /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
+		CEB68BD529BA285B00455785 /* UTXOSLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTXOSLoader.swift; sourceTree = "<group>"; };
 		CEC45CA729AFF3DD00848C23 /* librsa_crypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librsa_crypto.a; sourceTree = "<group>"; };
 		CEC45CA929AFF45900848C23 /* rsa_crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rsa_crypto.h; sourceTree = "<group>"; };
 		CEC45CAA29AFF4DD00848C23 /* RSACryptoBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSACryptoBridgingHeader.h; sourceTree = "<group>"; };
@@ -376,6 +379,22 @@
 			path = Types;
 			sourceTree = "<group>";
 		};
+		CEB68BD329BA27F700455785 /* Daemons */ = {
+			isa = PBXGroup;
+			children = (
+				CEB68BD429BA280200455785 /* UTXOS */,
+			);
+			path = Daemons;
+			sourceTree = "<group>";
+		};
+		CEB68BD429BA280200455785 /* UTXOS */ = {
+			isa = PBXGroup;
+			children = (
+				CEB68BD529BA285B00455785 /* UTXOSLoader.swift */,
+			);
+			path = UTXOS;
+			sourceTree = "<group>";
+		};
 		CEC9D10229B2436A0056D3C4 /* SwiftyRSA */ = {
 			isa = PBXGroup;
 			children = (
@@ -501,6 +520,7 @@
 		CEE8802B29A50994009CC313 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CEB68BD329BA27F700455785 /* Daemons */,
 				CEA691E129B8E9B600110E44 /* Config */,
 				CEC9D10C29B243EE0056D3C4 /* ECDSA */,
 				CE94EF0B29AE115200B06CFA /* RSA */,
@@ -701,6 +721,7 @@
 				CEC45CAC29AFF83B00848C23 /* RSACrypto.swift in Sources */,
 				CE94EF1229AE450B00B06CFA /* shuffle_service.pb.swift in Sources */,
 				CE7BB8A729ABB8E70089CB57 /* UTXOsView.swift in Sources */,
+				CEB68BD629BA285B00455785 /* UTXOSLoader.swift in Sources */,
 				CE7BB88C29AB93870089CB57 /* SolidityInvocation.swift in Sources */,
 				CE7BB89D29ABB8E70089CB57 /* MainLoaderView.swift in Sources */,
 				CEA691E329B8E9C600110E44 /* Parser.swift in Sources */,
@@ -733,6 +754,7 @@
 				CE7BB88A29AB6C0C0089CB57 /* String.swift in Sources */,
 				CE94EF0929ADFB6B00B06CFA /* Room.swift in Sources */,
 				CEDEEE0F29B10A85009647C1 /* Node.swift in Sources */,
+				CEB68BD729BA285B00455785 /* UTXOSLoader.swift in Sources */,
 				CE94EF1329AE450C00B06CFA /* shuffle_service.pb.swift in Sources */,
 				CE94EF1029AE3D5C00B06CFA /* CryptographyTest.swift in Sources */,
 				CE7BB8A629ABB8E70089CB57 /* UTXODetailView.swift in Sources */,

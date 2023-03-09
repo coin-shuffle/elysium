@@ -15,6 +15,8 @@ struct CardUTXOView: View {
             HStack {
                 Text(utxo.name)
                     .font(.headline)
+                Text("#\(utxo.ID.description)")
+                    .foregroundColor(.gray)
                 Spacer()
                 Text(utxo.symbol)
             }
