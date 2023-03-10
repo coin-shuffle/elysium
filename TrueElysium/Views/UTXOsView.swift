@@ -66,7 +66,9 @@ struct UTXOsView: View {
                 Text("New")
                     .font(.bold(.headline)())
             }
-            .disabled(ethereumClient.user == nil && privateKey.isEmpty)
+            .disabled(
+                ethereumClient.user == nil && privateKey.isEmpty
+            )
             
         }
         .sheet(isPresented: $isPresentCreateUTXO) {
@@ -76,6 +78,7 @@ struct UTXOsView: View {
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
                             Button("Cancel") {
+                                privateKey = ""
                                 isPresentCreateUTXO = false
                             }
                         }
@@ -85,7 +88,10 @@ struct UTXOsView: View {
                             }
                         }
                     }
-                    .errorAlert(error: $_error, actor: $isPresentCreateUTXO)
+                    .errorAlert(
+                        error: $_error,
+                        actor: $isPresentCreateUTXO
+                    )
             }
         }
         .sheet(isPresented: $isPresentFilterSelection) {
@@ -112,7 +118,10 @@ struct UTXOsView: View {
                             }
                         }
                     }
-                    .errorAlert(error: $_error, actor: $isPresentChangePrivateKey)
+                    .errorAlert(
+                        error: $_error,
+                        actor: $isPresentChangePrivateKey
+                    )
             }
         }
         .task {

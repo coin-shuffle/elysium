@@ -12,8 +12,4 @@ final class TrueElysiumTests: XCTestCase {
     override func setUpWithError() throws {}
 
     override func tearDownWithError() throws {}
-    
-    func testConfig() throws {
-        try parseConfig()
-    }
 }

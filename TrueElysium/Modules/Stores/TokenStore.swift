@@ -33,7 +33,9 @@ public class TokenStore: ObservableObject {
     }
     
     func getToken(_ tokenAddress: EthereumAddress) async throws -> Token {
-        guard let token = tokens.first else {
+        guard let token = tokens.first(where: { token in
+            token.address == tokenAddress
+        }) else {
             let (name, symbol) = try await ethereumClient.getETC20NameAndSymbol(tokenAddress)
             
             let token = Token(

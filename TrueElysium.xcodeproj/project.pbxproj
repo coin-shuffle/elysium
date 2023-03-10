@@ -71,6 +71,7 @@
 		CEB68BD929BA345D00455785 /* TokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BD829BA345D00455785 /* TokenStore.swift */; };
 		CEB68BDA29BA345D00455785 /* TokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BD829BA345D00455785 /* TokenStore.swift */; };
 		CEB68BE429BA4D5800455785 /* RangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BE329BA4D5800455785 /* RangeSliderView.swift */; };
+		CEBB745529BB63A500848A8D /* RangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BE329BA4D5800455785 /* RangeSliderView.swift */; };
 		CEC45CA429AF72C500848C23 /* SwiftyRSA in Frameworks */ = {isa = PBXBuildFile; productRef = CEC45CA329AF72C500848C23 /* SwiftyRSA */; };
 		CEC45CA629AF72C500848C23 /* SwiftyRSA in Embed Frameworks */ = {isa = PBXBuildFile; productRef = CEC45CA329AF72C500848C23 /* SwiftyRSA */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CEC45CA829AFF3DD00848C23 /* librsa_crypto.a in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEC45CA729AFF3DD00848C23 /* librsa_crypto.a */; };
@@ -782,6 +783,7 @@
 				CE7BB88D29AB93870089CB57 /* SolidityInvocation.swift in Sources */,
 				CE7BB89E29ABB8E70089CB57 /* MainLoaderView.swift in Sources */,
 				CEB68BD229B9FC7A00455785 /* Filters.swift in Sources */,
+				CEBB745529BB63A500848A8D /* RangeSliderView.swift in Sources */,
 				CEA1FB3429A63B960008C9C5 /* UTXOStorageContract.swift in Sources */,
 				CEC9D10829B243B20056D3C4 /* PublicKey.swift in Sources */,
 				CE94EEF629ACFA0300B06CFA /* ChangePrivateKeyView.swift in Sources */,

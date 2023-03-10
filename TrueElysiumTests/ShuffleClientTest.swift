@@ -47,8 +47,7 @@ final class ShuffleClientTest: XCTestCase {
         )
         
         client = try ShuffleClient(
-            grpcHost: "3.23.147.9",
-            port: 8080,
+            cfg: parseConfig().CoinShuffleSvcConfig,
             node: Node(
                 utxoStore: store
             )
