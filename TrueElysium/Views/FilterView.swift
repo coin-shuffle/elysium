@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BigInt
 
 struct FilterView: View {
     @ObservedObject var filterer: Filterer
@@ -34,6 +35,13 @@ struct FilterView: View {
                     Toggle(isOn: $filterer.onlyMine) {
                         Text("Mine")
                     }
+                }
+                Section(header: Text("Amount range")) {
+                    RangedSliderView(
+                        currentValue: $filterer.tokensAmounts,
+                        sliderBounds: $filterer.tokensAmountsBounds
+                    )
+                    .padding()
                 }
             }
         }

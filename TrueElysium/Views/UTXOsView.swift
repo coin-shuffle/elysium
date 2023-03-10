@@ -19,6 +19,8 @@ struct UTXOsView: View {
     @State private var data = UTXO.Data()
     @State private var privateKey: String = ""
     @State private var _error: LocalizedError?
+    @State var tokenAmountRange: ClosedRange<Float> = 1...10000
+    @State var tokenAmountBounds: ClosedRange<Int> = 1...10000
     @StateObject private var filterer = Filterer()
     var ethereumClient: EthereumClient
     var shuffleClient: ShuffleClient
@@ -88,7 +90,9 @@ struct UTXOsView: View {
         }
         .sheet(isPresented: $isPresentFilterSelection) {
             NavigationView {
-                FilterView(filterer: filterer)
+                FilterView(
+                    filterer: filterer
+                )
                     .navigationTitle("Filtering")
             }
         }

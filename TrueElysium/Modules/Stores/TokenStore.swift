@@ -15,7 +15,7 @@ struct Token: Codable {
 }
 
 public class TokenStore: ObservableObject {
-    @Published var tokens: [Token] = []
+    var tokens: [Token] = []
     let ethereumClient: EthereumClient
     
     init(ethereumClient: EthereumClient) {

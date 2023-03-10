@@ -70,6 +70,7 @@
 		CEB68BD729BA285B00455785 /* UTXOSLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BD529BA285B00455785 /* UTXOSLoader.swift */; };
 		CEB68BD929BA345D00455785 /* TokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BD829BA345D00455785 /* TokenStore.swift */; };
 		CEB68BDA29BA345D00455785 /* TokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BD829BA345D00455785 /* TokenStore.swift */; };
+		CEB68BE429BA4D5800455785 /* RangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BE329BA4D5800455785 /* RangeSliderView.swift */; };
 		CEC45CA429AF72C500848C23 /* SwiftyRSA in Frameworks */ = {isa = PBXBuildFile; productRef = CEC45CA329AF72C500848C23 /* SwiftyRSA */; };
 		CEC45CA629AF72C500848C23 /* SwiftyRSA in Embed Frameworks */ = {isa = PBXBuildFile; productRef = CEC45CA329AF72C500848C23 /* SwiftyRSA */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CEC45CA829AFF3DD00848C23 /* librsa_crypto.a in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEC45CA729AFF3DD00848C23 /* librsa_crypto.a */; };
@@ -187,6 +188,7 @@
 		CEB68BD029B9FC7A00455785 /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
 		CEB68BD529BA285B00455785 /* UTXOSLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTXOSLoader.swift; sourceTree = "<group>"; };
 		CEB68BD829BA345D00455785 /* TokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStore.swift; sourceTree = "<group>"; };
+		CEB68BE329BA4D5800455785 /* RangeSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSliderView.swift; sourceTree = "<group>"; };
 		CEC45CA729AFF3DD00848C23 /* librsa_crypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librsa_crypto.a; sourceTree = "<group>"; };
 		CEC45CA929AFF45900848C23 /* rsa_crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rsa_crypto.h; sourceTree = "<group>"; };
 		CEC45CAA29AFF4DD00848C23 /* RSACryptoBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSACryptoBridgingHeader.h; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				CE7BB89A29ABB8E70089CB57 /* CardUTXOView.swift */,
 				CEED37B129B0EBB600C5FB41 /* HeaderView.swift */,
 				CEB68BCD29B9F4BC00455785 /* FilterView.swift */,
+				CEB68BE329BA4D5800455785 /* RangeSliderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -708,6 +711,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEB68BE429BA4D5800455785 /* RangeSliderView.swift in Sources */,
 				CE94EEF229ACB98A00B06CFA /* View.swift in Sources */,
 				CE7BB88929AB6C0C0089CB57 /* String.swift in Sources */,
 				CE3C7F8129B60AB100734DF9 /* BigUInt.swift in Sources */,

@@ -28,6 +28,9 @@ class Filterer: ObservableObject {
     
     @Published var onlyMine = false
     
+    @Published var tokensAmounts: ClosedRange<UInt> = 1...10
+    @Published var tokensAmountsBounds: ClosedRange<UInt> = 1...10
+    
     func toggle(statusFilter: StatusFilter) {
         self.statuses[statusFilter.id].selected.toggle()
     }
@@ -58,15 +61,35 @@ class Filterer: ObservableObject {
         return owner == user
     }
     
+    func isInAmountsRange(amount: BigUInt) -> Bool {
+        tokensAmounts.contains(UInt(amount))
+    }
+    
     func filter(utxo: UTXO, user: EthereumAddress?) -> Bool {
+        if utxo.amount > tokensAmountsBounds.upperBound {
+            tokensAmountsBounds = 1...UInt(utxo.amount)
+            tokensAmounts = tokensAmounts.lowerBound...tokensAmountsBounds.upperBound
+        }
+        
+        
         guard isSelected(status: utxo.status) else {
             return false
         }
         
         if onlyMine {
-            return isMine(owner: utxo.owner, user: user) && isFitName(name: utxo.name)
+            guard isMine(owner: utxo.owner, user: user) else {
+                return false
+            }
         }
         
-        return isFitName(name: utxo.name)
+        guard isFitName(name: utxo.name) else {
+            return false
+        }
+        
+        guard isInAmountsRange(amount: utxo.amount) else {
+            return false
+        }
+        
+        return true
     }
 }
