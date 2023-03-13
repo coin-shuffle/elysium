@@ -20,7 +20,7 @@ final class ShuffleClientTest: XCTestCase {
         store.utxos.append(contentsOf:
             [
                 UTXO(
-                    id: 0,
+                    ID: 0,
                     token: try EthereumAddress(hex: "0x7057cB3cB70e1d4a617A0DED65353553af8d5976", eip55: true),
                     amount: 5,
                     owner: try EthereumAddress(hex: "0xE86C4A45C1Da21f8838a1ea26Fc852BD66489ce9", eip55: true),
@@ -28,7 +28,7 @@ final class ShuffleClientTest: XCTestCase {
                     symbol: "Kek"
                 ),
                 UTXO(
-                    id: 1,
+                    ID: 1,
                     token: try EthereumAddress(hex: "0x7057cB3cB70e1d4a617A0DED65353553af8d5976", eip55: true),
                     amount: 5,
                     owner: try EthereumAddress(hex: "0xE86C4A45C1Da21f8838a1ea26Fc852BD66489ce9", eip55: true),
@@ -36,7 +36,7 @@ final class ShuffleClientTest: XCTestCase {
                     symbol: "Kek"
                 ),
                 UTXO(
-                    id: 2,
+                    ID: 2,
                     token: try EthereumAddress(hex: "0x7057cB3cB70e1d4a617A0DED65353553af8d5976", eip55: true),
                     amount: 5,
                     owner: try EthereumAddress(hex: "0xE86C4A45C1Da21f8838a1ea26Fc852BD66489ce9", eip55: true),
@@ -47,8 +47,7 @@ final class ShuffleClientTest: XCTestCase {
         )
         
         client = try ShuffleClient(
-            grpcHost: "3.23.147.9",
-            port: 8080,
+            cfg: parseConfig().CoinShuffleSvcConfig,
             node: Node(
                 utxoStore: store
             )

@@ -6,64 +6,78 @@
 //
 
 import SwiftUI
+import Neumorphic
 import Web3
 
 struct UTXOsView: View {
     @ObservedObject var utxoStore: UTXOStore
+    @ObservedObject var tokenStore: TokenStore
     @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject private var launchScreenState: LaunchScreenStateManager
     @State private var isPresentCreateUTXO = false
     @State private var isPresentChangePrivateKey = false
-    @State private var isLoading = false
+    @State private var isPresentFilterSelection = false
+    @State private var isNewest = false
     @State private var data = UTXO.Data()
     @State private var privateKey: String = ""
     @State private var _error: LocalizedError?
+    @State var tokenAmountRange: ClosedRange<Float> = 1...10000
+    @State var tokenAmountBounds: ClosedRange<Int> = 1...10000
+    @StateObject private var filterer = Filterer()
     var ethereumClient: EthereumClient
     var shuffleClient: ShuffleClient
     let saveAction: ()->Void
     
     var body: some View {
-        ZStack {
-            VStack {
-                HeaderView(
-                    isPresentChangePrivateKey: $isPresentChangePrivateKey)
-                if !utxoStore.utxos.isEmpty {
-                    List {
-                        ForEach($utxoStore.utxos) {$utxo in
-                            NavigationLink(
-                                destination: UTXODetailView(
-                                    utxo: $utxo,
-                                    hasUser: ethereumClient.user != nil && privateKey.isEmpty,
-                                    shuffleClient: shuffleClient,
-                                    ethreumClient: ethereumClient
-                                )
-                            ) {
-                                CardUTXOView(utxo: utxo)
-                            }
+        VStack {
+            HeaderView(
+                isPresentChangePrivateKey: $isPresentChangePrivateKey,
+                isPresentFilterSelection: $isPresentFilterSelection
+            )
+            if !utxoStore.utxos.isEmpty {
+                List {
+                    ForEach($utxoStore.utxos.filter {filterer.filter(
+                        utxo: $0.wrappedValue,
+                        user: ethereumClient.user?.publicKey.address
+                    )}.reversedIf(isNewest)) { $utxo in
+                        NavigationLink(
+                            destination: UTXODetailView(
+                                utxo: $utxo,
+                                hasUser: ethereumClient.user != nil && privateKey.isEmpty && ethereumClient.user!.publicKey.address == utxo.owner,
+                                shuffleClient: shuffleClient,
+                                ethreumClient: ethereumClient
+                            )
+                        ) {
+                            CardUTXOView(utxo: utxo)
                         }
                     }
-                    .onChange(of: scenePhase) { phase in
-                        if phase == .inactive {
-                            saveAction()
-                        }
+                }
+                .onChange(of: scenePhase) { phase in
+                    if phase == .inactive {
+                        saveAction()
                     }
-                } else {
-                    Spacer()
-                    Label("You do not have UTXO yet", systemImage: "nosign")
-                    Spacer()
                 }
-                Button(action: {
-                    isPresentCreateUTXO = true
-                }) {
-                    Text("New")
-                        .font(.bold(.headline)())
-                }
-                .disabled(ethereumClient.user == nil && privateKey.isEmpty)
-                
+            } else {
+                Spacer()
+                Label("You do not have UTXO yet", systemImage: "nosign")
+                Spacer()
             }
-            LoaderView()
-                .hidden(!isLoading)
-                
+            Button(action: {
+                isPresentCreateUTXO = true
+            }) {
+                Text("New")
+                    .fontWeight(.bold)
+                    .frame(width: 150)
+            }
+            .softButtonStyle(
+                RoundedRectangle(cornerRadius: 20),
+                mainColor: .white,
+                textColor: .blue
+            )
+            .disabled(
+                ethereumClient.user == nil && privateKey.isEmpty
+            )
+            
         }
         .sheet(isPresented: $isPresentCreateUTXO) {
             NavigationView {
@@ -72,6 +86,7 @@ struct UTXOsView: View {
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
                             Button("Cancel") {
+                                privateKey = ""
                                 isPresentCreateUTXO = false
                             }
                         }
@@ -81,7 +96,19 @@ struct UTXOsView: View {
                             }
                         }
                     }
-                    .errorAlert(error: $_error, actor: $isPresentCreateUTXO)
+                    .errorAlert(
+                        error: $_error,
+                        actor: $isPresentCreateUTXO
+                    )
+            }
+        }
+        .sheet(isPresented: $isPresentFilterSelection) {
+            NavigationView {
+                FilterView(
+                    filterer: filterer,
+                    isNewest: $isNewest
+                )
+                    .navigationTitle("Filtering")
             }
         }
         .sheet(isPresented: $isPresentChangePrivateKey) {
@@ -100,7 +127,10 @@ struct UTXOsView: View {
                             }
                         }
                     }
-                    .errorAlert(error: $_error, actor: $isPresentChangePrivateKey)
+                    .errorAlert(
+                        error: $_error,
+                        actor: $isPresentChangePrivateKey
+                    )
             }
         }
         .task {
@@ -131,31 +161,40 @@ struct UTXOsView: View {
         }
         
         guard let tokenAddress = try? EthereumAddress(hex: data.token, eip55: true) else {
-                _error = UTXOsViewError.invalidTokenAddress
-                return
+            _error = UTXOsViewError.invalidTokenAddress
+            return
         }
         
         guard let amount = BigUInt(data.amount) else {
-                _error = UTXOsViewError.invalidAmount
-                return
-        }
-        
-        guard let (name, symbol) = try? ethereumClient.getETC20NameAndSymbol(tokenAddress) else {
-            _error = UTXOsViewError.failedToGetTokenNameAndSymbol
+            _error = UTXOsViewError.invalidAmount
             return
         }
-                                        
-        let utxo = UTXO(token: tokenAddress, amount: amount, name: name, symbol: symbol)
         
-        utxoStore.utxos.append(utxo)
-        let utxoIndex = utxoStore.utxos.endIndex-1
-        
-        isPresentCreateUTXO = false
-        isLoading = true
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            guard let finishedUTXO = try? ethereumClient.createUTXO(from: tokenAddress, amount: amount)
-            else {
+        Task {
+            guard try await ethereumClient.isContract(tokenAddress) else {
+                throw UTXOsViewError.invalidTokenAddress
+            }
+            
+            guard let token = try? await tokenStore.getToken(tokenAddress) else {
+                throw UTXOsViewError.failedToGetTokenNameAndSymbol
+            }
+            
+            utxoStore.utxos.append(UTXO(
+                token: tokenAddress,
+                amount: amount,
+                name: token.name,
+                symbol: token.symbol
+            ))
+            
+            let utxoIndex = utxoStore.utxos.endIndex-1
+            
+            isPresentCreateUTXO = false
+            
+            guard let finishedUTXO = try? await ethereumClient.createUTXO(
+                tokenStore: tokenStore,
+                from: tokenAddress,
+                amount: amount
+            ) else {
                 var _utxo = utxoStore.utxos[utxoIndex]
                 
                 _utxo.status = .failed
@@ -168,10 +207,7 @@ struct UTXOsView: View {
             var _utxo = utxoStore.utxos[utxoIndex]
             
             _utxo.update(utxo: finishedUTXO)
-            
             utxoStore.utxos[utxoIndex] = _utxo
-            
-            isLoading = false
         }
     }
 }
@@ -183,12 +219,16 @@ struct UTXOsView_Previews: PreviewProvider {
         NavigationStack {
             UTXOsView(
                 utxoStore: UTXOStore(),
+                tokenStore: TokenStore(
+                    ethereumClient: try! EthereumClient(
+                        netCfg: parseConfig().NetConfig
+                    )
+                ),
                 ethereumClient: try! EthereumClient(
-                utxoStorageContractAddress: try! EthereumAddress(hex: "0x4C0d116d9d028E60904DCA468b9Fa7537Ef8Cd5f", eip55: true)
+                    netCfg: parseConfig().NetConfig
                 ),
                 shuffleClient: try! ShuffleClient(
-                    grpcHost: "3.23.147.9",
-                    port: 8080,
+                    cfg: parseConfig().CoinShuffleSvcConfig,
                     node: Node(
                         utxoStore: UTXOStore()
                     )

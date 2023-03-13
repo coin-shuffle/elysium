@@ -1,0 +1,8 @@
+NetConfig:
+  httpProviderURL: https://goerli.infura.io/v3/cb621ec4047444bd91487c018d21f733
+  utxoStorageAddress: "0x4C0d116d9d028E60904DCA468b9Fa7537Ef8Cd5f"
+  networkID: 5
+
+CoinShuffleSvcConfig:
+  grpcHost: qui0scit.dev
+  port: 8080

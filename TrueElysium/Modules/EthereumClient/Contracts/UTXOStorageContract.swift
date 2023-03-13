@@ -144,4 +144,12 @@ public extension UTXOStorageContract {
         let method = SolidityConstantFunction(name: "listUTXOsByAddress", inputs: inputs, outputs: outputs, handler: self)
         return method.invoke(owner, offset, limit)
     }
+    
+    func getUTXOsLength() -> SolidityInvocation {
+        let outputs = [
+            SolidityFunctionParameter(name: "length", type: .uint256)
+        ]
+        let method = SolidityConstantFunction(name: "getUTXOsLength", outputs: outputs, handler: self)
+        return method.invoke()
+    }
 }

@@ -8,13 +8,20 @@
 import SwiftUI
 import Web3
 
+let cfg = parseConfig()
+
+let _ethereumClient = try! EthereumClient(
+    netCfg: cfg.NetConfig
+)
+
 @main
 struct ElysiumApp: App {
     @StateObject private var store = UTXOStore()
-    @StateObject var launchScreenState = LaunchScreenStateManager()
-    let ethereumClient = try! EthereumClient(
-        utxoStorageContractAddress: try! EthereumAddress(hex: "0x4C0d116d9d028E60904DCA468b9Fa7537Ef8Cd5f", eip55: true)
+    @StateObject private var tokenStore = TokenStore(
+        ethereumClient: _ethereumClient
     )
+    @StateObject var launchScreenState = LaunchScreenStateManager()
+    let ethereumClient = _ethereumClient
     
     var body: some Scene {
         WindowGroup {
@@ -22,16 +29,22 @@ struct ElysiumApp: App {
                 NavigationStack {
                     UTXOsView(
                         utxoStore: store,
+                        tokenStore: tokenStore,
                         ethereumClient: ethereumClient,
                         shuffleClient:  try! ShuffleClient(
-                            grpcHost: "3.23.147.9",
-                            port: 8080,
+                            cfg: cfg.CoinShuffleSvcConfig,
                             node: Node(
                                 utxoStore: store
                             )
                         )
                     ) {
                         UTXOStore.save(utxos: store.utxos) { result in
+                            if case .failure(let error) = result {
+                                fatalError(error.localizedDescription)
+                            }
+                        }
+                        
+                        TokenStore.save(tokens: tokenStore.tokens) { result in
                             if case .failure(let error) = result {
                                 fatalError(error.localizedDescription)
                             }
@@ -46,6 +59,23 @@ struct ElysiumApp: App {
                         case .success(let utxos):
                             store.utxos = utxos
                         }
+                    }
+                    
+                    TokenStore.load {result in
+                        switch result {
+                        case .failure(let error):
+                            fatalError(error.localizedDescription)
+                        case .success(let tokens):
+                            tokenStore.tokens = tokens
+                        }
+                    }
+                    
+                    Task {
+                        await UTXOLoader(
+                            utxoStore: store,
+                            tokenStore: tokenStore,
+                            ethereumClient: ethereumClient
+                        ).run()
                     }
                 }
                 

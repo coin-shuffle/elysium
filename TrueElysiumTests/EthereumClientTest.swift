@@ -13,37 +13,52 @@ import Web3PromiseKit
 
 final class EthereumClientTest: XCTestCase {
     private var ethereumClient: EthereumClient!
+    private var cfg = parseConfig()
+    private var tokenStore: TokenStore!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         self.ethereumClient = try EthereumClient(
-            utxoStorageContractAddress: try! EthereumAddress(hex: "0x4C0d116d9d028E60904DCA468b9Fa7537Ef8Cd5f", eip55: true)
+            netCfg: cfg.NetConfig
         )
-        
-        print("Gas price: \(ethereumClient.gasPrice!)")
-        print("Funds: \(try! ethereumClient.client.eth.getBalance(address: ethereumClient.user!.address, block: .latest).wait())")
+        self.tokenStore = TokenStore(ethereumClient: self.ethereumClient)
     }
 
     override func tearDownWithError() throws {}
-
-    func testGetNameAndSymbol() throws {
+    
+    func testCheckAddressType() async throws {
         let contractAddress = try EthereumAddress(hex: "0x7057cB3cB70e1d4a617A0DED65353553af8d5976", eip55: true)
-        print("contract address: \(contractAddress.hex(eip55: false))")
+        let userAddress = try EthereumAddress(hex: "0xE86C4A45C1Da21f8838a1ea26Fc852BD66489ce9", eip55: true)
         
-        var name: String, symbol: String
-        (name, symbol) = try ethereumClient.getETC20NameAndSymbol(contractAddress)
+        var result = try await ethereumClient.client.eth.getCode(address: contractAddress, block: .latest).async()
+        _ = try await ethereumClient.isContract(userAddress)
         
-        assert(name == "Ibrahim" && symbol == "KEK", "Invalid name and symbol of the token")
-        print("Token name: \(name), Token symbol: \(symbol)")
+        result = try await ethereumClient.client.eth.getCode(address: userAddress, block: .latest).async()
+        print("Address code: \(result.hex())")
     }
     
-    func testCreateUTXO() throws {
+    func testGetNameAndSymbol() async throws {
+        let contractAddress = try EthereumAddress(hex: "0xf90699245de9a7C70725954Baf0E285fD18AdA02", eip55: true)
+        let ibrahumToken = try EthereumAddress(hex: "0x7057cB3cB70e1d4a617A0DED65353553af8d5976", eip55: true)
+        
+        let (name, symbol) = try await ethereumClient.getETC20NameAndSymbol(contractAddress)
+        
+        print("Token name: \(name), Token symbol: \(symbol)")
+        
+        var token = try await tokenStore.getToken(contractAddress)
+        print("Token name: \(token.name), Token symbol: \(token.symbol)")
+        
+         token = try await tokenStore.getToken(ibrahumToken)
+        print("Token name: \(token.name), Token symbol: \(token.symbol)")
+    }
+    
+    func testCreateUTXO() async throws {
         let contractAddress = try EthereumAddress(hex: "0x7057cB3cB70e1d4a617A0DED65353553af8d5976", eip55: true)
         
         let amount = BigUInt(5)
-        let utxo = try ethereumClient.createUTXO(from: contractAddress, amount: amount)
         
-        assert(utxo.id == ethereumClient.userUTXOs.last!.id, "UTXO ERROR: Invalid ID")
+        let utxo = try await ethereumClient.createUTXO(tokenStore: tokenStore, from: contractAddress, amount: amount)
+        
         assert(utxo.token == contractAddress, "UTXO ERROR: Invalid token")
         assert(utxo.amount == amount, "UTXO ERROR: Invalid amount")
         assert(utxo.owner == ethereumClient.user!.address, "UTXO ERROR: Invalid owner")
@@ -51,7 +66,7 @@ final class EthereumClientTest: XCTestCase {
         assert(utxo.symbol == "KEK", "UTXO ERROR: Invalid symbol")
         assert(utxo.status == .created, "UTXO ERROR: Invalid status")
         
-        print("UTXO: [id: \(utxo.id), token: \(utxo.token), amount: \(utxo.amount), owner: \(utxo.owner), name: \(utxo.name), symbol: \(utxo.symbol), status: \(utxo.status.description)]")
+        print("UTXO: [id: \(utxo.ID), token: \(utxo.token), amount: \(utxo.amount), owner: \(utxo.owner), name: \(utxo.name), symbol: \(utxo.symbol), status: \(utxo.status.description)]")
     }
     
     func testOutputConverible() throws {
@@ -128,36 +143,5 @@ final class EthereumClientTest: XCTestCase {
         }
         
         print("Tx: \(tx)")
-    }
-    
-    func testUTXOsFetch() throws {
-        let semaphore = DispatchSemaphore(value: 0)
-        var err: Error?
-        var flag = true
-        while flag {
-            firstly {
-                ethereumClient.utxoStorage.listUTXOsByAddress(
-                    owner: ethereumClient.user!.address,
-                    offset: BigUInt(ethereumClient.userUTXOs.count),
-                    limit: 5
-                ).call()
-            }.done(on: ethereumClient.queue) { values in
-                let utxos = UTXOStorageContract.UTXO.getUTXOsFromAny(values: values["UTXOs"]!)
-                if utxos.isEmpty {
-                    flag = false
-                }
-                
-                self.ethereumClient.userUTXOs.append(contentsOf: utxos)
-            }.catch(on: ethereumClient.queue) { error in
-                err = error
-            }.finally(on: ethereumClient.queue) {
-                semaphore.signal()
-            }; semaphore.wait()
-            if err != nil {
-                throw err!
-            }
-        }
-        
-        print("UTXOs: \(ethereumClient.userUTXOs)")
     }
 }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Web3
+import Neumorphic
 import UniformTypeIdentifiers
 
 struct UTXODetailView: View {
@@ -14,18 +15,17 @@ struct UTXODetailView: View {
     let hasUser: Bool
     let shuffleClient: ShuffleClient
     let ethreumClient: EthereumClient
-    @State var isRunning = false
     
     @State private var output: String = ""
     
     var body: some View {
         VStack {
             List {
-                Section(header: Text("UTXO INFO")) {
+                Section(header: Text("UTXO INFO").font(.headline)) {
                     HStack {
                         Text("ID")
                         Spacer()
-                        Text(utxo.id.description)
+                        Text(utxo.ID.description)
                     }
                     HStack {
                         Text("Token address")
@@ -33,8 +33,10 @@ struct UTXODetailView: View {
                         Text(utxo.token.hex(eip55: true).contraction(maxLength: 10))
                             .multilineTextAlignment(.trailing)
                             .onTapGesture(count: 2) {
-                                UIPasteboard.general.setValue(utxo.token.hex(eip55: true),
-                                        forPasteboardType: UTType.plainText.identifier)
+                                UIPasteboard.general.setValue(
+                                    utxo.token.hex(eip55: true),
+                                    forPasteboardType: UTType.plainText.identifier
+                                )
                             }
                     }
                     HStack {
@@ -48,8 +50,10 @@ struct UTXODetailView: View {
                         Text(utxo.owner.hex(eip55: true).contraction(maxLength: 10))
                             .multilineTextAlignment(.trailing)
                             .onTapGesture(count: 2) {
-                                UIPasteboard.general.setValue(utxo.owner.hex(eip55: true),
-                                        forPasteboardType: UTType.plainText.identifier)
+                                UIPasteboard.general.setValue(
+                                    utxo.owner.hex(eip55: true),
+                                    forPasteboardType: UTType.plainText.identifier
+                                )
                             }
                     }
                     HStack {
@@ -60,42 +64,65 @@ struct UTXODetailView: View {
                     }
                 }
             }
-            HStack {
-                TextField("0x00...00", text: $output)
-                Button("Shuffle") {
-                    guard let outputAddress = try? EthereumAddress(hex: output, eip55: true) else {
-                        output = ""
-                        return
+            if hasUser && utxo.status == .created {
+                HStack {
+                    TextField("0x00...00", text: $output)
+                    Button(action: shuffleAction) {
+                        Text("Shuffle")
                     }
-                    
-                    Task {
-                        do {
-                            try await shuffle(outputAddress: outputAddress)
-                        } catch let error {
-                            print("Error \(error)")
-                        }
-                    }
-                
-                    output = ""
-
+                    .softButtonStyle(
+                        RoundedRectangle(cornerRadius: 20),
+                        mainColor: .white,
+                        textColor: .blue
+                    )
+                    .buttonStyle(.borderedProminent)
+                    .disabled(output.isEmpty)
                 }
-                .disabled(output.isEmpty)
+                .disabled(!hasUser || utxo.status != .created)
+                .padding()
             }
-            .disabled(!hasUser || utxo.status != .created)
-            .padding()
         }
         .navigationTitle("\(utxo.name)(\(utxo.symbol))")
     }
     
+    func shuffleAction() {
+        guard let outputAddress = try? EthereumAddress(
+            hex: output,
+            eip55: true
+        ) else {
+            output = ""
+            return
+        }
+        
+        Task {
+            do {
+                try await shuffle(
+                    outputAddress:outputAddress
+                )
+            } catch {
+                try! await shuffleClient.node.updateUTXOStatus(
+                    utxoID: utxo.ID,
+                    status: .created
+                )
+                
+                shuffleClient.logger.error(
+                    "UTXO ID: \(utxo.ID), received an error: \(error)"
+                )
+            }
+        }
+        
+        output = ""
+    }
+    
     func shuffle(outputAddress: EthereumAddress) async throws  {
         try await shuffleClient.initRoom(
-            utxoID: utxo.id,
+            utxoID: utxo.ID,
             outputAddress: outputAddress,
             privateEthKey: ethreumClient.user!
         )
-        try await shuffleClient.joinRoom(utxoID: utxo.id)
-        try await shuffleClient.waitShuffle(utxoID: utxo.id)
-        try await shuffleClient.connectRoom(utxoID: utxo.id)
+        try await shuffleClient.joinRoom(utxoID: utxo.ID)
+        try await shuffleClient.waitShuffle(utxoID: utxo.ID)
+        try await shuffleClient.connectRoom(utxoID: utxo.ID)
     }
 }
 
@@ -106,15 +133,14 @@ struct UTXODetail_Previews: PreviewProvider {
                 utxo: .constant(UTXO.sampleData[0]),
                 hasUser: true,
                 shuffleClient: try! ShuffleClient(
-                    grpcHost: "3.23.147.9",
-                    port: 8080,
+                    cfg: parseConfig().CoinShuffleSvcConfig,
                     node: Node(
                         utxoStore: UTXOStore()
                     )
                 ),
                 ethreumClient: try! EthereumClient(
-                    utxoStorageContractAddress: try! EthereumAddress(hex: "0x4C0d116d9d028E60904DCA468b9Fa7537Ef8Cd5f", eip55: true)
-                    )
+                    netCfg: parseConfig().NetConfig
+                )
             )
         }
     }

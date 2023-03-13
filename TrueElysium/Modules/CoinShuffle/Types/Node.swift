@@ -33,7 +33,7 @@ public class Node {
         privateRSAKey: PrivateKey,
         privateEthereumKey: EthereumPrivateKey
     ) throws {
-        guard let utxoIndex = utxoStore.utxos.firstIndex(where: {$0.id == utxoID}) else {
+        guard let utxoIndex = utxoStore.utxos.firstIndex(where: {$0.ID == utxoID}) else {
             throw NodeError.UTXODoesNotExists
         }
         
@@ -136,7 +136,7 @@ extension Node {
 
 extension Node {
     func updateUTXOStatus(utxoID: BigUInt, status: UTXO.Status) throws {
-        guard let utxoIndex = utxoStore.utxos.firstIndex(where: {$0.id == utxoID}) else {
+        guard let utxoIndex = utxoStore.utxos.firstIndex(where: {$0.ID == utxoID}) else {
             throw NodeError.UTXODoesNotExists
         }
         

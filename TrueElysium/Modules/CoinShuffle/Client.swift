@@ -14,11 +14,11 @@ class ShuffleClient {
     let node: Node
     let logger = Logger(label: "info")
     
-    init(grpcHost: String, port: Int, node: Node) throws {
+    init(cfg: CoinShuffleSvcConfig, node: Node) throws {
         self.node = node
         
         let channel = try GRPCChannelPool.with(
-            target: .host(grpcHost, port: port),
+            target: .host(cfg.grpcHost, port: cfg.port),
             transportSecurity: .plaintext,
             eventLoopGroup: MultiThreadedEventLoopGroup(numberOfThreads: 1)
         )
@@ -81,6 +81,7 @@ class ShuffleClient {
             )
             
             isReady = resp.ready
+            try await node.setJwt(utxoID: utxoID, jwt: resp.roomAccessToken)
             logger.info("UTXO ID: \(utxoID). Checking a queue status..., isReady: \(isReady)")
         }
     }
