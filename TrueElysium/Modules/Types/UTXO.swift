@@ -128,11 +128,11 @@ public extension UTXO {
         
         public var color: Color {
             switch self {
-            case .searching: return .yellow
+            case .searching: return .gray.opacity(0.5)
             case .created: return .blue
-            case .shuffling: return .orange
+            case .shuffling: return .green.opacity(0.5)
             case .shuffled: return .green
-            case .creating: return .gray
+            case .creating: return .blue.opacity(0.5)
             case .failed: return .red
             }
         }

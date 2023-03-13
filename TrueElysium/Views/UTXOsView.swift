@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Neumorphic
 import Web3
 
 struct UTXOsView: View {
@@ -16,6 +17,7 @@ struct UTXOsView: View {
     @State private var isPresentCreateUTXO = false
     @State private var isPresentChangePrivateKey = false
     @State private var isPresentFilterSelection = false
+    @State private var isNewest = false
     @State private var data = UTXO.Data()
     @State private var privateKey: String = ""
     @State private var _error: LocalizedError?
@@ -37,7 +39,7 @@ struct UTXOsView: View {
                     ForEach($utxoStore.utxos.filter {filterer.filter(
                         utxo: $0.wrappedValue,
                         user: ethereumClient.user?.publicKey.address
-                    )}) { $utxo in
+                    )}.reversedIf(isNewest)) { $utxo in
                         NavigationLink(
                             destination: UTXODetailView(
                                 utxo: $utxo,
@@ -64,8 +66,14 @@ struct UTXOsView: View {
                 isPresentCreateUTXO = true
             }) {
                 Text("New")
-                    .font(.bold(.headline)())
+                    .fontWeight(.bold)
+                    .frame(width: 150)
             }
+            .softButtonStyle(
+                RoundedRectangle(cornerRadius: 20),
+                mainColor: .white,
+                textColor: .blue
+            )
             .disabled(
                 ethereumClient.user == nil && privateKey.isEmpty
             )
@@ -97,7 +105,8 @@ struct UTXOsView: View {
         .sheet(isPresented: $isPresentFilterSelection) {
             NavigationView {
                 FilterView(
-                    filterer: filterer
+                    filterer: filterer,
+                    isNewest: $isNewest
                 )
                     .navigationTitle("Filtering")
             }

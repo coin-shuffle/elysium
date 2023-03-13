@@ -15,11 +15,11 @@ struct CardUTXOView: View {
             HStack {
                 Text(utxo.name)
                     .font(.headline)
-                Text("#\(utxo.ID.description)")
-                    .foregroundColor(.gray)
                 Spacer()
-                Text(utxo.symbol)
+                Text(utxo.symbol)   
             }
+            Text("#\(utxo.ID.description)")
+                .foregroundColor(.gray)
             Spacer()
             HStack {
                 Label("\(String(utxo.amount))", systemImage: "bitcoinsign.circle")

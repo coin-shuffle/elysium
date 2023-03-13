@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Combine
 
 struct ChangePrivateKeyView: View {
     @Binding var privateKey: String

@@ -12,27 +12,33 @@ struct HeaderView: View {
     @Binding var isPresentFilterSelection: Bool
     
     var body: some View {
-        ZStack {
+        HStack {
             Text("UTXOs")
-                .font(.bold(.title)())
-            HStack {
-                Button(action: {
-                    isPresentFilterSelection = true
-                }) {
-                    Text("Filter")
-                        .font(.bold(.headline)())
-                        .padding()
-                }
-                Spacer()
-                Button(action: {
-                    isPresentChangePrivateKey = true
-                }) {
-                    Image(systemName: "key")
-                        .padding()
-                }
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+            
+            Spacer()
+            
+            Button(action: {
+                isPresentFilterSelection = true
+            }) {
+                Image(systemName: "line.horizontal.3.decrease.circle")
+                    .font(.title)
+                    .foregroundColor(.white)
             }
             
+            Button(action: {
+                isPresentChangePrivateKey = true
+            }) {
+                Image(systemName: "key.fill")
+                    .font(.title)
+                    .rotationEffect(.degrees(isPresentChangePrivateKey ? 90 : 0))
+                    .foregroundColor(.white)
+            }
         }
+        .padding()
+        .background(.blue)
     }
 }
 

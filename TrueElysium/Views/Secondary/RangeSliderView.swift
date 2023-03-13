@@ -9,7 +9,7 @@ import SwiftUI
 import BigInt
 
 struct RangedSliderView: View {
-    let currentValue: Binding<ClosedRange<UInt>>
+    @Binding var currentValue: ClosedRange<UInt>
     @Binding var sliderBounds: ClosedRange<UInt>
     
     var body: some View {
@@ -29,16 +29,16 @@ struct RangedSliderView: View {
                 let sliderBoundDifference = sliderBounds.count
                 let stepWidthInPixel = CGFloat(sliderSize.width) / CGFloat(sliderBoundDifference)
                 
-                let leftThumbLocation: CGFloat = currentValue.wrappedValue.lowerBound == sliderBounds.lowerBound
+                let leftThumbLocation: CGFloat = currentValue.lowerBound == sliderBounds.lowerBound
                     ? 0
-                    : CGFloat(currentValue.wrappedValue.lowerBound - sliderBounds.lowerBound) * stepWidthInPixel
+                    : CGFloat(currentValue.lowerBound - sliderBounds.lowerBound) * stepWidthInPixel
                 
-                let rightThumbLocation = CGFloat(currentValue.wrappedValue.upperBound) * stepWidthInPixel
+                let rightThumbLocation = CGFloat(currentValue.upperBound) * stepWidthInPixel
                 
                 lineBetweenThumbs(from: .init(x: leftThumbLocation, y: sliderViewYCenter), to: .init(x: rightThumbLocation, y: sliderViewYCenter))
                 
                 let leftThumbPoint = CGPoint(x: leftThumbLocation, y: sliderViewYCenter)
-                thumbView(position: leftThumbPoint, value: currentValue.wrappedValue.lowerBound)
+                thumbView(position: leftThumbPoint, value: currentValue.lowerBound)
                     .highPriorityGesture(DragGesture().onChanged { dragValue in
                         
                         let dragLocation = dragValue.location
@@ -46,12 +46,12 @@ struct RangedSliderView: View {
                         
                         let newValue = sliderBounds.lowerBound + UInt(xThumbOffset / stepWidthInPixel)
                         
-                        if newValue < currentValue.wrappedValue.upperBound {
-                            currentValue.wrappedValue = newValue...currentValue.wrappedValue.upperBound
+                        if newValue < $currentValue.wrappedValue.upperBound {
+                            currentValue = newValue...currentValue.upperBound
                         }
                     })
                 
-                thumbView(position: CGPoint(x: rightThumbLocation, y: sliderViewYCenter), value: currentValue.wrappedValue.upperBound)
+                thumbView(position: CGPoint(x: rightThumbLocation, y: sliderViewYCenter), value: currentValue.upperBound)
                     .highPriorityGesture(DragGesture().onChanged { dragValue in
                         let dragLocation = dragValue.location
                         let xThumbOffset = min(max(CGFloat(leftThumbLocation), dragLocation.x), sliderSize.width)
@@ -59,8 +59,8 @@ struct RangedSliderView: View {
                         var newValue = UInt(xThumbOffset / stepWidthInPixel)
                         newValue = min(newValue, sliderBounds.upperBound)
                         
-                        if newValue > currentValue.wrappedValue.lowerBound {
-                            currentValue.wrappedValue = currentValue.wrappedValue.lowerBound...newValue
+                        if newValue > $currentValue.wrappedValue.lowerBound {
+                            $currentValue.wrappedValue = $currentValue.wrappedValue.lowerBound...newValue
                         }
                     })
             }

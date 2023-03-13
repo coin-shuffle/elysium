@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Web3
+import Neumorphic
 import UniformTypeIdentifiers
 
 struct UTXODetailView: View {
@@ -20,7 +21,7 @@ struct UTXODetailView: View {
     var body: some View {
         VStack {
             List {
-                Section(header: Text("UTXO INFO")) {
+                Section(header: Text("UTXO INFO").font(.headline)) {
                     HStack {
                         Text("ID")
                         Spacer()
@@ -32,8 +33,10 @@ struct UTXODetailView: View {
                         Text(utxo.token.hex(eip55: true).contraction(maxLength: 10))
                             .multilineTextAlignment(.trailing)
                             .onTapGesture(count: 2) {
-                                UIPasteboard.general.setValue(utxo.token.hex(eip55: true),
-                                        forPasteboardType: UTType.plainText.identifier)
+                                UIPasteboard.general.setValue(
+                                    utxo.token.hex(eip55: true),
+                                    forPasteboardType: UTType.plainText.identifier
+                                )
                             }
                     }
                     HStack {
@@ -47,8 +50,10 @@ struct UTXODetailView: View {
                         Text(utxo.owner.hex(eip55: true).contraction(maxLength: 10))
                             .multilineTextAlignment(.trailing)
                             .onTapGesture(count: 2) {
-                                UIPasteboard.general.setValue(utxo.owner.hex(eip55: true),
-                                        forPasteboardType: UTType.plainText.identifier)
+                                UIPasteboard.general.setValue(
+                                    utxo.owner.hex(eip55: true),
+                                    forPasteboardType: UTType.plainText.identifier
+                                )
                             }
                     }
                     HStack {
@@ -62,25 +67,15 @@ struct UTXODetailView: View {
             if hasUser && utxo.status == .created {
                 HStack {
                     TextField("0x00...00", text: $output)
-                    Button("Shuffle") {
-                        guard let outputAddress = try? EthereumAddress(hex: output, eip55: true) else {
-                            output = ""
-                            return
-                        }
-                        
-                        Task {
-                            do {
-                                try await shuffle(outputAddress: outputAddress)
-                            } catch let error {
-                                try! shuffleClient.node.updateUTXOStatus(utxoID: utxo.ID, status: .created)
-                                
-                                shuffleClient.logger.error("UTXO ID: \(utxo.ID), received an error: \(error)")
-                            }
-                        }
-                        
-                        output = ""
-                        
+                    Button(action: shuffleAction) {
+                        Text("Shuffle")
                     }
+                    .softButtonStyle(
+                        RoundedRectangle(cornerRadius: 20),
+                        mainColor: .white,
+                        textColor: .blue
+                    )
+                    .buttonStyle(.borderedProminent)
                     .disabled(output.isEmpty)
                 }
                 .disabled(!hasUser || utxo.status != .created)
@@ -88,6 +83,35 @@ struct UTXODetailView: View {
             }
         }
         .navigationTitle("\(utxo.name)(\(utxo.symbol))")
+    }
+    
+    func shuffleAction() {
+        guard let outputAddress = try? EthereumAddress(
+            hex: output,
+            eip55: true
+        ) else {
+            output = ""
+            return
+        }
+        
+        Task {
+            do {
+                try await shuffle(
+                    outputAddress:outputAddress
+                )
+            } catch {
+                try! await shuffleClient.node.updateUTXOStatus(
+                    utxoID: utxo.ID,
+                    status: .created
+                )
+                
+                shuffleClient.logger.error(
+                    "UTXO ID: \(utxo.ID), received an error: \(error)"
+                )
+            }
+        }
+        
+        output = ""
     }
     
     func shuffle(outputAddress: EthereumAddress) async throws  {

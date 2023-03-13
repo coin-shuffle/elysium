@@ -72,6 +72,9 @@
 		CEB68BDA29BA345D00455785 /* TokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BD829BA345D00455785 /* TokenStore.swift */; };
 		CEB68BE429BA4D5800455785 /* RangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BE329BA4D5800455785 /* RangeSliderView.swift */; };
 		CEBB745529BB63A500848A8D /* RangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BE329BA4D5800455785 /* RangeSliderView.swift */; };
+		CEBB745A29BB79DE00848A8D /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = CEBB745929BB79DE00848A8D /* Neumorphic */; };
+		CEBB745C29BB8E5400848A8D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBB745B29BB8E5400848A8D /* Array.swift */; };
+		CEBB745D29BB8E5400848A8D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBB745B29BB8E5400848A8D /* Array.swift */; };
 		CEC45CA429AF72C500848C23 /* SwiftyRSA in Frameworks */ = {isa = PBXBuildFile; productRef = CEC45CA329AF72C500848C23 /* SwiftyRSA */; };
 		CEC45CA629AF72C500848C23 /* SwiftyRSA in Embed Frameworks */ = {isa = PBXBuildFile; productRef = CEC45CA329AF72C500848C23 /* SwiftyRSA */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		CEC45CA829AFF3DD00848C23 /* librsa_crypto.a in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEC45CA729AFF3DD00848C23 /* librsa_crypto.a */; };
@@ -190,6 +193,7 @@
 		CEB68BD529BA285B00455785 /* UTXOSLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTXOSLoader.swift; sourceTree = "<group>"; };
 		CEB68BD829BA345D00455785 /* TokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStore.swift; sourceTree = "<group>"; };
 		CEB68BE329BA4D5800455785 /* RangeSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSliderView.swift; sourceTree = "<group>"; };
+		CEBB745B29BB8E5400848A8D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		CEC45CA729AFF3DD00848C23 /* librsa_crypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librsa_crypto.a; sourceTree = "<group>"; };
 		CEC45CA929AFF45900848C23 /* rsa_crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rsa_crypto.h; sourceTree = "<group>"; };
 		CEC45CAA29AFF4DD00848C23 /* RSACryptoBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSACryptoBridgingHeader.h; sourceTree = "<group>"; };
@@ -228,6 +232,7 @@
 				CE7BB8BE29ABBA7A0089CB57 /* SwiftProtobufPluginLibrary in Frameworks */,
 				CEE8803329A50A8C009CC313 /* Web3 in Frameworks */,
 				CE7BB8BC29ABBA7A0089CB57 /* SwiftProtobuf in Frameworks */,
+				CEBB745A29BB79DE00848A8D /* Neumorphic in Frameworks */,
 				CE439AD229AEBA8B00AD38D0 /* SwiftyRSA in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,15 +341,12 @@
 		CE94EF0A29AE00F300B06CFA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CEBB745729BB699300848A8D /* Sections */,
+				CEBB745629BB697800848A8D /* Secondary */,
 				CE7BB89729ABB8E70089CB57 /* UTXOsView.swift */,
-				CE94EEF429ACFA0300B06CFA /* ChangePrivateKeyView.swift */,
 				CE7BB89629ABB8E70089CB57 /* UTXODetailView.swift */,
-				CE7BB89529ABB8E60089CB57 /* NewUTXOView.swift */,
-				CE7BB89229ABB8E60089CB57 /* MainLoaderView.swift */,
 				CE7BB89A29ABB8E70089CB57 /* CardUTXOView.swift */,
 				CEED37B129B0EBB600C5FB41 /* HeaderView.swift */,
-				CEB68BCD29B9F4BC00455785 /* FilterView.swift */,
-				CEB68BE329BA4D5800455785 /* RangeSliderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -403,6 +405,25 @@
 			path = UTXOS;
 			sourceTree = "<group>";
 		};
+		CEBB745629BB697800848A8D /* Secondary */ = {
+			isa = PBXGroup;
+			children = (
+				CEB68BE329BA4D5800455785 /* RangeSliderView.swift */,
+				CE7BB89229ABB8E60089CB57 /* MainLoaderView.swift */,
+			);
+			path = Secondary;
+			sourceTree = "<group>";
+		};
+		CEBB745729BB699300848A8D /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				CEB68BCD29B9F4BC00455785 /* FilterView.swift */,
+				CE7BB89529ABB8E60089CB57 /* NewUTXOView.swift */,
+				CE94EEF429ACFA0300B06CFA /* ChangePrivateKeyView.swift */,
+			);
+			path = Sections;
+			sourceTree = "<group>";
+		};
 		CEC9D10229B2436A0056D3C4 /* SwiftyRSA */ = {
 			isa = PBXGroup;
 			children = (
@@ -432,6 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				CE7BB88829AB6C0C0089CB57 /* String.swift */,
+				CEBB745B29BB8E5400848A8D /* Array.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -576,6 +598,7 @@
 				CE94EF1429AE4C5300B06CFA /* GRPC */,
 				CE439AD129AEBA8B00AD38D0 /* SwiftyRSA */,
 				CEA691DD29B8E99800110E44 /* Yams */,
+				CEBB745929BB79DE00848A8D /* Neumorphic */,
 			);
 			productName = TrueElysium;
 			productReference = CEE87FFE29A5098D009CC313 /* TrueElysium.app */;
@@ -665,6 +688,7 @@
 				CE7BB8BF29ABBAAF0089CB57 /* XCRemoteSwiftPackageReference "grpc-swift" */,
 				CE439AD029AEBA8B00AD38D0 /* XCRemoteSwiftPackageReference "SwiftyRSA" */,
 				CEA691DC29B8E99800110E44 /* XCRemoteSwiftPackageReference "Yams" */,
+				CEBB745829BB79DE00848A8D /* XCRemoteSwiftPackageReference "neumorphic" */,
 			);
 			productRefGroup = CEE87FFF29A5098D009CC313 /* Products */;
 			projectDirPath = "";
@@ -721,6 +745,7 @@
 				CEA1FB3329A62D940008C9C5 /* UTXO.swift in Sources */,
 				CE3C7F7B29B4CACB00734DF9 /* ShuffleError.swift in Sources */,
 				CEA1FB2F29A620C30008C9C5 /* UTXOStorageContract.swift in Sources */,
+				CEBB745C29BB8E5400848A8D /* Array.swift in Sources */,
 				CEED37AF29B0D7B400C5FB41 /* Nonce.swift in Sources */,
 				CEC9D10729B243B20056D3C4 /* PublicKey.swift in Sources */,
 				CEE8800229A5098D009CC313 /* TrueElysiumApp.swift in Sources */,
@@ -771,6 +796,7 @@
 				CE3C7F9129B64DA900734DF9 /* Future.swift in Sources */,
 				CEE8801329A5098F009CC313 /* TrueElysiumTests.swift in Sources */,
 				CE94EEF329ACB98A00B06CFA /* View.swift in Sources */,
+				CEBB745D29BB8E5400848A8D /* Array.swift in Sources */,
 				CEA1FB3529A63B9A0008C9C5 /* UTXO.swift in Sources */,
 				CEE8803A29A50D79009CC313 /* EthereumClientTest.swift in Sources */,
 				CE94EEFB29AD0BB400B06CFA /* UTXOStore.swift in Sources */,
@@ -1156,6 +1182,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		CEBB745829BB79DE00848A8D /* XCRemoteSwiftPackageReference "neumorphic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/costachung/neumorphic";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		CEE8803129A50A8C009CC313 /* XCRemoteSwiftPackageReference "Web3" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Boilertalk/Web3.swift";
@@ -1196,6 +1230,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CEA691DC29B8E99800110E44 /* XCRemoteSwiftPackageReference "Yams" */;
 			productName = Yams;
+		};
+		CEBB745929BB79DE00848A8D /* Neumorphic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEBB745829BB79DE00848A8D /* XCRemoteSwiftPackageReference "neumorphic" */;
+			productName = Neumorphic;
 		};
 		CEC45CA329AF72C500848C23 /* SwiftyRSA */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -10,6 +10,7 @@ import BigInt
 
 struct FilterView: View {
     @ObservedObject var filterer: Filterer
+    @Binding var isNewest: Bool
     
     var body: some View {
         VStack {
@@ -35,6 +36,7 @@ struct FilterView: View {
                     Toggle(isOn: $filterer.onlyMine) {
                         Text("Mine")
                     }
+                    
                 }
                 Section(header: Text("Amount range")) {
                     RangedSliderView(
@@ -42,6 +44,11 @@ struct FilterView: View {
                         sliderBounds: $filterer.tokensAmountsBounds
                     )
                     .padding()
+                }
+                Section(header: Text("Time creation")) {
+                    Toggle(isOn: $isNewest) {
+                        Text("Newest")
+                    }
                 }
             }
         }
@@ -51,7 +58,8 @@ struct FilterView: View {
 struct FilterView_Previews: PreviewProvider {
     static var previews: some View {
         FilterView(
-            filterer: Filterer()
+            filterer: Filterer(),
+            isNewest: .constant(false)
         )
     }
 }
