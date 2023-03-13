@@ -20,7 +20,6 @@ struct NewUTXOView: View {
                 Section(header: Text("Amount:")) {
                     TextField("0", text: $data.amount)
                         .keyboardType(.numberPad)
-                    
                 }
             }
         }

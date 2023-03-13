@@ -20,101 +20,33 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-struct CoinShuffle_V1_RoomAccessJWT {
+struct CoinShuffle_V1_RsaPublicKey {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// header:    base64({"alg":"HS256","typ":"JWT"})
-  /// payload:   base64({"room_id":"2ee1deab-40b0-4155-b8ab-b2c253e9f6f6","exp":"123456789"})
-  /// signature: base64(HMACSHA256(header.payload, secret))
-  /// jwt:       header.payload.signature
-  var jwt: String = String()
+  /// Modulus of the RSA public key represented as a big-endian byte array
+  var modulus: Data = Data()
+
+  /// Public exponent of the RSA public key represented as a big-endian byte array
+  var exponent: Data = Data()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 }
 
-struct CoinShuffle_V1_BaseRequest {
+struct CoinShuffle_V1_DecodedOutput {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var id: String = String()
-
-  var jwt: CoinShuffle_V1_RoomAccessJWT {
-    get {return _jwt ?? CoinShuffle_V1_RoomAccessJWT()}
-    set {_jwt = newValue}
-  }
-  /// Returns true if `jwt` has been explicitly set.
-  var hasJwt: Bool {return self._jwt != nil}
-  /// Clears the value of `jwt`. Subsequent reads from it will return its default value.
-  mutating func clearJwt() {self._jwt = nil}
+  /// Address of the output
+  var address: Data = Data()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  fileprivate var _jwt: CoinShuffle_V1_RoomAccessJWT? = nil
-}
-
-struct CoinShuffle_V1_JoinShuffleRoomRequest {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  /// UTXO id that shuffle participant wanna use for shuffle
-  var utxo: String = String()
-
-  /// ECDSA Signature of the UTXO ID with the UTXO owner private key
-  var sign: String = String()
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
-struct CoinShuffle_V1_JoinShuffleRoomResponse {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var accessJwt: CoinShuffle_V1_RoomAccessJWT {
-    get {return _accessJwt ?? CoinShuffle_V1_RoomAccessJWT()}
-    set {_accessJwt = newValue}
-  }
-  /// Returns true if `accessJwt` has been explicitly set.
-  var hasAccessJwt: Bool {return self._accessJwt != nil}
-  /// Clears the value of `accessJwt`. Subsequent reads from it will return its default value.
-  mutating func clearAccessJwt() {self._accessJwt = nil}
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-
-  fileprivate var _accessJwt: CoinShuffle_V1_RoomAccessJWT? = nil
-}
-
-struct CoinShuffle_V1_ConnectShuffleRoomRequest {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var base: CoinShuffle_V1_BaseRequest {
-    get {return _base ?? CoinShuffle_V1_BaseRequest()}
-    set {_base = newValue}
-  }
-  /// Returns true if `base` has been explicitly set.
-  var hasBase: Bool {return self._base != nil}
-  /// Clears the value of `base`. Subsequent reads from it will return its default value.
-  mutating func clearBase() {self._base = nil}
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-
-  fileprivate var _base: CoinShuffle_V1_BaseRequest? = nil
 }
 
 struct CoinShuffle_V1_ShuffleError {
@@ -169,9 +101,6 @@ struct CoinShuffle_V1_ShuffleEvent {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
-
-  /// Unique event identifier
-  var id: String = String()
 
   var body: CoinShuffle_V1_ShuffleEvent.OneOf_Body? = nil
 
@@ -279,53 +208,17 @@ struct CoinShuffle_V1_ShuffleEvent {
   init() {}
 }
 
-struct CoinShuffle_V1_IsReadyForShuffleRequest {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var base: CoinShuffle_V1_BaseRequest {
-    get {return _base ?? CoinShuffle_V1_BaseRequest()}
-    set {_base = newValue}
-  }
-  /// Returns true if `base` has been explicitly set.
-  var hasBase: Bool {return self._base != nil}
-  /// Clears the value of `base`. Subsequent reads from it will return its default value.
-  mutating func clearBase() {self._base = nil}
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-
-  fileprivate var _base: CoinShuffle_V1_BaseRequest? = nil
-}
-
-struct CoinShuffle_V1_IsReadyForShuffleResponse {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var ready: Bool = false
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
 struct CoinShuffle_V1_ShuffleInfo {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// Shuffle participants number
-  var participantsNumber: Int32 = 0
-
-  /// Participant's serial number in the shuffle process
-  var nodeSerialNumber: Int32 = 0
-
   /// HEX encoded shuffle participants public keys.
   /// Unique for every user depend on serial number
-  var publicKeysList: [String] = []
+  var publicKeysList: [CoinShuffle_V1_RsaPublicKey] = []
+
+  /// Token given for accessing room in shuffle process
+  var shuffleAccessToken: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -338,7 +231,7 @@ struct CoinShuffle_V1_EncodedOutputs {
   // methods supported on all messages.
 
   /// RSA encoded shuffle participants outputs equal to output addresses
-  var outputsList: [String] = []
+  var outputs: [Data] = []
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -351,7 +244,7 @@ struct CoinShuffle_V1_TxSigningOutputs {
   // methods supported on all messages.
 
   /// Transaction outputs for signing
-  var outputs: [String] = []
+  var outputs: [Data] = []
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -364,24 +257,90 @@ struct CoinShuffle_V1_ShuffleTxHash {
   // methods supported on all messages.
 
   /// Shuffle transaction hash
-  var txHash: String = String()
+  var txHash: Data = Data()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 }
 
-struct CoinShuffle_V1_DecodedOutputs {
+struct CoinShuffle_V1_JoinShuffleRoomRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// HEX encoded shuffle participants outputs; equal to output addresses
-  var outputsList: [String] = []
+  /// U256 is a 256-bit unsigned integer.
+  var utxoID: Data = Data()
+
+  /// UNIX timestamp in seconds.
+  var timestamp: UInt64 = 0
+
+  /// ECDSA signature of concatenated bytes of `utxo_id` and `timestamp`
+  ///
+  /// `signature = sign(concat(utxo_id, timestamp))`.
+  var signature: Data = Data()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
+}
+
+struct CoinShuffle_V1_JoinShuffleRoomResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var roomAccessToken: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct CoinShuffle_V1_IsReadyForShuffleRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct CoinShuffle_V1_IsReadyForShuffleResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var ready: Bool = false
+
+  /// New access token to check if room is ready
+  var roomAccessToken: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct CoinShuffle_V1_ConnectShuffleRoomRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var publicKey: CoinShuffle_V1_RsaPublicKey {
+    get {return _publicKey ?? CoinShuffle_V1_RsaPublicKey()}
+    set {_publicKey = newValue}
+  }
+  /// Returns true if `publicKey` has been explicitly set.
+  var hasPublicKey: Bool {return self._publicKey != nil}
+  /// Clears the value of `publicKey`. Subsequent reads from it will return its default value.
+  mutating func clearPublicKey() {self._publicKey = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _publicKey: CoinShuffle_V1_RsaPublicKey? = nil
 }
 
 struct CoinShuffle_V1_ShuffleRoundRequest {
@@ -389,30 +348,11 @@ struct CoinShuffle_V1_ShuffleRoundRequest {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var base: CoinShuffle_V1_BaseRequest {
-    get {return _base ?? CoinShuffle_V1_BaseRequest()}
-    set {_base = newValue}
-  }
-  /// Returns true if `base` has been explicitly set.
-  var hasBase: Bool {return self._base != nil}
-  /// Clears the value of `base`. Subsequent reads from it will return its default value.
-  mutating func clearBase() {self._base = nil}
-
-  var encodedOutputs: CoinShuffle_V1_DecodedOutputs {
-    get {return _encodedOutputs ?? CoinShuffle_V1_DecodedOutputs()}
-    set {_encodedOutputs = newValue}
-  }
-  /// Returns true if `encodedOutputs` has been explicitly set.
-  var hasEncodedOutputs: Bool {return self._encodedOutputs != nil}
-  /// Clears the value of `encodedOutputs`. Subsequent reads from it will return its default value.
-  mutating func clearEncodedOutputs() {self._encodedOutputs = nil}
+  var encodedOutputs: [Data] = []
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  fileprivate var _base: CoinShuffle_V1_BaseRequest? = nil
-  fileprivate var _encodedOutputs: CoinShuffle_V1_DecodedOutputs? = nil
 }
 
 struct CoinShuffle_V1_ShuffleRoundResponse {
@@ -430,23 +370,12 @@ struct CoinShuffle_V1_SignShuffleTxRequest {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var base: CoinShuffle_V1_BaseRequest {
-    get {return _base ?? CoinShuffle_V1_BaseRequest()}
-    set {_base = newValue}
-  }
-  /// Returns true if `base` has been explicitly set.
-  var hasBase: Bool {return self._base != nil}
-  /// Clears the value of `base`. Subsequent reads from it will return its default value.
-  mutating func clearBase() {self._base = nil}
-
   /// ECDSA Signature of participant's input and list of all outputs
-  var signature: String = String()
+  var signature: Data = Data()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  fileprivate var _base: CoinShuffle_V1_BaseRequest? = nil
 }
 
 struct CoinShuffle_V1_SignShuffleTxResponse {
@@ -460,22 +389,21 @@ struct CoinShuffle_V1_SignShuffleTxResponse {
 }
 
 #if swift(>=5.5) && canImport(_Concurrency)
-extension CoinShuffle_V1_RoomAccessJWT: @unchecked Sendable {}
-extension CoinShuffle_V1_BaseRequest: @unchecked Sendable {}
-extension CoinShuffle_V1_JoinShuffleRoomRequest: @unchecked Sendable {}
-extension CoinShuffle_V1_JoinShuffleRoomResponse: @unchecked Sendable {}
-extension CoinShuffle_V1_ConnectShuffleRoomRequest: @unchecked Sendable {}
+extension CoinShuffle_V1_RsaPublicKey: @unchecked Sendable {}
+extension CoinShuffle_V1_DecodedOutput: @unchecked Sendable {}
 extension CoinShuffle_V1_ShuffleError: @unchecked Sendable {}
 extension CoinShuffle_V1_ShuffleError.Code: @unchecked Sendable {}
 extension CoinShuffle_V1_ShuffleEvent: @unchecked Sendable {}
 extension CoinShuffle_V1_ShuffleEvent.OneOf_Body: @unchecked Sendable {}
-extension CoinShuffle_V1_IsReadyForShuffleRequest: @unchecked Sendable {}
-extension CoinShuffle_V1_IsReadyForShuffleResponse: @unchecked Sendable {}
 extension CoinShuffle_V1_ShuffleInfo: @unchecked Sendable {}
 extension CoinShuffle_V1_EncodedOutputs: @unchecked Sendable {}
 extension CoinShuffle_V1_TxSigningOutputs: @unchecked Sendable {}
 extension CoinShuffle_V1_ShuffleTxHash: @unchecked Sendable {}
-extension CoinShuffle_V1_DecodedOutputs: @unchecked Sendable {}
+extension CoinShuffle_V1_JoinShuffleRoomRequest: @unchecked Sendable {}
+extension CoinShuffle_V1_JoinShuffleRoomResponse: @unchecked Sendable {}
+extension CoinShuffle_V1_IsReadyForShuffleRequest: @unchecked Sendable {}
+extension CoinShuffle_V1_IsReadyForShuffleResponse: @unchecked Sendable {}
+extension CoinShuffle_V1_ConnectShuffleRoomRequest: @unchecked Sendable {}
 extension CoinShuffle_V1_ShuffleRoundRequest: @unchecked Sendable {}
 extension CoinShuffle_V1_ShuffleRoundResponse: @unchecked Sendable {}
 extension CoinShuffle_V1_SignShuffleTxRequest: @unchecked Sendable {}
@@ -486,10 +414,11 @@ extension CoinShuffle_V1_SignShuffleTxResponse: @unchecked Sendable {}
 
 fileprivate let _protobuf_package = "coin_shuffle.v1"
 
-extension CoinShuffle_V1_RoomAccessJWT: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".RoomAccessJWT"
+extension CoinShuffle_V1_RsaPublicKey: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".RsaPublicKey"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "jwt"),
+    1: .same(proto: "modulus"),
+    2: .same(proto: "exponent"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -498,31 +427,35 @@ extension CoinShuffle_V1_RoomAccessJWT: SwiftProtobuf.Message, SwiftProtobuf._Me
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.jwt) }()
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.modulus) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.exponent) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.jwt.isEmpty {
-      try visitor.visitSingularStringField(value: self.jwt, fieldNumber: 1)
+    if !self.modulus.isEmpty {
+      try visitor.visitSingularBytesField(value: self.modulus, fieldNumber: 1)
+    }
+    if !self.exponent.isEmpty {
+      try visitor.visitSingularBytesField(value: self.exponent, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: CoinShuffle_V1_RoomAccessJWT, rhs: CoinShuffle_V1_RoomAccessJWT) -> Bool {
-    if lhs.jwt != rhs.jwt {return false}
+  static func ==(lhs: CoinShuffle_V1_RsaPublicKey, rhs: CoinShuffle_V1_RsaPublicKey) -> Bool {
+    if lhs.modulus != rhs.modulus {return false}
+    if lhs.exponent != rhs.exponent {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension CoinShuffle_V1_BaseRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".BaseRequest"
+extension CoinShuffle_V1_DecodedOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".DecodedOutput"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "id"),
-    2: .same(proto: "jwt"),
+    1: .same(proto: "address"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -531,140 +464,21 @@ extension CoinShuffle_V1_BaseRequest: SwiftProtobuf.Message, SwiftProtobuf._Mess
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.id) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._jwt) }()
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.address) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    if !self.id.isEmpty {
-      try visitor.visitSingularStringField(value: self.id, fieldNumber: 1)
-    }
-    try { if let v = self._jwt {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    } }()
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: CoinShuffle_V1_BaseRequest, rhs: CoinShuffle_V1_BaseRequest) -> Bool {
-    if lhs.id != rhs.id {return false}
-    if lhs._jwt != rhs._jwt {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension CoinShuffle_V1_JoinShuffleRoomRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".JoinShuffleRoomRequest"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "utxo"),
-    2: .same(proto: "sign"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.utxo) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.sign) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.utxo.isEmpty {
-      try visitor.visitSingularStringField(value: self.utxo, fieldNumber: 1)
-    }
-    if !self.sign.isEmpty {
-      try visitor.visitSingularStringField(value: self.sign, fieldNumber: 2)
+    if !self.address.isEmpty {
+      try visitor.visitSingularBytesField(value: self.address, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: CoinShuffle_V1_JoinShuffleRoomRequest, rhs: CoinShuffle_V1_JoinShuffleRoomRequest) -> Bool {
-    if lhs.utxo != rhs.utxo {return false}
-    if lhs.sign != rhs.sign {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension CoinShuffle_V1_JoinShuffleRoomResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".JoinShuffleRoomResponse"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    2: .standard(proto: "access_jwt"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._accessJwt) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._accessJwt {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    } }()
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: CoinShuffle_V1_JoinShuffleRoomResponse, rhs: CoinShuffle_V1_JoinShuffleRoomResponse) -> Bool {
-    if lhs._accessJwt != rhs._accessJwt {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension CoinShuffle_V1_ConnectShuffleRoomRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".ConnectShuffleRoomRequest"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "base"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._base) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._base {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: CoinShuffle_V1_ConnectShuffleRoomRequest, rhs: CoinShuffle_V1_ConnectShuffleRoomRequest) -> Bool {
-    if lhs._base != rhs._base {return false}
+  static func ==(lhs: CoinShuffle_V1_DecodedOutput, rhs: CoinShuffle_V1_DecodedOutput) -> Bool {
+    if lhs.address != rhs.address {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -711,12 +525,11 @@ extension CoinShuffle_V1_ShuffleError.Code: SwiftProtobuf._ProtoNameProviding {
 extension CoinShuffle_V1_ShuffleEvent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".ShuffleEvent"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "id"),
-    2: .same(proto: "error"),
-    3: .standard(proto: "shuffle_info"),
-    4: .standard(proto: "encoded_outputs"),
-    5: .standard(proto: "tx_signing_outputs"),
-    6: .standard(proto: "shuffle_tx_hash"),
+    1: .same(proto: "error"),
+    2: .standard(proto: "shuffle_info"),
+    3: .standard(proto: "encoded_outputs"),
+    4: .standard(proto: "tx_signing_outputs"),
+    5: .standard(proto: "shuffle_tx_hash"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -725,8 +538,7 @@ extension CoinShuffle_V1_ShuffleEvent: SwiftProtobuf.Message, SwiftProtobuf._Mes
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.id) }()
-      case 2: try {
+      case 1: try {
         var v: CoinShuffle_V1_ShuffleError?
         var hadOneofValue = false
         if let current = self.body {
@@ -739,7 +551,7 @@ extension CoinShuffle_V1_ShuffleEvent: SwiftProtobuf.Message, SwiftProtobuf._Mes
           self.body = .error(v)
         }
       }()
-      case 3: try {
+      case 2: try {
         var v: CoinShuffle_V1_ShuffleInfo?
         var hadOneofValue = false
         if let current = self.body {
@@ -752,7 +564,7 @@ extension CoinShuffle_V1_ShuffleEvent: SwiftProtobuf.Message, SwiftProtobuf._Mes
           self.body = .shuffleInfo(v)
         }
       }()
-      case 4: try {
+      case 3: try {
         var v: CoinShuffle_V1_EncodedOutputs?
         var hadOneofValue = false
         if let current = self.body {
@@ -765,7 +577,7 @@ extension CoinShuffle_V1_ShuffleEvent: SwiftProtobuf.Message, SwiftProtobuf._Mes
           self.body = .encodedOutputs(v)
         }
       }()
-      case 5: try {
+      case 4: try {
         var v: CoinShuffle_V1_TxSigningOutputs?
         var hadOneofValue = false
         if let current = self.body {
@@ -778,7 +590,7 @@ extension CoinShuffle_V1_ShuffleEvent: SwiftProtobuf.Message, SwiftProtobuf._Mes
           self.body = .txSigningOutputs(v)
         }
       }()
-      case 6: try {
+      case 5: try {
         var v: CoinShuffle_V1_ShuffleTxHash?
         var hadOneofValue = false
         if let current = self.body {
@@ -801,29 +613,26 @@ extension CoinShuffle_V1_ShuffleEvent: SwiftProtobuf.Message, SwiftProtobuf._Mes
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
-    if !self.id.isEmpty {
-      try visitor.visitSingularStringField(value: self.id, fieldNumber: 1)
-    }
     switch self.body {
     case .error?: try {
       guard case .error(let v)? = self.body else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
     }()
     case .shuffleInfo?: try {
       guard case .shuffleInfo(let v)? = self.body else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     }()
     case .encodedOutputs?: try {
       guard case .encodedOutputs(let v)? = self.body else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
     }()
     case .txSigningOutputs?: try {
       guard case .txSigningOutputs(let v)? = self.body else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
     }()
     case .shuffleTxHash?: try {
       guard case .shuffleTxHash(let v)? = self.body else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
     }()
     case nil: break
     }
@@ -831,76 +640,7 @@ extension CoinShuffle_V1_ShuffleEvent: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 
   static func ==(lhs: CoinShuffle_V1_ShuffleEvent, rhs: CoinShuffle_V1_ShuffleEvent) -> Bool {
-    if lhs.id != rhs.id {return false}
     if lhs.body != rhs.body {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension CoinShuffle_V1_IsReadyForShuffleRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".IsReadyForShuffleRequest"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "base"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._base) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._base {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: CoinShuffle_V1_IsReadyForShuffleRequest, rhs: CoinShuffle_V1_IsReadyForShuffleRequest) -> Bool {
-    if lhs._base != rhs._base {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension CoinShuffle_V1_IsReadyForShuffleResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".IsReadyForShuffleResponse"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "ready"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularBoolField(value: &self.ready) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.ready != false {
-      try visitor.visitSingularBoolField(value: self.ready, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: CoinShuffle_V1_IsReadyForShuffleResponse, rhs: CoinShuffle_V1_IsReadyForShuffleResponse) -> Bool {
-    if lhs.ready != rhs.ready {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -909,9 +649,8 @@ extension CoinShuffle_V1_IsReadyForShuffleResponse: SwiftProtobuf.Message, Swift
 extension CoinShuffle_V1_ShuffleInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".ShuffleInfo"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "participants_number"),
-    2: .standard(proto: "node_serial_number"),
-    3: .standard(proto: "public_keys_list"),
+    1: .standard(proto: "public_keys_list"),
+    2: .standard(proto: "shuffle_access_token"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -920,31 +659,26 @@ extension CoinShuffle_V1_ShuffleInfo: SwiftProtobuf.Message, SwiftProtobuf._Mess
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularInt32Field(value: &self.participantsNumber) }()
-      case 2: try { try decoder.decodeSingularInt32Field(value: &self.nodeSerialNumber) }()
-      case 3: try { try decoder.decodeRepeatedStringField(value: &self.publicKeysList) }()
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.publicKeysList) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.shuffleAccessToken) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.participantsNumber != 0 {
-      try visitor.visitSingularInt32Field(value: self.participantsNumber, fieldNumber: 1)
-    }
-    if self.nodeSerialNumber != 0 {
-      try visitor.visitSingularInt32Field(value: self.nodeSerialNumber, fieldNumber: 2)
-    }
     if !self.publicKeysList.isEmpty {
-      try visitor.visitRepeatedStringField(value: self.publicKeysList, fieldNumber: 3)
+      try visitor.visitRepeatedMessageField(value: self.publicKeysList, fieldNumber: 1)
+    }
+    if !self.shuffleAccessToken.isEmpty {
+      try visitor.visitSingularStringField(value: self.shuffleAccessToken, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: CoinShuffle_V1_ShuffleInfo, rhs: CoinShuffle_V1_ShuffleInfo) -> Bool {
-    if lhs.participantsNumber != rhs.participantsNumber {return false}
-    if lhs.nodeSerialNumber != rhs.nodeSerialNumber {return false}
     if lhs.publicKeysList != rhs.publicKeysList {return false}
+    if lhs.shuffleAccessToken != rhs.shuffleAccessToken {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -953,7 +687,7 @@ extension CoinShuffle_V1_ShuffleInfo: SwiftProtobuf.Message, SwiftProtobuf._Mess
 extension CoinShuffle_V1_EncodedOutputs: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".EncodedOutputs"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "outputs_list"),
+    1: .same(proto: "outputs"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -962,21 +696,21 @@ extension CoinShuffle_V1_EncodedOutputs: SwiftProtobuf.Message, SwiftProtobuf._M
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeRepeatedStringField(value: &self.outputsList) }()
+      case 1: try { try decoder.decodeRepeatedBytesField(value: &self.outputs) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.outputsList.isEmpty {
-      try visitor.visitRepeatedStringField(value: self.outputsList, fieldNumber: 1)
+    if !self.outputs.isEmpty {
+      try visitor.visitRepeatedBytesField(value: self.outputs, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: CoinShuffle_V1_EncodedOutputs, rhs: CoinShuffle_V1_EncodedOutputs) -> Bool {
-    if lhs.outputsList != rhs.outputsList {return false}
+    if lhs.outputs != rhs.outputs {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -994,7 +728,7 @@ extension CoinShuffle_V1_TxSigningOutputs: SwiftProtobuf.Message, SwiftProtobuf.
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeRepeatedStringField(value: &self.outputs) }()
+      case 1: try { try decoder.decodeRepeatedBytesField(value: &self.outputs) }()
       default: break
       }
     }
@@ -1002,7 +736,7 @@ extension CoinShuffle_V1_TxSigningOutputs: SwiftProtobuf.Message, SwiftProtobuf.
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.outputs.isEmpty {
-      try visitor.visitRepeatedStringField(value: self.outputs, fieldNumber: 1)
+      try visitor.visitRepeatedBytesField(value: self.outputs, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -1026,7 +760,7 @@ extension CoinShuffle_V1_ShuffleTxHash: SwiftProtobuf.Message, SwiftProtobuf._Me
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.txHash) }()
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.txHash) }()
       default: break
       }
     }
@@ -1034,7 +768,7 @@ extension CoinShuffle_V1_ShuffleTxHash: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.txHash.isEmpty {
-      try visitor.visitSingularStringField(value: self.txHash, fieldNumber: 1)
+      try visitor.visitSingularBytesField(value: self.txHash, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -1046,10 +780,12 @@ extension CoinShuffle_V1_ShuffleTxHash: SwiftProtobuf.Message, SwiftProtobuf._Me
   }
 }
 
-extension CoinShuffle_V1_DecodedOutputs: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".DecodedOutputs"
+extension CoinShuffle_V1_JoinShuffleRoomRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".JoinShuffleRoomRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "outputs_list"),
+    1: .standard(proto: "utxo_id"),
+    2: .same(proto: "timestamp"),
+    3: .same(proto: "signature"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1058,31 +794,40 @@ extension CoinShuffle_V1_DecodedOutputs: SwiftProtobuf.Message, SwiftProtobuf._M
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeRepeatedStringField(value: &self.outputsList) }()
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.utxoID) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.timestamp) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.signature) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.outputsList.isEmpty {
-      try visitor.visitRepeatedStringField(value: self.outputsList, fieldNumber: 1)
+    if !self.utxoID.isEmpty {
+      try visitor.visitSingularBytesField(value: self.utxoID, fieldNumber: 1)
+    }
+    if self.timestamp != 0 {
+      try visitor.visitSingularUInt64Field(value: self.timestamp, fieldNumber: 2)
+    }
+    if !self.signature.isEmpty {
+      try visitor.visitSingularBytesField(value: self.signature, fieldNumber: 3)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: CoinShuffle_V1_DecodedOutputs, rhs: CoinShuffle_V1_DecodedOutputs) -> Bool {
-    if lhs.outputsList != rhs.outputsList {return false}
+  static func ==(lhs: CoinShuffle_V1_JoinShuffleRoomRequest, rhs: CoinShuffle_V1_JoinShuffleRoomRequest) -> Bool {
+    if lhs.utxoID != rhs.utxoID {return false}
+    if lhs.timestamp != rhs.timestamp {return false}
+    if lhs.signature != rhs.signature {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension CoinShuffle_V1_ShuffleRoundRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".ShuffleRoundRequest"
+extension CoinShuffle_V1_JoinShuffleRoomResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".JoinShuffleRoomResponse"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "base"),
-    2: .standard(proto: "encoded_outputs"),
+    1: .standard(proto: "room_access_token"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1091,8 +836,96 @@ extension CoinShuffle_V1_ShuffleRoundRequest: SwiftProtobuf.Message, SwiftProtob
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._base) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._encodedOutputs) }()
+      case 1: try { try decoder.decodeSingularStringField(value: &self.roomAccessToken) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.roomAccessToken.isEmpty {
+      try visitor.visitSingularStringField(value: self.roomAccessToken, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: CoinShuffle_V1_JoinShuffleRoomResponse, rhs: CoinShuffle_V1_JoinShuffleRoomResponse) -> Bool {
+    if lhs.roomAccessToken != rhs.roomAccessToken {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension CoinShuffle_V1_IsReadyForShuffleRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".IsReadyForShuffleRequest"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: CoinShuffle_V1_IsReadyForShuffleRequest, rhs: CoinShuffle_V1_IsReadyForShuffleRequest) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension CoinShuffle_V1_IsReadyForShuffleResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".IsReadyForShuffleResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "ready"),
+    2: .standard(proto: "room_access_token"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularBoolField(value: &self.ready) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.roomAccessToken) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.ready != false {
+      try visitor.visitSingularBoolField(value: self.ready, fieldNumber: 1)
+    }
+    if !self.roomAccessToken.isEmpty {
+      try visitor.visitSingularStringField(value: self.roomAccessToken, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: CoinShuffle_V1_IsReadyForShuffleResponse, rhs: CoinShuffle_V1_IsReadyForShuffleResponse) -> Bool {
+    if lhs.ready != rhs.ready {return false}
+    if lhs.roomAccessToken != rhs.roomAccessToken {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension CoinShuffle_V1_ConnectShuffleRoomRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".ConnectShuffleRoomRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "public_key"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._publicKey) }()
       default: break
       }
     }
@@ -1103,18 +936,46 @@ extension CoinShuffle_V1_ShuffleRoundRequest: SwiftProtobuf.Message, SwiftProtob
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._base {
+    try { if let v = self._publicKey {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
-    try { if let v = self._encodedOutputs {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
+  static func ==(lhs: CoinShuffle_V1_ConnectShuffleRoomRequest, rhs: CoinShuffle_V1_ConnectShuffleRoomRequest) -> Bool {
+    if lhs._publicKey != rhs._publicKey {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension CoinShuffle_V1_ShuffleRoundRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".ShuffleRoundRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    2: .standard(proto: "encoded_outputs"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 2: try { try decoder.decodeRepeatedBytesField(value: &self.encodedOutputs) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.encodedOutputs.isEmpty {
+      try visitor.visitRepeatedBytesField(value: self.encodedOutputs, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
   static func ==(lhs: CoinShuffle_V1_ShuffleRoundRequest, rhs: CoinShuffle_V1_ShuffleRoundRequest) -> Bool {
-    if lhs._base != rhs._base {return false}
-    if lhs._encodedOutputs != rhs._encodedOutputs {return false}
+    if lhs.encodedOutputs != rhs.encodedOutputs {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1142,8 +1003,7 @@ extension CoinShuffle_V1_ShuffleRoundResponse: SwiftProtobuf.Message, SwiftProto
 extension CoinShuffle_V1_SignShuffleTxRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".SignShuffleTxRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "base"),
-    2: .same(proto: "signature"),
+    1: .same(proto: "signature"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1152,29 +1012,20 @@ extension CoinShuffle_V1_SignShuffleTxRequest: SwiftProtobuf.Message, SwiftProto
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._base) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.signature) }()
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.signature) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._base {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
     if !self.signature.isEmpty {
-      try visitor.visitSingularStringField(value: self.signature, fieldNumber: 2)
+      try visitor.visitSingularBytesField(value: self.signature, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: CoinShuffle_V1_SignShuffleTxRequest, rhs: CoinShuffle_V1_SignShuffleTxRequest) -> Bool {
-    if lhs._base != rhs._base {return false}
     if lhs.signature != rhs.signature {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

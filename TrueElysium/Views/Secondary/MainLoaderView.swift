@@ -9,22 +9,28 @@ import Foundation
 import SwiftUI
 
 struct MainLoaderView: View {
-    @State private var isLoading = false
-    
     var body: some View {
         ZStack {
-            Rectangle()
-                .fill(.white)
-            VStack{
-                Image("logo")
+            LinearGradient(
+                gradient: Gradient(colors: [.blue, .white]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            VStack(spacing: 20) {
+                Image("logo2")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .frame(width: 350)
+                    .padding(.top, 80)
                 Text("ELYSIUM")
-                    .font(.custom("AncientGeek", size: 35))
+                    .font(.custom("AncientGeek", size: 50))
+                    .foregroundColor(.black)
             }
         }
+        .ignoresSafeArea()
     }
 }
+
 
 struct MainLoaderView_Previews: PreviewProvider {
     static var previews: some View {

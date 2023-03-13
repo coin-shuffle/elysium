@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Combine
 
 struct ChangePrivateKeyView: View {
     @Binding var privateKey: String
@@ -24,7 +23,9 @@ struct ChangePrivateKeyView: View {
 
 struct ChangePrivateKeyView_Previews: PreviewProvider {
     static var previews: some View {
-        ChangePrivateKeyView(privateKey: .constant(""))
+        ChangePrivateKeyView(
+            privateKey: .constant("")
+        )
     }
 }
 
