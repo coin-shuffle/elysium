@@ -89,6 +89,7 @@ public enum EthereumClientError: LocalizedError {
     case invalidContract
     case failedToCreateTx
     case txFailed
+    case failedToEncodeWithdrawSignatureData
     
     public var errorDescription: String? {
         switch self {
@@ -97,6 +98,7 @@ public enum EthereumClientError: LocalizedError {
         case .invalidContract: return "Invalid contract"
         case .failedToCreateTx: return "Failed to create a transaction"
         case .txFailed: return "Transaction failed"
+        case .failedToEncodeWithdrawSignatureData: return "Somehow encoding data were corrupted"
         }
     }
 }

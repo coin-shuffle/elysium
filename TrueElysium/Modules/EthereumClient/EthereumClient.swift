@@ -11,6 +11,7 @@ import Web3
 import Web3ContractABI
 import Web3PromiseKit
 import Collections
+import CryptoSwift
 
 let LIMIT = BigUInt(stringLiteral: "115792089237316195423570985008687907853269984665640564039457584007913129639936")
 
@@ -93,6 +94,26 @@ public extension EthereumClient {
         }
         
         return true
+    }
+}
+
+extension EthereumClient {
+    struct WithdrawSignature: ABIEncodable {
+        let id: BigUInt
+        let receiver: EthereumAddress
+        
+        func abiEncode(dynamic: Bool) -> String? {
+            return try? ABI.encodeParameter(.tuple(.uint(id), .address(receiver)))
+        }
+        
+        func abiEncodePacked() -> String? {
+            let rawID = id.makeBytes()
+            
+            let encodedID: [UInt8] = Array(repeating: 0, count: 32-rawID.count) + rawID
+            let encodedAddress: [UInt8] = receiver.rawAddress
+            
+            return (encodedID + encodedAddress).toHexString()
+        }
     }
 }
 
@@ -200,5 +221,76 @@ public extension EthereumClient {
             symbol: token.symbol,
             status: .created
         )
+    }
+    
+    func withdraw(
+        id: BigUInt,
+        to: EthereumAddress
+    ) async throws {
+        let gasPrice = try await getGasPrice()
+        
+        guard let encodedData = WithdrawSignature(
+            id: id,
+            receiver: to
+        ).abiEncodePacked() else {
+            throw EthereumClientError.failedToEncodeWithdrawSignatureData
+        }
+        
+        let signature = try signMsg(data: Data(encodedData.hexToBytes()))
+        
+        print("Signature: \(signature.toHexString())")
+        
+        let input = UTXOStorageContract.Input(
+            id: id,
+            signature: signature
+        )
+        
+        guard let depositTx = utxoStorage.withdraw(
+            to: to,
+            input: input
+        ).createTx(
+            nonce: try await getNonce(),
+            gasPrice: EthereumQuantity(quantity: gasPrice.quantity + 50.gwei),
+            maxFeePerGas: EthereumQuantity(quantity: gasPrice.quantity + 100.gwei),
+            maxPriorityFeePerGas: EthereumQuantity(quantity: 3.gwei),
+            gasLimit: 3000000,
+            from: self.user!.address,
+            value: 0,
+            accessList: [:],
+            transactionType: .legacy
+        ) else {
+            throw EthereumClientError.failedToCreateTx
+        }
+        
+        let signedDepositTx = try depositTx.sign(
+            with: user!,
+            chainId: networkID
+        )
+        let depositTxHash = try await client.eth.sendRawTransaction(
+            transaction: signedDepositTx
+        ).async()
+
+        print("Withdraw Tx Hash: \(depositTxHash.hex())")
+        try await waitTxSuccess(txHash: depositTxHash)
+    }
+    
+    fileprivate func signMsg(data: Data) throws -> Data {
+        print("Encoded data: \(data.toHexString())")
+        
+        let hashedMsg = SHA3(variant: .keccak256).calculate(for: data.makeBytes())
+        
+        print("Hashed Message: \(hashedMsg.toHexString())")
+        
+        let prefix = "19457468657265756d205369676e6564204d6573736167653a0a3332".hexToBytes()
+        
+        print("Prefix: \(prefix.toHexString())");
+        
+        let signMsg = SHA3(variant: .keccak256).calculate(for: prefix+hashedMsg)
+        
+        print("Sign Msg: \(signMsg.toHexString())")
+        
+        let (v, r, s) = try user!.sign(hash: signMsg)
+        
+        return Data(r+s+[Byte(v+27)])
     }
 }

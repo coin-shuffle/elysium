@@ -114,6 +114,8 @@ public extension UTXO {
         case searching
         case shuffling
         case shuffled
+        case withdrawing
+        case withdrawn
         
         public var description: String {
             switch self {
@@ -123,6 +125,8 @@ public extension UTXO {
             case .failed: return "Failed"
             case .shuffling: return "Shuffling"
             case .shuffled: return "Shuffled"
+            case .withdrawing: return "Withdrawing"
+            case .withdrawn: return "Withdrawn"
             }
         }
         
@@ -134,6 +138,8 @@ public extension UTXO {
             case .shuffled: return .green
             case .creating: return .blue.opacity(0.5)
             case .failed: return .red
+            case .withdrawing: return .black.opacity(0.5)
+            case .withdrawn: return .black
             }
         }
         
@@ -161,6 +167,10 @@ public extension UTXO {
                 self = .shuffled
             case 5:
                 self = .searching
+            case 6:
+                self = .withdrawing
+            case 7:
+                self = .withdrawn
             default:
                 throw CodingError.unknownValue
             }
@@ -181,6 +191,10 @@ public extension UTXO {
                 try container.encode(4, forKey: .rawValue)
             case .searching:
                 try container.encode(2, forKey: .rawValue)
+            case .withdrawing:
+                try container.encode(2, forKey: .rawValue)
+            case .withdrawn:
+                try container.encode(7, forKey: .rawValue)
             }
         }
     }

@@ -21,6 +21,7 @@ final class EthereumClientTest: XCTestCase {
         self.ethereumClient = try EthereumClient(
             netCfg: cfg.NetConfig
         )
+        self.ethereumClient.user = try EthereumPrivateKey(hexPrivateKey: "c70f720a396a8dafa16da1a3bddefe70f22b089a7c821e3595765d14de0f377f")
         self.tokenStore = TokenStore(ethereumClient: self.ethereumClient)
     }
 
@@ -127,7 +128,7 @@ final class EthereumClientTest: XCTestCase {
         
         print("Data hex: \(data.hex())")
         
-        guard let tx = invocation.createTx(
+        guard let tx = invocation.createTransaction(
             nonce: 0,
             gasPrice: 0,
             maxFeePerGas: nil,
@@ -143,5 +144,21 @@ final class EthereumClientTest: XCTestCase {
         }
         
         print("Tx: \(tx)")
+    }
+    
+    func testWithdraw() async throws {
+        let utxoID = BigUInt(5)
+        let to = try EthereumAddress(hex: "0xE86C4A45C1Da21f8838a1ea26Fc852BD66489ce9", eip55: true)
+        
+        try await ethereumClient.withdraw(id: utxoID, to: to)
+    }
+    
+    func testFunctionSelector() async throws {
+        let signData = EthereumClient.WithdrawSignature(
+            id: 5,
+            receiver: try EthereumAddress(hex: "0xE86C4A45C1Da21f8838a1ea26Fc852BD66489ce9", eip55: true)
+        )
+        
+        print("EncodePacked", signData.abiEncodePacked()!)
     }
 }

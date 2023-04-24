@@ -21,7 +21,9 @@ class Filterer: ObservableObject {
         StatusFilter(id: 2, value: .created, selected: true),
         StatusFilter(id: 3, value: .searching, selected: true),
         StatusFilter(id: 4, value: .shuffling, selected: true),
-        StatusFilter(id: 5, value: .shuffled, selected: true)
+        StatusFilter(id: 5, value: .shuffled, selected: true),
+        StatusFilter(id: 6, value: .withdrawing, selected: true),
+        StatusFilter(id: 7, value: .withdrawn, selected: true)
     ]
     
     @Published var tokenName = ""

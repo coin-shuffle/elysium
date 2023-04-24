@@ -52,6 +52,9 @@
                   Identifier = "EthereumClientTest/testFunctionEncoding()">
                </Test>
                <Test
+                  Identifier = "EthereumClientTest/testGetNameAndSymbol()">
+               </Test>
+               <Test
                   Identifier = "EthereumClientTest/testOutputConverible()">
                </Test>
                <Test

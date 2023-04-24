@@ -6,6 +6,7 @@
 //
 
 import Web3
+import Foundation
 import Web3ContractABI
 
 open class UTXOStorageContract: StaticContract {
@@ -51,6 +52,43 @@ public extension UTXOStorageContract {
         
         public func abiEncode(dynamic: Bool) -> String? {
             return try? ABI.encodeParameter(.tuple(.uint(amount), .address(owner)))
+        }
+    }
+    
+    struct Input: ABIConvertible {
+        let id: BigUInt
+        let signature: Data
+        
+        public init(id: BigUInt, signature: Data) {
+            self.id = id
+            self.signature = signature
+        }
+        
+        public init?(hexString: String) {
+            guard let _decoded = try? ABI.decodeParameter(type: .tuple([.uint256, .bytes(length: 65)]), from: hexString) else {
+                return nil
+            }
+            
+            guard let decoded = _decoded as? [Any] else {
+                return nil
+            }
+            
+            guard let id = decoded[1] as? BigUInt,
+                  let signature = decoded.first as? Data
+            else {
+                return nil
+            }
+            
+            self.id = id
+            self.signature = signature
+        }
+        
+        public func abiEncode(dynamic: Bool) -> String? {
+            guard let encodedData = try? ABI.encodeParameter(.tuple(.uint(id), .bytes(signature))) else {
+                return nil
+            }
+            
+            return "0x" + encodedData.substr(65, encodedData.count-65)!.dropFirst()
         }
     }
     
@@ -151,5 +189,15 @@ public extension UTXOStorageContract {
         ]
         let method = SolidityConstantFunction(name: "getUTXOsLength", outputs: outputs, handler: self)
         return method.invoke()
+    }
+
+    func withdraw(to: EthereumAddress, input: Input) -> SolidityInvocation {
+        let inputs = [
+            SolidityFunctionParameter(name: "input_", type: .tuple([.uint256, .bytes(length: nil)])),
+            SolidityFunctionParameter(name: "to_", type: .address)
+        ]
+        
+        let method = SolidityNonPayableFunction(name: "withdraw", inputs: inputs, handler: self)
+        return method.invoke(input, to)
     }
 }

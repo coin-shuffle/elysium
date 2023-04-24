@@ -62,6 +62,7 @@
 		CEA691E429B8E9C600110E44 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA691E229B8E9C600110E44 /* Parser.swift */; };
 		CEA691E729B8E9F100110E44 /* Cfg.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA691E629B8E9F100110E44 /* Cfg.swift */; };
 		CEA691E829B8E9F100110E44 /* Cfg.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA691E629B8E9F100110E44 /* Cfg.swift */; };
+		CEB6365429F014C400D1D88F /* librsa_crypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB6365329F014C400D1D88F /* librsa_crypto.a */; };
 		CEB68BCE29B9F4BC00455785 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BCD29B9F4BC00455785 /* FilterView.swift */; };
 		CEB68BCF29B9F4BC00455785 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BCD29B9F4BC00455785 /* FilterView.swift */; };
 		CEB68BD129B9FC7A00455785 /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB68BD029B9FC7A00455785 /* Filters.swift */; };
@@ -77,7 +78,6 @@
 		CEBB745D29BB8E5400848A8D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBB745B29BB8E5400848A8D /* Array.swift */; };
 		CEC45CA429AF72C500848C23 /* SwiftyRSA in Frameworks */ = {isa = PBXBuildFile; productRef = CEC45CA329AF72C500848C23 /* SwiftyRSA */; };
 		CEC45CA629AF72C500848C23 /* SwiftyRSA in Embed Frameworks */ = {isa = PBXBuildFile; productRef = CEC45CA329AF72C500848C23 /* SwiftyRSA */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		CEC45CA829AFF3DD00848C23 /* librsa_crypto.a in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEC45CA729AFF3DD00848C23 /* librsa_crypto.a */; };
 		CEC45CAC29AFF83B00848C23 /* RSACrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC45CAB29AFF83B00848C23 /* RSACrypto.swift */; };
 		CEC45CAD29AFF83B00848C23 /* RSACrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC45CAB29AFF83B00848C23 /* RSACrypto.swift */; };
 		CEC9D0F629B211120056D3C4 /* shuffle_service.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9D0F529B211120056D3C4 /* shuffle_service.grpc.swift */; };
@@ -141,7 +141,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CEC45CA829AFF3DD00848C23 /* librsa_crypto.a in Embed Frameworks */,
 				CEC45CA629AF72C500848C23 /* SwiftyRSA in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -188,13 +187,13 @@
 		CEA691D929B8E66200110E44 /* Config.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = Config.yaml; sourceTree = "<group>"; };
 		CEA691E229B8E9C600110E44 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		CEA691E629B8E9F100110E44 /* Cfg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cfg.swift; sourceTree = "<group>"; };
+		CEB6365329F014C400D1D88F /* librsa_crypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librsa_crypto.a; sourceTree = "<group>"; };
 		CEB68BCD29B9F4BC00455785 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		CEB68BD029B9FC7A00455785 /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
 		CEB68BD529BA285B00455785 /* UTXOSLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTXOSLoader.swift; sourceTree = "<group>"; };
 		CEB68BD829BA345D00455785 /* TokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStore.swift; sourceTree = "<group>"; };
 		CEB68BE329BA4D5800455785 /* RangeSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSliderView.swift; sourceTree = "<group>"; };
 		CEBB745B29BB8E5400848A8D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		CEC45CA729AFF3DD00848C23 /* librsa_crypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librsa_crypto.a; sourceTree = "<group>"; };
 		CEC45CA929AFF45900848C23 /* rsa_crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rsa_crypto.h; sourceTree = "<group>"; };
 		CEC45CAA29AFF4DD00848C23 /* RSACryptoBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSACryptoBridgingHeader.h; sourceTree = "<group>"; };
 		CEC45CAB29AFF83B00848C23 /* RSACrypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSACrypto.swift; sourceTree = "<group>"; };
@@ -230,6 +229,7 @@
 				CEE8803729A50A8C009CC313 /* Web3PromiseKit in Frameworks */,
 				CE94EF1529AE4C5300B06CFA /* GRPC in Frameworks */,
 				CE7BB8BE29ABBA7A0089CB57 /* SwiftProtobufPluginLibrary in Frameworks */,
+				CEB6365429F014C400D1D88F /* librsa_crypto.a in Frameworks */,
 				CEE8803329A50A8C009CC313 /* Web3 in Frameworks */,
 				CE7BB8BC29ABBA7A0089CB57 /* SwiftProtobuf in Frameworks */,
 				CEBB745A29BB79DE00848A8D /* Neumorphic in Frameworks */,
@@ -485,7 +485,7 @@
 		CEE87FF529A5098D009CC313 = {
 			isa = PBXGroup;
 			children = (
-				CEC45CA729AFF3DD00848C23 /* librsa_crypto.a */,
+				CEB6365329F014C400D1D88F /* librsa_crypto.a */,
 				CEE8800029A5098D009CC313 /* TrueElysium */,
 				CEE8801129A5098F009CC313 /* TrueElysiumTests */,
 				CEE8801B29A5098F009CC313 /* TrueElysiumUITests */,
@@ -988,6 +988,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				"LIBRARY_SEARCH_PATHS[arch=*]" = /Users/user/other/rsa/target/universal/release;
 				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = DistributedLab.TrueElysium;
@@ -1020,6 +1024,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
 				);
 				"LIBRARY_SEARCH_PATHS[arch=*]" = /Users/user/other/rsa/target/universal/release;
 				MARKETING_VERSION = 0.0.1;

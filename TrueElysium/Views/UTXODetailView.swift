@@ -14,7 +14,9 @@ struct UTXODetailView: View {
     @Binding var utxo: UTXO
     let hasUser: Bool
     let shuffleClient: ShuffleClient
-    let ethreumClient: EthereumClient
+    let ethereumClient: EthereumClient
+    
+    @Environment(\.presentationMode) var presentationMode
     
     @State private var output: String = ""
     
@@ -59,6 +61,11 @@ struct UTXODetailView: View {
                     HStack {
                         Text("Status")
                         Spacer()
+                        if hasUser && utxo.status == .created {
+                            Button(action: withdrawAction) {
+                                Image(systemName: "dollarsign.arrow.circlepath")
+                            }
+                        }
                         Text(utxo.status.description)
                             .foregroundColor(utxo.status.color)
                     }
@@ -83,6 +90,37 @@ struct UTXODetailView: View {
             }
         }
         .navigationTitle("\(utxo.name)(\(utxo.symbol))")
+    }
+    
+    func withdrawAction() {
+        try! shuffleClient.node.updateUTXOStatus(
+            utxoID: utxo.ID,
+            status: .withdrawing
+        )
+        
+        Task {
+            do {
+                try await ethereumClient.withdraw(
+                    id: utxo.ID,
+                    to: ethereumClient.user!.address
+                )
+                try! await shuffleClient.node.updateUTXOStatus(
+                    utxoID: utxo.ID,
+                    status: .withdrawn
+                )
+            } catch {
+                ethereumClient.logger.error(
+                    "UTXO ID: \(utxo.ID), failed to withdraw: \(error)"
+                )
+                
+                try! await shuffleClient.node.updateUTXOStatus(
+                    utxoID: utxo.ID,
+                    status: .created
+                )
+            }
+        }
+        
+        self.presentationMode.wrappedValue.dismiss()
     }
     
     func shuffleAction() {
@@ -118,7 +156,7 @@ struct UTXODetailView: View {
         try await shuffleClient.initRoom(
             utxoID: utxo.ID,
             outputAddress: outputAddress,
-            privateEthKey: ethreumClient.user!
+            privateEthKey: ethereumClient.user!
         )
         try await shuffleClient.joinRoom(utxoID: utxo.ID)
         try await shuffleClient.waitShuffle(utxoID: utxo.ID)
@@ -138,7 +176,7 @@ struct UTXODetail_Previews: PreviewProvider {
                         utxoStore: UTXOStore()
                     )
                 ),
-                ethreumClient: try! EthereumClient(
+                ethereumClient: try! EthereumClient(
                     netCfg: parseConfig().NetConfig
                 )
             )

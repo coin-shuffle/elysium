@@ -45,7 +45,7 @@ struct UTXOsView: View {
                                 utxo: $utxo,
                                 hasUser: ethereumClient.user != nil && privateKey.isEmpty && ethereumClient.user!.publicKey.address == utxo.owner,
                                 shuffleClient: shuffleClient,
-                                ethreumClient: ethereumClient
+                                ethereumClient: ethereumClient
                             )
                         ) {
                             CardUTXOView(utxo: utxo)
