@@ -14,4 +14,26 @@ extension BigUInt {
         
         return Array(repeating: UInt8(0), count: 32-buf.count) + buf
     }
+    
+    func splitWithNominations(nominations: [BigUInt]) -> [BigUInt] {
+        var remainingAmount = self
+        
+        let sortedNominations = nominations.sorted(by: { $0 > $1 })
+        
+        var result: [BigUInt] = []
+        
+        for nomination in sortedNominations {
+            let count = remainingAmount / nomination
+            
+            result.append(contentsOf: Array(repeating: nomination, count: Int(count)))
+            
+            remainingAmount -= count * nomination
+            
+            if remainingAmount == 0 {
+                break
+            }
+        }
+        
+        return result
+    }
 }

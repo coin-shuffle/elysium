@@ -14,6 +14,7 @@
 		CE3C7F8229B60AB100734DF9 /* BigUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3C7F8029B60AB100734DF9 /* BigUInt.swift */; };
 		CE3C7F9029B64DA900734DF9 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3C7F8F29B64DA900734DF9 /* Future.swift */; };
 		CE3C7F9129B64DA900734DF9 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3C7F8F29B64DA900734DF9 /* Future.swift */; };
+		CE3CB29B29F8291C0017DEF3 /* ERC20Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CB29A29F8291C0017DEF3 /* ERC20Token.swift */; };
 		CE439AD229AEBA8B00AD38D0 /* SwiftyRSA in Frameworks */ = {isa = PBXBuildFile; productRef = CE439AD129AEBA8B00AD38D0 /* SwiftyRSA */; };
 		CE7BB88929AB6C0C0089CB57 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB88829AB6C0C0089CB57 /* String.swift */; };
 		CE7BB88A29AB6C0C0089CB57 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB88829AB6C0C0089CB57 /* String.swift */; };
@@ -164,6 +165,7 @@
 		CE3C7F7C29B4D77100734DF9 /* ShuffleClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleClientTest.swift; sourceTree = "<group>"; };
 		CE3C7F8029B60AB100734DF9 /* BigUInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigUInt.swift; sourceTree = "<group>"; };
 		CE3C7F8F29B64DA900734DF9 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
+		CE3CB29A29F8291C0017DEF3 /* ERC20Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20Token.swift; sourceTree = "<group>"; };
 		CE7BB88829AB6C0C0089CB57 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		CE7BB88B29AB93870089CB57 /* SolidityInvocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidityInvocation.swift; sourceTree = "<group>"; };
 		CE7BB89229ABB8E60089CB57 /* MainLoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainLoaderView.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 				CEA1FB3229A62D940008C9C5 /* UTXO.swift */,
 				CE7BB8C429ABDB330089CB57 /* Error.swift */,
 				CEB68BD029B9FC7A00455785 /* Filters.swift */,
+				CE3CB29A29F8291C0017DEF3 /* ERC20Token.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -747,6 +750,7 @@
 				CEA1FB2F29A620C30008C9C5 /* UTXOStorageContract.swift in Sources */,
 				CEBB745C29BB8E5400848A8D /* Array.swift in Sources */,
 				CEED37AF29B0D7B400C5FB41 /* Nonce.swift in Sources */,
+				CE3CB29B29F8291C0017DEF3 /* ERC20Token.swift in Sources */,
 				CEC9D10729B243B20056D3C4 /* PublicKey.swift in Sources */,
 				CEE8800229A5098D009CC313 /* TrueElysiumApp.swift in Sources */,
 				CEC9D10F29B245A20056D3C4 /* ECDSACrypto.swift in Sources */,

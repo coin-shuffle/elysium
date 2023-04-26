@@ -143,11 +143,11 @@ public extension EthereumClient {
         return UTXOStorageContract.UTXO.getUTXOsFromAny(values: values["UTXOs"]!)
     }
     
-    func createUTXO(
+    func createUTXOs(
         tokenStore: TokenStore,
         from tokenContractAddress: EthereumAddress,
-        amount: BigUInt
-    ) async throws -> UTXO {
+        amounts: [BigUInt]
+    ) async throws -> [UTXO] {
         erc20.address = tokenContractAddress
         defer {
             erc20.address = nil
@@ -155,7 +155,7 @@ public extension EthereumClient {
         
         let _gasPrice = try await getGasPrice()
         
-        guard let approveTx = erc20.approve(spender: utxoStorage.address!, value: amount).createTransaction(
+        guard let approveTx = erc20.approve(spender: utxoStorage.address!, value: amounts.reduce(0, +)).createTransaction(
             nonce: try await getNonce(),
             gasPrice: EthereumQuantity(quantity: _gasPrice.quantity + 50.gwei),
             maxFeePerGas: EthereumQuantity(quantity: _gasPrice.quantity + 100.gwei),
@@ -169,9 +169,19 @@ public extension EthereumClient {
             throw EthereumClientError.failedToCreateTx
         }
         
+        var outputs: [UTXOStorageContract.Output] = []
+        for amount in amounts {
+            outputs.append(
+                UTXOStorageContract.Output(
+                    amount: amount,
+                    owner: self.user!.address
+                )
+            )
+        }
+        
         guard let depositTx = utxoStorage.deposit(
             token: tokenContractAddress,
-            outputs: [UTXOStorageContract.Output(amount: amount, owner: self.user!.address)]
+            outputs: outputs
         ).createTx(
             nonce: try await getNonce(),
             gasPrice: EthereumQuantity(quantity: _gasPrice.quantity + 50.gwei),
@@ -209,18 +219,24 @@ public extension EthereumClient {
         if utxos.isEmpty {
             throw EthereumClientError.txFailed
         }
-        
         let token = try await tokenStore.getToken(tokenContractAddress)
         
-        return UTXO(
-            ID: utxos.last!.id,
-            token: tokenContractAddress,
-            amount: amount,
-            owner: user!.address,
-            name: token.name,
-            symbol: token.symbol,
-            status: .created
-        )
+        var createdUTXOs: [UTXO] = []
+        for (index, amount) in amounts.enumerated() {
+            createdUTXOs.append(
+                UTXO(
+                    ID: utxos[utxos.count-(amounts.count-index)].id,
+                    token: tokenContractAddress,
+                    amount: amount,
+                    owner: user!.address,
+                    name: token.name,
+                    symbol: token.symbol,
+                    status: .created
+                )
+            )
+        }
+        
+        return createdUTXOs
     }
     
     func withdraw(

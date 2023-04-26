@@ -58,7 +58,9 @@ final class EthereumClientTest: XCTestCase {
         
         let amount = BigUInt(5)
         
-        let utxo = try await ethereumClient.createUTXO(tokenStore: tokenStore, from: contractAddress, amount: amount)
+        let utxos = try await ethereumClient.createUTXOs(tokenStore: tokenStore, from: contractAddress, amounts: [amount])
+        
+        let utxo = utxos.first!
         
         assert(utxo.token == contractAddress, "UTXO ERROR: Invalid token")
         assert(utxo.amount == amount, "UTXO ERROR: Invalid amount")
@@ -160,5 +162,20 @@ final class EthereumClientTest: XCTestCase {
         )
         
         print("EncodePacked", signData.abiEncodePacked()!)
+    }
+    
+    func testDeposit() async throws {
+        let amounts: [BigUInt] = [100, 100, 50, 10]
+        let utxos = try await ethereumClient.createUTXOs(
+            tokenStore: TokenStore(
+                ethereumClient: ethereumClient
+            ),
+            from: try EthereumAddress(hex: "0x7057cB3cB70e1d4a617A0DED65353553af8d5976", eip55: true),
+            amounts: amounts
+        )
+        
+        for utxo in utxos {
+            print("UTXO: \(utxo)")
+        }
     }
 }

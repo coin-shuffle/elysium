@@ -63,6 +63,7 @@ public extension UTXO {
         var owner: String
         var name: String
         var symbol: String
+        var mustSplit: Bool = false
         
         init() {
             self.id = 0

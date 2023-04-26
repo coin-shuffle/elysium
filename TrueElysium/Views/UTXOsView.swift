@@ -23,6 +23,7 @@ struct UTXOsView: View {
     @State private var _error: LocalizedError?
     @State var tokenAmountRange: ClosedRange<Float> = 1...10000
     @State var tokenAmountBounds: ClosedRange<Int> = 1...10000
+    @State var chosenPopularToken = ERC20Token.CUSTOM
     @StateObject private var filterer = Filterer()
     var ethereumClient: EthereumClient
     var shuffleClient: ShuffleClient
@@ -81,7 +82,10 @@ struct UTXOsView: View {
         }
         .sheet(isPresented: $isPresentCreateUTXO) {
             NavigationView {
-                NewUTXOView(data: $data)
+                NewUTXOView(
+                    data: $data,
+                    chosenPopularToken: $chosenPopularToken
+                )
                     .navigationTitle("New")
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
@@ -160,14 +164,26 @@ struct UTXOsView: View {
             data.amount = ""
         }
         
+        let rawTokenAddress = chosenPopularToken == .CUSTOM ? data.token : chosenPopularToken.contractAddress
         guard let tokenAddress = try? EthereumAddress(hex: data.token, eip55: true) else {
             _error = UTXOsViewError.invalidTokenAddress
             return
         }
         
+        var amounts: [BigUInt] = []
         guard let amount = BigUInt(data.amount) else {
             _error = UTXOsViewError.invalidAmount
             return
+        }
+        
+        if !data.mustSplit {
+            amounts.append(amount)
+        } else {
+            amounts.append(
+                contentsOf: amount.splitWithNominations(
+                    nominations: [1_000_000, 100_000, 10_000, 5_000, 1_000, 500, 200, 100, 50, 20, 10, 5, 2, 1]
+                )
+            )
         }
         
         Task {
@@ -179,35 +195,42 @@ struct UTXOsView: View {
                 throw UTXOsViewError.failedToGetTokenNameAndSymbol
             }
             
-            utxoStore.utxos.append(UTXO(
-                token: tokenAddress,
-                amount: amount,
-                name: token.name,
-                symbol: token.symbol
-            ))
-            
-            let utxoIndex = utxoStore.utxos.endIndex-1
+            for _amount in amounts {
+                utxoStore.utxos.append(UTXO(
+                    token: tokenAddress,
+                    amount: _amount,
+                    name: token.name,
+                    symbol: token.symbol
+                ))
+            }
             
             isPresentCreateUTXO = false
             
-            guard let finishedUTXO = try? await ethereumClient.createUTXO(
+            guard let finishedUTXOs = try? await ethereumClient.createUTXOs(
                 tokenStore: tokenStore,
                 from: tokenAddress,
-                amount: amount
+                amounts: amounts
             ) else {
-                var _utxo = utxoStore.utxos[utxoIndex]
-                
-                _utxo.status = .failed
-                
-                utxoStore.utxos[utxoIndex] = _utxo
+                for (index, _) in amounts.enumerated() {
+                    let utxoIndex = utxoStore.utxos.count-(amounts.count-index)
+                    
+                    var _utxo = utxoStore.utxos[utxoIndex]
+                    
+                    _utxo.status = .failed
+                    
+                    utxoStore.utxos[utxoIndex] = _utxo
+                }
                 _error = UTXOsViewError.failedToCreateUTXO
                 return
             }
             
-            var _utxo = utxoStore.utxos[utxoIndex]
-            
-            _utxo.update(utxo: finishedUTXO)
-            utxoStore.utxos[utxoIndex] = _utxo
+            for (index, _) in amounts.enumerated() {
+                let utxoIndex = utxoStore.utxos.count-(amounts.count-index)
+                var _utxo = utxoStore.utxos[utxoIndex]
+                
+                _utxo.update(utxo: finishedUTXOs[index])
+                utxoStore.utxos[utxoIndex] = _utxo
+            }
         }
     }
 }
